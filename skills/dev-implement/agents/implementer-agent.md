@@ -60,6 +60,17 @@ Report one of:
 - **NEEDS_CONTEXT** -- Cannot proceed without additional information.
 - **BLOCKED** -- Cannot proceed due to a hard dependency or error.
 
+## When You're in Over Your Head
+
+STOP and report BLOCKED if:
+- The task requires changes to more than 5 files you have not read
+- You cannot find the function/class/module referenced in the task
+- The existing code contradicts what the task expects
+- You've spent 3+ attempts on the same error
+- The task requires external system access you don't have
+
+Reporting BLOCKED is not failure — it is honesty. Guessing is failure.
+
 ## Report Format
 
 ```

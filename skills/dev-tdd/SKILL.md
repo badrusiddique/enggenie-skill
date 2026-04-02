@@ -73,6 +73,53 @@ Then start the cycle again.
 
 ---
 
+## Worked Example: Bug Fix with TDD
+
+**Scenario:** Email validation accepts "user@" as valid.
+
+**RED — Write the failing test:**
+```python
+def test_rejects_email_without_domain():
+    assert validate_email("user@") == False
+```
+
+Run: `pytest tests/test_email.py::test_rejects_email_without_domain`
+```
+FAILED - assert True == False
+```
+Good. The test fails because the current code does not check for a domain.
+
+**GREEN — Write the simplest fix:**
+```python
+def validate_email(email: str) -> bool:
+    if "@" not in email:
+        return False
+    local, domain = email.rsplit("@", 1)
+    return len(local) > 0 and len(domain) > 0
+```
+
+Run: `pytest tests/test_email.py`
+```
+4 passed
+```
+All tests pass. Do NOT add more validation yet.
+
+**REFACTOR — Clean up while tests stay green:**
+No refactoring needed — the code is already clean.
+
+---
+
+**Good test vs Bad test:**
+
+| Aspect | Good | Bad |
+|--------|------|-----|
+| Name | `test_rejects_email_without_domain` | `test_email_validation` |
+| Assertion | `assert validate_email("user@") == False` | `assert result is not None` |
+| Scope | Tests ONE behavior | Tests multiple behaviors |
+| Failure message | "assert True == False" tells you what broke | "AssertionError" tells you nothing |
+
+---
+
 ## The Shortcut Tax
 
 Every shortcut has a cost. Here's what you're actually paying.
@@ -103,6 +150,10 @@ STOP and start over if any of these are true:
 - You're "just going to quickly add" something without a test
 - You're thinking "this case is different because..."
 - You're keeping deleted code "as reference"
+- You wrote tests after implementation → Delete the code. Write the test. Watch it fail. Rewrite.
+- You can't explain why a test failed → You don't understand the code. Investigate before proceeding.
+- You're thinking "I already spent X hours on this code, deleting is wasteful" → Sunk cost fallacy. Delete it. TDD code is faster to rewrite than debug.
+- You're thinking "TDD is dogmatic, I'm being pragmatic" → Pragmatic means following processes that work. TDD works. Skipping it is not pragmatic, it's reckless.
 
 If you hit any of these: stop. Delete the production code. Go back to RED.
 

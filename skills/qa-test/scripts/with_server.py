@@ -55,7 +55,11 @@ def main():
         if not wait_for_server(args.port, timeout=args.timeout):
             print(f"Server did not start within {args.timeout}s", file=sys.stderr)
             server.terminate()
-            server.wait(timeout=5)
+            try:
+                server.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                server.kill()
+                server.wait()
             sys.exit(1)
 
         print(f"Server ready on port {args.port}")

@@ -107,7 +107,7 @@ If Figma MCP is not available, note that design details should be added manually
 
 ### Step 5: Generate the Spec
 
-Generate the spec using the team's template if one exists at `docs/enggenie/templates/spec-template.md` or `templates/spec-template.md` in the target repo. If no team template is found, use the default template at `references/default-spec-template.md`.
+Generate the spec using the team's template if one exists at `docs/enggenie/templates/spec-template.md` or `templates/spec-template.md` in the target repo. If no team template is found, use the default template at `templates/spec-template.md`.
 
 The spec must contain all of the following sections. No section may contain "TBD", "TODO", or empty content.
 
@@ -175,16 +175,20 @@ All estimates follow this process. The method is transparent -- show every step 
 
 3. **Round UP to nearest Fibonacci number** -- The buffered estimate maps to the Fibonacci scale: 1, 2, 3, 5, 8. Always round up, never down.
 
-4. **Cap at 8** -- Any estimate above 8 points means the story is too large. Decompose it into smaller stories. No exceptions.
+**Note:** In this method, raw hour estimates map directly to the Fibonacci scale — the Fibonacci number IS the estimate, not a separate "points" concept. 3.6 hours rounds up to 5 on the Fibonacci scale.
 
-5. **Show the work** -- Every estimate includes the transparent calculation:
+4. **Estimate the story AS A WHOLE** -- Use the largest sub-area as the anchor. Do not sum sub-estimates — summing Fibonacci numbers produces non-Fibonacci totals.
+
+5. **Cap at 8** -- Any estimate above 8 points means the story is too large. Decompose it into smaller stories. No exceptions.
+
+6. **Show the work** -- Every estimate includes the transparent calculation:
 
 ```
 Backend API:     3h raw -> +20% -> 3.6h -> round up -> 5 points
 Frontend UI:     2h raw -> +20% -> 2.4h -> round up -> 3 points
 Database migration: 1h raw -> +20% -> 1.2h -> round up -> 2 points
 Testing:         2h raw -> +20% -> 2.4h -> round up -> 3 points
-Total story:     13 points -> exceeds 8 cap -> decompose into 2 stories
+Largest sub-area: 5 points (Backend API) -> story estimate: 5 points
 ```
 
 The estimation method is configurable per team. Check the project's CLAUDE.md for overrides:
@@ -233,7 +237,7 @@ Graceful skip if memory tooling is not installed. The spec is still complete wit
 
 ## Default Spec Template
 
-The default spec template is located at `references/default-spec-template.md`. Teams can override this by placing their own template at `docs/enggenie/templates/spec-template.md` or `templates/spec-template.md` in their repo.
+The default spec template is located at `templates/spec-template.md`. Teams can override this by placing their own template at `docs/enggenie/templates/spec-template.md` or `templates/spec-template.md` in their repo.
 
 The default template contains all section headers, formatting conventions, and placeholder guidance. The skill fills in the content; the template provides the structure.
 

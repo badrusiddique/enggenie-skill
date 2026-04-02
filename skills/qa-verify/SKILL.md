@@ -27,7 +27,7 @@ Before claiming ANYTHING is complete, follow this exact sequence:
 5. ONLY THEN — Make the claim.
 ```
 
-Skip any step and you're guessing, not verifying.
+Claiming work is complete without verification is dishonesty, not efficiency. Skip any step and you're lying, not verifying.
 
 ## What Counts as Evidence
 
@@ -52,7 +52,12 @@ Stop if you notice yourself:
 - **Extrapolating** — "Linter passed, so build will too" → Linter is not compiler. Run the build.
 - **Relying on memory** — "Tests passed earlier" → Run them again. State may have changed.
 - **Feeling confident** — Confidence is not evidence. Evidence is evidence.
-- You're using different words to avoid the rule ("I've confirmed the changes" instead of showing test output) → Same rule applies to ANY wording that implies success without evidence.
+- You're using ANY wording that implies success without evidence → This rule applies to:
+  - Exact phrases ("tests pass", "build works")
+  - Paraphrases ("I've confirmed the changes", "everything looks good")
+  - Implications of success ("the fix addresses the issue")
+  - ANY communication suggesting completion or correctness
+  Violating the letter of this rule is violating the spirit of this rule.
 
 ## The Shortcut Tax
 
