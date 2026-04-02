@@ -10,10 +10,10 @@ Exit code matches the test command's exit code.
 """
 
 import argparse
+import shlex
 import subprocess
 import sys
 import time
-import signal
 import urllib.request
 import urllib.error
 
@@ -42,11 +42,10 @@ def main():
     # Start server
     print(f"Starting server: {args.cmd}")
     server = subprocess.Popen(
-        args.cmd,
-        shell=True,
+        shlex.split(args.cmd),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
-        preexec_fn=lambda: signal.signal(signal.SIGINT, signal.SIG_IGN),
+        start_new_session=True,
     )
 
     try:
@@ -66,7 +65,7 @@ def main():
 
         # Run tests
         print(f"Running tests: {args.test}")
-        result = subprocess.run(args.test, shell=True)
+        result = subprocess.run(shlex.split(args.test))
         test_exit_code = result.returncode
 
     finally:

@@ -1,6 +1,6 @@
 {
   "name": "enggenie",
   "description": "Role-based SDLC skill suite: PM, Architect, Dev, Reviewer, QA, Deploy",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "skills_dir": "skills"
 }

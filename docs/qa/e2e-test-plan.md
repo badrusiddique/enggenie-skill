@@ -136,7 +136,7 @@ This document defines a comprehensive end-to-end QA test plan for the enggenie s
 
 | Priority | Count | Description |
 |---|---|---|
-| **P1** | **26** | Critical path - must pass for release. Covers installation, all 13 skill activations, key integration chains, and critical negative cases. |
+| **P1** | **26** | Critical path - must pass for release. Covers installation, all 14 skill activations, key integration chains, and critical negative cases. |
 | **P2** | **25** | Important validation - should pass for release. Covers secondary platforms, edge cases, and extended integration scenarios. |
 | **Total** | **51** | |
 

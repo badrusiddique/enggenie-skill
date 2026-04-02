@@ -3,6 +3,7 @@
 ## Prerequisites
 
 - Cursor IDE installed ([cursor.com](https://cursor.com))
+- [Node.js](https://nodejs.org) 18+ installed (for Option A)
 - A code project open in Cursor
 - Terminal access
 
@@ -14,17 +15,17 @@
 npx skills add badrusiddique/enggenie-skill
 ```
 
-This auto-detects Cursor and installs all 14 skills. Skip to Step 2.
+This auto-detects Cursor and installs all 14 skills. Skip to Step 2. (`npx` comes with Node.js. The `skills` CLI is from [skillkit.sh](https://www.skillkit.sh/).)
 
 **Option B: Manual install**
 
-Clone the repo and add a `.cursorrules` reference:
+Clone the repo and add a rules reference:
 
 ```bash
 git clone https://github.com/badrusiddique/enggenie-skill.git ~/.cursor/skills/enggenie
 ```
 
-Then add this to your project's `.cursorrules` file (create it if it doesn't exist):
+Then add this to your project's `.cursor/rules/enggenie.mdc` file (or `.cursorrules` if using an older Cursor version):
 
 ```
 Use the skills in ~/.cursor/skills/enggenie/skills/ for development workflows.
@@ -40,7 +41,7 @@ In Cursor's chat, type:
 What enggenie skills do I have? Check ~/.cursor/skills/enggenie/skills/
 ```
 
-**What you should see:** A list of 13 skill directories, each containing a SKILL.md file.
+**What you should see:** A list of 14 skill directories, each containing a SKILL.md file.
 
 ## Step 3: Tool Name Differences
 
@@ -81,11 +82,11 @@ Read ~/.cursor/skills/enggenie/skills/dev-tdd/SKILL.md and follow it.
 | Plan a feature | "I want to build X. Read the architect-design skill and follow it." |
 | Review code | "Review my changes. Read the review-code skill and follow it." |
 
-**Tip:** After a few uses, Cursor learns to check for applicable skills automatically via `.cursorrules`.
+**Tip:** After a few uses, Cursor learns to check for applicable skills automatically via your rules file.
 
 ## Step 6: Customize for Your Team (Optional)
 
-Add to your project's `.cursorrules`:
+Add to your project's `.cursor/rules/enggenie.mdc` (or `.cursorrules`):
 
 ```
 ## enggenie Configuration
@@ -98,7 +99,7 @@ Add to your project's `.cursorrules`:
 
 **Cursor doesn't find the skills:**
 - Verify the clone path: `ls ~/.cursor/skills/enggenie/skills/`
-- Make sure `.cursorrules` points to the correct path
+- Make sure `.cursor/rules/enggenie.mdc` (or `.cursorrules`) points to the correct path
 
 **Skills reference wrong tool names:**
 - Cursor auto-translates most tool names. If not, reference `references/cursor-tools.md` explicitly.

@@ -3,6 +3,7 @@
 ## Prerequisites
 
 - GitHub Copilot CLI installed ([docs.github.com](https://docs.github.com/en/copilot/using-github-copilot/using-github-copilot-in-the-command-line))
+- [Node.js](https://nodejs.org) 18+ installed (for Option A)
 - A code project to work in
 - Terminal access
 
@@ -14,7 +15,7 @@
 npx skills add badrusiddique/enggenie-skill
 ```
 
-This auto-detects Copilot CLI and installs all 14 skills. Skip to Step 2.
+This auto-detects Copilot CLI and installs all 14 skills. Skip to Step 2. (`npx` comes with Node.js. The `skills` CLI is from [skillkit.sh](https://www.skillkit.sh/).)
 
 **Option B: Manual install**
 
@@ -41,7 +42,7 @@ Ask Copilot:
 List all the enggenie skills in ~/.copilot/skills/enggenie/skills/
 ```
 
-**What you should see:** 13 skill directories (enggenie, pm-refine, architect-design, architect-plan, dev-implement, dev-tdd, dev-debug, review-code, review-design, qa-verify, qa-test, deploy-ship, memory-recall).
+**What you should see:** 14 skill directories (enggenie, pm-refine, architect-design, architect-plan, dev-implement, dev-tdd, dev-debug, dev-commit, review-code, review-design, qa-verify, qa-test, deploy-ship, memory-recall).
 
 ## Step 3: Tool Name Differences
 

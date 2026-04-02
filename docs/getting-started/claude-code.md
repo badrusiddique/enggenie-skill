@@ -3,7 +3,7 @@
 ## Prerequisites
 
 - Claude Code installed ([install guide](https://docs.anthropic.com/en/docs/claude-code))
-- [Node.js](https://nodejs.org) installed (for the `npx` installer in Option A)
+- [Node.js](https://nodejs.org) 18+ installed (for Option A)
 - A code project to work in (any language)
 - Terminal access
 
@@ -54,6 +54,7 @@ What enggenie skills do I have?
 - QA: `enggenie:qa-verify`, `enggenie:qa-test`
 - Deploy: `enggenie:deploy-ship`
 - Memory: `enggenie:memory-recall`
+- Gateway: `enggenie` (routes to the right skill when intent is ambiguous)
 
 ## Step 3: Try Your First Skill
 

@@ -34,7 +34,7 @@ deploy-ship uses conventional commits by default. Teams can customize the format
 | `emoji_prefix` | Adds emoji before commit type | Off | `feat: add search` |
 | `jira_in_subject` | Adds Jira ticket to subject line | Off | `[PROJ-1234] feat: add search` |
 | `conventional_commits_strict` | Rejects non-conforming messages | Off | Enforces `type: description` format |
-| `co_authored_by` | Adds co-author tag | Off | `Co-authored-by: Claude <noreply@anthropic.com>` |
+| `co_authored_by` | Adds co-author tag | Off | `Co-authored-by: AI Assistant <team@example.com>` |
 
 You can enable any combination. The skill reads these settings and applies them to the commit message proposal. The user still confirms before anything is committed.
 

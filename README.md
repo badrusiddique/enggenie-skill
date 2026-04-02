@@ -32,7 +32,7 @@ Most AI coding tools only help with one thing: writing code. But software engine
 
 ## Install
 
-**Prerequisites:** [Node.js](https://nodejs.org) (for the `npx` installer)
+**Prerequisites:** [Node.js](https://nodejs.org) 18+ (for the `npx` installer)
 
 **Any platform (Claude Code, Cursor, Gemini CLI, Copilot, OpenCode, and more):**
 

@@ -3,6 +3,7 @@
 ## Prerequisites
 
 - Gemini CLI installed ([github.com/google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli))
+- [Node.js](https://nodejs.org) 18+ installed (for Option A)
 - A code project to work in
 - Terminal access
 
@@ -14,7 +15,7 @@
 npx skills add badrusiddique/enggenie-skill
 ```
 
-This auto-detects Gemini CLI and installs all 14 skills. Skip to Step 2.
+This auto-detects Gemini CLI and installs all 14 skills. Skip to Step 2. (`npx` comes with Node.js. The `skills` CLI is from [skillkit.sh](https://www.skillkit.sh/).)
 
 **Option B: Manual install**
 
@@ -43,7 +44,7 @@ Ask Gemini:
 List all the enggenie skills in ~/.gemini/extensions/enggenie/skills/
 ```
 
-**What you should see:** 13 skill directories, each with a SKILL.md file.
+**What you should see:** 14 skill directories, each with a SKILL.md file.
 
 ## Step 3: Tool Name Differences
 

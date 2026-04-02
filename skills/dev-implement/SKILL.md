@@ -350,7 +350,7 @@ When all tasks across all phases are complete and verified:
 1. Run the full test suite one final time
 2. Dispatch a final reviewer (opus) to review the complete set of changes across all tasks
 3. Address any final review findings
-4. Invoke enggenie:deploy-ship to handle deployment
+4. Invoke enggenie:qa-verify to verify all claims with evidence before shipping
 
 ---
 

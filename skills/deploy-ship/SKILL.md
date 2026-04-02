@@ -200,7 +200,7 @@ These behaviors are OFF by default. Teams enable them via CLAUDE.md project conf
 | Emoji prefix | `✨ feat: add search` | Off |
 | Jira ticket in subject | `[PROJ-1234] feat: add search` | Off |
 | Conventional Commits strict mode | Reject non-conforming messages | Off |
-| Co-authored-by tag | `Co-authored-by: Claude <noreply@anthropic.com>` | Off |
+| Co-authored-by tag | `Co-authored-by: AI Assistant <team@example.com>` | Off |
 
 To enable, add to your project's CLAUDE.md:
 ```markdown
