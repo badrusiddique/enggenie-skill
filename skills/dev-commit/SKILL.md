@@ -1,6 +1,6 @@
 ---
 name: dev-commit
-description: Use when creating commit messages - analyzes git diffs, proposes conventional commit messages with appropriate type and emoji, and waits for user approval before committing
+description: Use when creating commit messages - analyzes git diffs, proposes conventional commit messages with appropriate type, and waits for user approval before committing
 ---
 
 # enggenie:dev-commit
@@ -33,24 +33,25 @@ If nothing is staged, tell the user: "No changes are staged. Stage your changes 
 
 ## Step 2: Propose Commit Message
 
-### Commit Types with Emojis
+### Commit Types
 
 Only use the following types:
 
-| Emoji | Type | When to use |
-|-------|------|------------|
-| ✨ | `feat:` | New feature or capability |
-| 🐛 | `fix:` | Bug fix |
-| 🔨 | `refactor:` | Code restructuring without behavior change |
-| 📝 | `docs:` | Documentation only |
-| 🎨 | `style:` | Formatting, whitespace, linting (no logic change) |
-| ✅ | `test:` | Adding or updating tests |
-| ⚡ | `perf:` | Performance improvement |
+| Type | When to use |
+|------|------------|
+| `feat:` | New feature or capability |
+| `fix:` | Bug fix |
+| `refactor:` | Code restructuring without behavior change |
+| `docs:` | Documentation only |
+| `style:` | Formatting, whitespace, linting (no logic change) |
+| `test:` | Adding or updating tests |
+| `perf:` | Performance improvement |
+| `chore:` | Build, config, tooling, dependencies |
 
 ### Format
 
 ```
-<emoji> <type>: <concise_description>
+<type>: <concise_description>
 
 <optional_body_explaining_why>
 ```
@@ -71,7 +72,7 @@ Only use the following types:
 Show the user:
 
 1. **Summary of staged changes** - brief overview of what is staged
-2. **Proposed commit message** - the full message with emoji, type, and body
+2. **Proposed commit message** - the full message with type and body
 3. **Ask for confirmation** - "Commit with this message? (yes/edit/cancel)"
 
 **NEVER auto-commit.** Wait for explicit user approval.
@@ -98,6 +99,18 @@ Report the result: commit hash, branch, and files committed.
 2. **Never add co-authored-by or AI attribution.** Commits must look human-written.
 3. **Never commit unstaged changes.** Only commit what is in the staging area.
 4. **Never commit secrets.** Check staged files for .env, credentials, API keys, tokens. Warn the user if detected.
+
+---
+
+## Shortcut Tax
+
+| Shortcut | What it costs you |
+|----------|------------------|
+| "Just commit it, I'll fix the message later" | You won't. Commit history becomes unreadable. Future you wastes time deciphering cryptic messages. |
+| "One big commit is fine" | Can't bisect, can't revert cleanly, can't understand changes in review. Split by logical unit. |
+| "The diff speaks for itself" | Diffs show WHAT changed. Only messages explain WHY. Future debuggers need the why. |
+| "I'll add the body later" | Later never comes. Write the why now while context is fresh. |
+| "Generic message is fine" | "fix stuff" tells nobody anything. 10 seconds to write a good message saves 10 minutes reading diffs. |
 
 ---
 

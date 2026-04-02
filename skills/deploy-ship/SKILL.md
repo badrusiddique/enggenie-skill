@@ -37,6 +37,7 @@ Format:
 | docs | Documentation only |
 | test | Adding or updating tests only |
 | perf | Performance improvement |
+| style | Formatting, whitespace, linting (no logic change) |
 | chore | Build, config, tooling, dependencies |
 
 **Rules:**

@@ -392,5 +392,5 @@ For each phase in plan:
 Next phase (or exit if final)
   |
   v
-Exit: Final opus review -> enggenie:deploy-ship
+Exit: Final opus review -> enggenie:qa-verify
 ```
