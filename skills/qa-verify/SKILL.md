@@ -136,6 +136,15 @@ When this skill activates, create a TodoWrite item:
 ```
 Mark it completed only AFTER evidence is gathered and stated.
 
+## Recommended Model
+
+**Primary:** haiku
+**Why:** Verification is about running commands and checking outputs, not complex reasoning. Haiku is fast and sufficient for evidence gathering.
+
+This is a recommendation. Ask the user: "Confirm model selection or override?"
+
+---
+
 ## Entry Condition
 
 None - fires before any completion claim:

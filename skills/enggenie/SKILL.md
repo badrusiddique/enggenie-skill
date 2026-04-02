@@ -40,6 +40,7 @@ Match the user's intent to the right skill:
 | "Are tests passing?", "Is this done?", "Verify this works" | enggenie:qa-verify | QA |
 | "Test this feature", "QA the login flow", "Run Playwright tests" | enggenie:qa-test | QA |
 | "Commit this", "Create a PR", "Ship it", "Done with this branch" | enggenie:deploy-ship | Deploy |
+| "Create a commit message", "Commit with a good message" | enggenie:dev-commit | Dev |
 | "What did we do last time?", "Did we solve this before?" | enggenie:memory-recall | Memory |
 
 ## When No Skill Matches
@@ -130,5 +131,19 @@ Skills use Claude Code tool names by default. For other platforms, read the tool
 | Reviewer | enggenie:review-design | Frontend/UI quality enforcement |
 | QA | enggenie:qa-verify | Evidence before completion claims |
 | QA | enggenie:qa-test | Playwright + manual browser testing |
+| Dev | enggenie:dev-commit | Conventional commit messages with diff analysis |
 | Deploy | enggenie:deploy-ship | Commit, PR, branch completion, Jira |
 | Memory | enggenie:memory-recall | Cross-session context (requires claude-mem) |
+
+---
+
+## Model Recommendations
+
+Each skill suggests an optimal model. The gateway does not override these - each skill presents its own recommendation and asks the user to confirm.
+
+| Model | Skills | Why |
+|-------|--------|-----|
+| **opus** (with extended thinking) | architect-design | Deep architectural reasoning |
+| **opus** | pm-refine, architect-plan | Thorough specs and plans |
+| **sonnet** | dev-implement (orchestrator), dev-tdd, dev-debug, review-code, review-design, qa-test | Balanced speed and capability |
+| **haiku** | qa-verify, deploy-ship, dev-commit, memory-recall | Lightweight tasks, fast execution |

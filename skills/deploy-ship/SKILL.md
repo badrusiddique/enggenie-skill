@@ -226,6 +226,17 @@ The skill reads these settings and applies them to the commit message proposal. 
 
 ---
 
+## Recommended Model
+
+**Primary:** haiku
+**Why:** Commits, PRs, and branch operations are straightforward. Haiku handles conventional commit formatting and PR descriptions efficiently.
+
+Override: Use sonnet for complex multi-service deployments with phased rollout.
+
+This is a recommendation. Ask the user: "Confirm model selection or override?"
+
+---
+
 ## Entry Condition
 
 After verification (enggenie:qa-verify) or QA (enggenie:qa-test). Code is proven correct before this skill activates.

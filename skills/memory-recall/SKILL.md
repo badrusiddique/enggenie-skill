@@ -144,6 +144,15 @@ Memory observations are snapshots in time. Before acting on a recalled decision:
 
 When in doubt, treat memory as a starting point for investigation, not as ground truth.
 
+## Recommended Model
+
+**Primary:** haiku
+**Why:** Memory retrieval is about searching indexes and fetching observations. Haiku is fast and efficient for this lookup-heavy work.
+
+This is a recommendation. Ask the user: "Confirm model selection or override?"
+
+---
+
 ## Entry Condition
 
 None - available anytime. Invoked by other skills as a utility, or directly by user.
