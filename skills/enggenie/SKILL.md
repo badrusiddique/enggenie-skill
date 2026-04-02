@@ -110,11 +110,11 @@ These thoughts mean you're rationalizing skipping a skill:
 
 ## Platform Adaptation
 
-Skills use Claude Code tool names by default. For other platforms:
-- **Cursor:** See `references/cursor-tools.md`
-- **Copilot CLI:** See `references/copilot-tools.md`
-- **Gemini CLI:** See `references/gemini-tools.md`
-- **OpenCode:** See `references/opencode-tools.md`
+Skills use Claude Code tool names by default. For other platforms, read the tool mapping reference at the project root:
+- **Cursor:** Read `../../references/cursor-tools.md` (relative to this skill)
+- **Copilot CLI:** Read `../../references/copilot-tools.md`
+- **Gemini CLI:** Read `../../references/gemini-tools.md`
+- **OpenCode:** Read `../../references/opencode-tools.md`
 
 ## All Skills
 
