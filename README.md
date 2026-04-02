@@ -20,8 +20,9 @@ Most AI coding tools only help with one thing: writing code. But software engine
 
 ## Highlights
 
-- **13 skills** covering the entire software development lifecycle
+- **14 skills** covering the entire software development lifecycle
 - **7 expert roles** - PM, Architect, Dev, Reviewer, QA, Deploy, Memory
+- **Model recommendations** - each skill suggests the optimal model (opus/sonnet/haiku) for best results
 - **Zero configuration** - skills activate automatically based on your intent
 - **Multi-platform** - works with Claude Code, Cursor, GitHub Copilot CLI, Google Gemini CLI, and OpenCode
 - **Team customizable** - spec templates, commit format, estimation method, all configurable
@@ -39,7 +40,7 @@ Most AI coding tools only help with one thing: writing code. But software engine
 npx skills add badrusiddique/enggenie-skill
 ```
 
-This auto-detects your installed AI coding tools and installs all 13 skills. The `skills` CLI is from [skillkit.sh](https://www.skillkit.sh/) (by Vercel).
+This auto-detects your installed AI coding tools and installs all 14 skills. The `skills` CLI is from [skillkit.sh](https://www.skillkit.sh/) (by Vercel).
 
 **Claude Code only (native plugin system):**
 
@@ -65,6 +66,7 @@ For platform-specific setup, see [Getting Started guides](#getting-started) belo
 | **Reviewer** | `enggenie:review-design` | Checks UI against design system, states, a11y | "Check the dashboard against our design" |
 | **QA** | `enggenie:qa-verify` | Requires evidence before any completion claim | "Are the tests passing?" |
 | **QA** | `enggenie:qa-test` | Playwright automation + manual browser testing | "Test the login flow as a QA engineer" |
+| **Dev** | `enggenie:dev-commit` | Analyzes diffs, proposes conventional commit messages | "Create a commit message" |
 | **Deploy** | `enggenie:deploy-ship` | Conventional commits, PR creation, Jira updates | "Create a PR for this work" |
 | **Memory** | `enggenie:memory-recall` | Cross-session context with 10x token savings | "What did we work on last session?" |
 | **Gateway** | `enggenie` | Routes to the right skill when intent is ambiguous | "Help me with this feature" |

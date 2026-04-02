@@ -14,7 +14,7 @@
 npx skills add badrusiddique/enggenie-skill
 ```
 
-This auto-detects Gemini CLI and installs all 13 skills. Skip to Step 2.
+This auto-detects Gemini CLI and installs all 14 skills. Skip to Step 2.
 
 **Option B: Manual install**
 

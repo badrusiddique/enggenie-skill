@@ -13,8 +13,8 @@ This repo contains skills that shape AI agent behavior. Changes to skill content
 
 ## Skill Architecture
 
-- **13 skills** across 7 roles (PM, Architect, Dev, Reviewer, QA, Deploy, Memory)
-- **14 agent prompt templates** in `agents/` subdirectories
+- **14 skills** across 7 roles (PM, Architect, Dev, Reviewer, QA, Deploy, Memory)
+- **15 agent prompt templates** in `agents/` subdirectories
 - **5 reference docs** in `references/` subdirectories
 - **4 platform adapters** in `references/`
 - **1 spec template** in `templates/`

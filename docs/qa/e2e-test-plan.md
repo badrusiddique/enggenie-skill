@@ -8,11 +8,11 @@
 
 ## 1. Summary
 
-This document defines a comprehensive end-to-end QA test plan for the enggenie skill suite plugin. enggenie provides 13 skills across 7 roles (PM, Architect, Dev, Reviewer, QA, Deploy, Memory) and supports 5 AI coding assistant platforms. The plan covers installation, individual skill activation, cross-skill integration, platform-specific behavior, and negative/edge cases.
+This document defines a comprehensive end-to-end QA test plan for the enggenie skill suite plugin. enggenie provides 14 skills across 7 roles (PM, Architect, Dev, Reviewer, QA, Deploy, Memory) and supports 5 AI coding assistant platforms. The plan covers installation, individual skill activation, cross-skill integration, platform-specific behavior, and negative/edge cases.
 
 **Scope:**
 - 51 total test cases: 26 P1 (critical path), 25 P2 (important but non-blocking)
-- All 13 skills validated individually
+- All 14 skills validated individually
 - Cross-skill handoff chains verified
 - All 5 supported platforms covered
 - Negative and edge case scenarios included
@@ -60,7 +60,7 @@ This document defines a comprehensive end-to-end QA test plan for the enggenie s
 |---|---|---|---|---|---|---|
 | TC-001 | P1 | Install | Universal install via npx | 1. Run `npx skills add badrusiddique/enggenie-skill` in a terminal. 2. Verify command exits 0. 3. Check that skill files are present in the expected directory. | Installation completes without errors. Skill configuration files are created. | |
 | TC-002 | P1 | Install | Claude Code native install - marketplace add | 1. In Claude Code, run `/plugin marketplace add badrusiddique/enggenie-skill`. 2. Observe output. | Plugin is added to the marketplace registry. Confirmation message displayed. | |
-| TC-003 | P1 | Install | Claude Code native install - plugin install | 1. After TC-002, run `/plugin install enggenie@badrusiddique-enggenie-skill`. 2. Observe output. | Plugin installs successfully. All 13 skills are registered. | |
+| TC-003 | P1 | Install | Claude Code native install - plugin install | 1. After TC-002, run `/plugin install enggenie@badrusiddique-enggenie-skill`. 2. Observe output. | Plugin installs successfully. All 14 skills are registered. | |
 | TC-004 | P1 | Install | Claude Code native install - reload plugins | 1. After TC-003, run `/reload-plugins`. 2. Verify skills are available. | Plugins reload without error. enggenie skills are active and discoverable. | |
 | TC-005 | P2 | Install | Cursor platform install | 1. Run `npx skills add badrusiddique/enggenie-skill` from a Cursor-integrated terminal. 2. Open Cursor and verify skill availability. | Skills are recognized by Cursor. No configuration errors. | |
 | TC-006 | P2 | Install | GitHub Copilot CLI platform install | 1. Run `npx skills add badrusiddique/enggenie-skill`. 2. Verify skills are accessible from GitHub Copilot CLI. | Skills are registered and invocable within Copilot CLI. | |
@@ -104,7 +104,7 @@ This document defines a comprehensive end-to-end QA test plan for the enggenie s
 
 | ID | Priority | Category | Test Name | Steps | Expected Result | Status |
 |---|---|---|---|---|---|---|
-| TC-032 | P1 | Platform | Claude Code - all 13 skills discoverable | 1. Install on Claude Code. 2. Activate each of the 13 skills by name or intent. | All 13 skills respond correctly on Claude Code. No missing or broken skill registrations. | |
+| TC-032 | P1 | Platform | Claude Code - all 14 skills discoverable | 1. Install on Claude Code. 2. Activate each of the 14 skills by name or intent. | All 14 skills respond correctly on Claude Code. No missing or broken skill registrations. | |
 | TC-033 | P2 | Platform | Cursor - skill activation via intent | 1. Install on Cursor. 2. Prompt with intent for pm-refine, dev-implement, and qa-test. | Skills activate automatically based on user intent in Cursor. | |
 | TC-034 | P2 | Platform | GitHub Copilot CLI - skill activation via intent | 1. Install on Copilot CLI. 2. Prompt with intent for architect-design and deploy-ship. | Skills activate correctly within the Copilot CLI environment. | |
 | TC-035 | P2 | Platform | Google Gemini CLI - skill activation via intent | 1. Install on Gemini CLI. 2. Prompt with intent for dev-tdd and review-code. | Skills activate correctly within the Gemini CLI environment. | |

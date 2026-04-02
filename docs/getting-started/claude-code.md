@@ -15,7 +15,7 @@
 npx skills add badrusiddique/enggenie-skill
 ```
 
-This auto-detects Claude Code and installs all 13 skills.
+This auto-detects Claude Code and installs all 14 skills.
 
 **Option B: Native plugin system**
 
@@ -30,7 +30,7 @@ Run these commands inside Claude Code:
 **What you should see:**
 
 ```
-Installed 13 skills
+Installed 14 skills
 ```
 
 **If you see an error:**
@@ -46,10 +46,10 @@ In Claude Code, type:
 What enggenie skills do I have?
 ```
 
-**What you should see:** A list of 13 skills grouped by role:
+**What you should see:** A list of 14 skills grouped by role:
 - PM: `enggenie:pm-refine`
 - Architect: `enggenie:architect-design`, `enggenie:architect-plan`
-- Dev: `enggenie:dev-implement`, `enggenie:dev-tdd`, `enggenie:dev-debug`
+- Dev: `enggenie:dev-implement`, `enggenie:dev-tdd`, `enggenie:dev-debug`, `enggenie:dev-commit`
 - Reviewer: `enggenie:review-code`, `enggenie:review-design`
 - QA: `enggenie:qa-verify`, `enggenie:qa-test`
 - Deploy: `enggenie:deploy-ship`

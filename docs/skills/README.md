@@ -1,6 +1,6 @@
 # enggenie Skills Reference
 
-All 13 skills organized by role. Each skill is a domain expert that activates based on user intent.
+All 14 skills organized by role. Each skill is a domain expert that activates based on user intent.
 
 ## PM
 
@@ -22,6 +22,7 @@ All 13 skills organized by role. Each skill is a domain expert that activates ba
 | `enggenie:dev-implement` | Subagent-driven TDD execution | "Execute the plan", "Start implementing" | Two-stage review gate (spec compliance + code quality) on every task, parallel dispatch |
 | `enggenie:dev-tdd` | TDD discipline (RED-GREEN-REFACTOR) | "Add a validate email function", "Write this code" | Discipline overlay that fires during any coding, not a workflow step |
 | `enggenie:dev-debug` | Systematic root cause investigation | "This test is failing", "Bug in the auth flow" | Four phases (investigate, find pattern, test hypothesis, fix), 3-attempt rule |
+| `enggenie:dev-commit` | Conventional commit messages with diff analysis | "Create a commit message", "Commit with a good message" | Analyzes staged diffs, proposes emoji + type + why, mandatory user approval |
 
 ## Reviewer
 
@@ -68,6 +69,7 @@ pm-refine (spec) --> architect-design (approved design) --> architect-plan (phas
 `dev-debug` interrupts any stage when something breaks.
 `memory-recall` is available to all stages as a utility.
 `dev-tdd` is a discipline overlay active during all coding.
+`dev-commit` generates commit messages with diff analysis.
 
 ## Subagent Summary
 
