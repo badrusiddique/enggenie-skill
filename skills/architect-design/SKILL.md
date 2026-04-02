@@ -119,6 +119,18 @@ Use when the user is weighing two or more technical options and needs to reach a
 
 ---
 
+### Visual Support
+
+When the design benefits from diagrams or visual aids:
+1. Describe the architecture as a text-based diagram (ASCII art or Mermaid syntax)
+2. If browser preview tools are available (MCP), generate an HTML visualization
+3. For UI-heavy features, suggest the user share screenshots or mockups for reference
+4. Save diagrams alongside the design document
+
+Not every design needs visuals. Use them when component relationships, data flow, or UI layout would benefit from a picture.
+
+---
+
 ## Design Principles
 
 These principles guide every mode. They are not aspirational -- they are constraints.

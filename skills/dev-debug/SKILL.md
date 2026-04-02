@@ -319,6 +319,7 @@ Dispatch one investigator subagent per failure domain:
 - `references/root-cause-tracing.md` -- Backward tracing technique: start at the symptom, trace data flow backward through each transformation until you find the divergence point.
 - `references/multi-component-debugging.md` -- Diagnostic instrumentation for multi-service systems: where to add logging, what to capture at each boundary, how to correlate across services.
 - `references/condition-based-waiting.md` -- Replace arbitrary timeouts with condition polling. When debugging timing issues, never use `sleep`. Poll for the expected condition with a timeout ceiling.
+- `../dev-tdd/references/defense-in-depth.md` - Validate at every layer, make bugs structurally impossible
 
 Read these references when you need detailed technique guidance. The phases above tell you WHAT to do. The references tell you HOW.
 
