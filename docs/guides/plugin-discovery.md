@@ -128,11 +128,23 @@ Or clone and reference in `.opencode/instructions.md` - see [OpenCode getting-st
 | Copilot | [GitHub Marketplace](https://github.com/marketplace) | No (verified pub) | `npx skills add` or `AGENTS.md` |
 | OpenCode | [Awesome OpenCode](https://awesomeopencode.com/) | No (PR) | `npx skills add` or `.opencode/instructions.md` |
 
+## Submission Status
+
+| Directory | Status | Action Needed |
+|-----------|--------|---------------|
+| skills.sh | Pending auto-index | GitHub topics set (`claude-skill`, `agent-skills`, `skill-md`). Wait for crawler. |
+| ClaudePluginHub | Pending auto-index | `.claude-plugin/plugin.json` with `"strict": true` is set. Wait for 2h crawl cycle. |
+| SkillsMP | Pending auto-index | GitHub topic `skill-md-skillsmp` set. Wait for crawler. |
+| Gemini Extensions | Requires submission | File `[Extension Submission]` issue on [google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli/issues/new). |
+| Cursor Marketplace | Requires submission | Submit at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish). May need `displayName` and `keywords` in plugin.json. |
+| GitHub Marketplace | Requires verified publisher | Create Copilot Extension as GitHub App, verify org, then list. |
+| Awesome OpenCode | Requires PR | Submit YAML to [awesome-opencode repo](https://github.com/awesome-opencode/awesome-opencode). |
+
 ## For Contributors
 
 To maximize enggenie's discoverability:
 
 1. **Star the repo** - SkillsMP prioritizes repos with 2+ stars
-2. **GitHub topics are set** - `claude-code-plugin`, `claude-plugin`, `ai-skills`, `sdlc`, `tdd`
+2. **GitHub topics are set** - `claude-skill`, `agent-skills`, `skill-md`, `skill-md-skillsmp`, `gemini-cli-extension`, `claude-code-plugin`, `ai-skills`, `sdlc`, `tdd`
 3. **skills.sh listing is seeded** - `npx skills add` works now
 4. **ClaudePluginHub auto-indexes** from `.claude-plugin/plugin.json`
