@@ -178,6 +178,20 @@ Debug (enggenie:dev-debug) - interrupts any stage when something breaks
 Memory (enggenie:memory-recall) - available at all stages
 ```
 
+## Plugin Discovery
+
+enggenie is listed on multiple plugin directories across platforms:
+
+| Directory | Platforms | URL |
+|-----------|----------|-----|
+| skills.sh | All (18+ tools) | [skills.sh](https://skills.sh) |
+| ClaudePluginHub | Claude Code | [claudepluginhub.com](https://www.claudepluginhub.com) |
+| Gemini Extensions Gallery | Gemini CLI | [geminicli.com/extensions](https://geminicli.com/extensions/) |
+| Cursor Marketplace | Cursor | [cursor.com/marketplace](https://cursor.com/marketplace) |
+| SkillsMP | All | [skillsmp.com](https://skillsmp.com) |
+
+See the [full plugin discovery guide](docs/guides/plugin-discovery.md) for all directories and submission details.
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). We welcome contributions - especially new reference docs, platform adapters, and bug reports.
