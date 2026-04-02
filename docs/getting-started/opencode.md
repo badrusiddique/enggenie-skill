@@ -1,125 +1,77 @@
 # Getting Started with enggenie on OpenCode.ai
 
-This guide walks you through setting up enggenie with OpenCode.ai, verifying it works, and trying your first skills.
-
-No prior experience with AI coding plugins is required.
-
-> **Note:** OpenCode's plugin system is evolving. The steps below reflect general guidance. If they do not match your version, check [OpenCode's documentation](https://opencode.ai) for the latest plugin installation method. Tool names differ slightly from Claude Code - see [opencode-tools.md](../../references/opencode-tools.md) for the mapping.
-
----
-
 ## Prerequisites
 
-- **OpenCode installed.** Follow the setup instructions at [opencode.ai](https://opencode.ai).
-- **A code project to work in.** Any project with tests is ideal.
-- **Terminal access.**
-
-To confirm OpenCode is installed, run:
-
-```bash
-opencode --version
-```
-
-**What you should see:** A version number. If you see "command not found," follow the installation instructions at the link above.
-
----
+- OpenCode installed ([opencode.ai](https://opencode.ai))
+- A code project to work in
+- Terminal access
 
 ## Step 1: Install enggenie
 
-Clone the enggenie repository:
+Clone the enggenie plugin into your OpenCode plugins directory:
 
 ```bash
-git clone https://github.com/badrusiddique/enggenie-skill.git
+git clone https://github.com/badrusiddique/enggenie-skill.git ~/.opencode/plugins/enggenie
 ```
 
-Then configure OpenCode to load the skill definitions from the cloned repository. This typically involves adding the plugin path to your OpenCode configuration file.
+Then add this to your project's `.opencode/instructions.md` (create it if it doesn't exist):
 
-> **Important:** The exact installation steps depend on your OpenCode version. The plugin system is under active development. Check [opencode.ai](https://opencode.ai) for the latest instructions on loading custom plugins.
-
-**What you should see:** After configuration, the enggenie skills should be available in your OpenCode sessions.
-
----
+```markdown
+## Skills
+Use the skills in ~/.opencode/plugins/enggenie/skills/ for development workflows.
+When a skill applies, read the SKILL.md file and follow its instructions.
+For tool name mappings, see ~/.opencode/plugins/enggenie/references/opencode-tools.md
+```
 
 ## Step 2: Verify Installation
 
-Start an OpenCode session and ask:
+Ask OpenCode:
 
 ```
-What enggenie skills do I have?
+List all the enggenie skills in ~/.opencode/plugins/enggenie/skills/
 ```
 
-**What you should see:** A list of 13 skills across 6 roles (PM, Architect, Developer, Reviewer, QA, Deploy) plus Memory and Meta. See [claude-code.md](claude-code.md) for the full list.
+**What you should see:** 13 skill directories, each with a SKILL.md file.
 
----
+## Step 3: Tool Name Differences
 
-## Step 3: Try Your First Skill (enggenie:qa-verify)
-
-In any project with tests, tell OpenCode:
-
-```
-Run the tests and tell me if they pass
-```
-
-**What happens:**
-
-1. The `enggenie:qa-verify` skill activates.
-2. OpenCode uses `bash` to execute your test suite.
-3. You see real test output with pass/fail counts.
-
-**What you should see:** Actual terminal output from your test runner, not guesses. Evidence of what passed and what failed.
-
----
-
-## Step 4: Try a Development Workflow (enggenie:dev-tdd)
-
-Tell OpenCode:
-
-```
-Add a utility function that validates email addresses. Use TDD.
-```
-
-**What happens:**
-
-1. **RED:** Writes a failing test, runs it with `bash`, shows the failure.
-2. **GREEN:** Writes the implementation, runs tests, shows them passing.
-3. **REFACTOR:** Cleans up and confirms tests still pass.
-
-**What you should see:** Three distinct phases, each with real test output.
-
----
-
-## Step 5: Explore More Skills
-
-| What you want to do | Say this | Skill that fires |
-|---------------------|----------|------------------|
-| Write a product spec | "Write a spec for user search" | `enggenie:pm-refine` |
-| Create an implementation plan | "Create a plan from this spec" | `enggenie:architect-plan` |
-| Add a feature with TDD | "Add a validate email function using TDD" | `enggenie:dev-tdd` |
-| Debug a failing test | "This test is failing, help me fix it" | `enggenie:dev-debug` |
-| Review code changes | "Review my changes" | `enggenie:review-code` |
-| Verify tests with evidence | "Are the tests passing?" | `enggenie:qa-verify` |
-| Create a PR | "Create a PR for this work" | `enggenie:deploy-ship` |
-
----
-
-## Tool Name Differences
-
-OpenCode tool names closely mirror Claude Code but use lowercase. Key differences:
+OpenCode uses similar but lowercase tool names. enggenie includes a mapping reference at `references/opencode-tools.md`:
 
 | Claude Code | OpenCode |
-|-------------|----------|
+|------------|----------|
 | `Read` | `read` |
 | `Edit` | `edit` |
+| `Write` | `write` |
 | `Bash` | `bash` |
 | `Grep` | `grep` |
+| `Glob` | `glob` |
 
-See [opencode-tools.md](../../references/opencode-tools.md) for the complete mapping.
+OpenCode's tools closely mirror Claude Code, making enggenie skills work with minimal adaptation.
 
----
+## Step 4: Try Your First Skill
+
+```
+I want to add a function that validates email addresses using TDD.
+Read the skill at ~/.opencode/plugins/enggenie/skills/dev-tdd/SKILL.md and follow it.
+```
+
+## Step 5: Try More Skills
+
+| What you want to do | Say this |
+|---------------------|---------|
+| Debug a test failure | "This test fails. Use the dev-debug skill." |
+| Plan a feature | "I want to build X. Use the architect-design skill." |
+| Create an implementation plan | "Create a plan. Use the architect-plan skill." |
+| Review code | "Review my changes. Use the review-code skill." |
+| Ship code | "Commit and create a PR. Use the deploy-ship skill." |
+
+## Troubleshooting
+
+**OpenCode doesn't find the skills:**
+- Verify: `ls ~/.opencode/plugins/enggenie/skills/`
+- Check that `.opencode/instructions.md` references the correct path
 
 ## What's Next?
 
-- **[Examples](../examples/)** - Full walkthroughs of enggenie skills.
-- **[Guides](../guides/)** - Deep dives on TDD, debugging, and planning workflows.
-- **[opencode-tools.md](../../references/opencode-tools.md)** - Complete tool name mapping.
-- **[Skill reference](../../README.md)** - Documentation for all 13 skills.
+- [All Skills Usage Examples](../skills/usage-examples.md) - Quick examples for every skill
+- [Full Feature Walkthrough](../examples/full-feature-walkthrough.md) - End-to-end workflow
