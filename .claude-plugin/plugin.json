@@ -9,6 +9,7 @@
   "homepage": "https://github.com/badrusiddique/enggenie-skill",
   "repository": "https://github.com/badrusiddique/enggenie-skill",
   "license": "MIT",
+  "strict": true,
   "keywords": [
     "skills",
     "sdlc",
