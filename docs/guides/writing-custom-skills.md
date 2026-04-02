@@ -4,7 +4,7 @@ How to extend enggenie with team-specific or domain-specific skills.
 
 ## When to Write a Custom Skill
 
-Write a custom skill when your team has a repeatable workflow that is not covered by enggenie's 13 core skills. Common examples:
+Write a custom skill when your team has a repeatable workflow that is not covered by enggenie's 14 core skills. Common examples:
 
 - **Domain-specific:** A skill for your internal deployment pipeline, compliance checks, or data migration tool
 - **Tool-specific:** A skill for interacting with a proprietary API, internal dashboard, or team-specific CLI
@@ -109,6 +109,6 @@ CSO (Claude Skill Orchestration) matches user intent to skill descriptions. To m
 
 - Use concrete verbs: "deploy," "migrate," "generate," not "handle" or "manage"
 - Include the user's likely phrasing: "Use when deploying to staging" matches "deploy to staging" directly
-- Avoid overlap with existing skill descriptions -- check all 13 enggenie descriptions before writing yours
+- Avoid overlap with existing skill descriptions -- check all 14 enggenie descriptions before writing yours
 - Test activation by saying your expected trigger phrase and verifying the correct skill fires
 - If your skill competes with an enggenie skill for the same trigger, make the description more specific to narrow its activation scope
