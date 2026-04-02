@@ -6,7 +6,7 @@ Format: [Semantic Versioning](https://semver.org/). Each version lists what was 
 
 ---
 
-## [2.0.0] - Unreleased
+## [2.0.0] - 2026-04-02
 
 ### Added
 - **Model recommendations per skill** - each skill now suggests the optimal model (opus/sonnet/haiku) with reasoning, and asks for user confirmation
