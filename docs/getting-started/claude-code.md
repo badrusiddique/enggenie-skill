@@ -3,6 +3,7 @@
 ## Prerequisites
 
 - Claude Code installed ([install guide](https://docs.anthropic.com/en/docs/claude-code))
+- [Node.js](https://nodejs.org) installed (for the `npx` installer in Option A)
 - A code project to work in (any language)
 - Terminal access
 
