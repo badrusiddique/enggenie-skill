@@ -285,6 +285,35 @@ When dispatching a subagent, load the appropriate template and inject the task-s
 
 ---
 
+## Subagent Context Preservation
+
+After each subagent completes (Implementer, Spec Reviewer, Code Quality Reviewer), explicitly capture their key outputs back to the main conversation:
+
+- **Implementer:** Files created/modified, test names and results, commit hash
+- **Spec Reviewer:** Compliance status, any issues found, whether re-work is needed
+- **Code Quality Reviewer:** Quality assessment, issues found, whether re-work is needed
+- **Cross-task context:** What was built in this task that the next task depends on (imports, interfaces, shared types)
+
+This context feeds into subsequent tasks. If you lose it, the next subagent starts blind.
+
+---
+
+## Recommended Model
+
+**Orchestrator:** sonnet
+**Why:** The orchestrator manages plan execution, dispatches subagents, and tracks progress. Sonnet balances speed and capability for this coordination role.
+
+**Subagent model selection** (already documented in the skill):
+- Implementer on simple tasks (1-2 files) -> haiku
+- Implementer on complex tasks (multi-file, integration) -> sonnet
+- Spec reviewer -> sonnet
+- Code quality reviewer -> sonnet
+- Final reviewer (after all tasks) -> opus
+
+This is a recommendation. Ask the user: "Confirm model selection or override?"
+
+---
+
 ## Hard Rules
 
 These are non-negotiable. Violating any of them is a defect in the process, not a judgment call.

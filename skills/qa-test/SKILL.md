@@ -206,6 +206,26 @@ After testing is complete:
 
 ---
 
+## Subagent Context Preservation
+
+When subagents (QA Automation, QA Manual) complete their work, explicitly capture their key outputs back to the main conversation:
+
+- **QA Automation subagent:** Test file paths created, pass/fail results, test matrix
+- **QA Manual subagent:** Screenshot evidence paths, test scenario results, test matrix report
+
+Do not assume the orchestrating agent retains subagent context automatically. Extract the full test results before reporting.
+
+---
+
+## Recommended Model
+
+**Primary:** sonnet
+**Why:** QA testing requires understanding user journeys, writing robust Playwright tests, and identifying edge cases. Sonnet balances quality with speed.
+
+This is a recommendation. Ask the user: "Confirm model selection or override?"
+
+---
+
 ## Quick Reference
 
 | Aspect | Detail |

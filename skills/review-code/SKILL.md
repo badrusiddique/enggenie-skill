@@ -234,6 +234,27 @@ When dispatching, load the template and inject the task-specific context (diff, 
 
 ---
 
+## Subagent Context Preservation
+
+When the Code Reviewer subagent completes, explicitly capture its findings back to the main conversation:
+
+- All review items with severity (critical, important, minor, wrong)
+- Specific file paths and line numbers referenced
+- Whether blocking issues were found
+
+Do not assume the orchestrating agent retains subagent context automatically. Extract the full review before acting on it.
+
+---
+
+## Recommended Model
+
+**Primary:** sonnet
+**Why:** Code review requires understanding patterns, spotting bugs, and evaluating design decisions. Sonnet provides sufficient depth without the cost of opus.
+
+This is a recommendation. Ask the user: "Confirm model selection or override?"
+
+---
+
 ## Exit Condition
 
 Review is complete when:

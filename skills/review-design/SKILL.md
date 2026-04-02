@@ -127,6 +127,29 @@ Common signs of AI-generated frontend code that looks "off":
 
 **Subagent prompt template:** `agents/design-reviewer-agent.md`
 
+## Subagent Context Preservation
+
+When the Design Reviewer subagent completes, explicitly capture its findings back to the main conversation:
+
+- Design system compliance results (pass/fail per category)
+- State coverage gaps found
+- Responsive behavior issues
+- Accessibility audit results
+- Specific file paths and components reviewed
+
+Do not assume the orchestrating agent retains subagent context automatically. Extract the full review before presenting results.
+
+---
+
+## Recommended Model
+
+**Primary:** sonnet
+**Why:** Design review requires understanding visual patterns, accessibility standards, and responsive behavior. Sonnet provides sufficient visual reasoning capability.
+
+This is a recommendation. Ask the user: "Confirm model selection or override?"
+
+---
+
 ## Entry Condition
 
 After frontend code is written (from enggenie:dev-implement FE phase).

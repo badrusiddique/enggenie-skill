@@ -314,6 +314,26 @@ Dispatch one investigator subagent per failure domain:
 
 ---
 
+## Subagent Context Preservation
+
+When subagents (Investigator, Memory) complete their work, explicitly capture their key findings back to the main conversation:
+
+- **Investigator subagent:** Full error messages, reproduction results, recent changes, data flow trace, boundary status
+- **Memory subagent:** Similar past bugs, previous root causes, relevant debugging notes
+
+Do not assume the orchestrating agent retains subagent context automatically. Extract and summarize findings before forming hypotheses.
+
+---
+
+## Recommended Model
+
+**Primary:** sonnet
+**Why:** Debugging requires methodical reasoning and code comprehension. Sonnet balances analytical depth with speed for iterative hypothesis testing.
+
+This is a recommendation. Ask the user: "Confirm model selection or override?"
+
+---
+
 ## Supporting References
 
 - `references/root-cause-tracing.md` -- Backward tracing technique: start at the symptom, trace data flow backward through each transformation until you find the divergence point.

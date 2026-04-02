@@ -212,6 +212,42 @@ These templates define the exact prompts, constraints, and output formats for ea
 
 ---
 
+## Subagent Context Preservation
+
+When subagents (Explorer, Doc Discovery, Plan Reviewer) complete their work, explicitly capture their key findings back to the main conversation before proceeding:
+
+- Existing patterns and utilities discovered by the Explorer
+- API signatures and methods extracted by Doc Discovery
+- Review defects and suggestions from the Plan Reviewer
+- File paths that will be created or modified
+
+Do not assume the orchestrating agent retains subagent context automatically. Extract and summarize findings before incorporating them into the plan.
+
+---
+
+## Recommended Model
+
+**Primary:** opus
+**Why:** Multi-phase planning with deployment gates requires understanding complex dependencies, service boundaries, and sequencing. Opus produces more thorough plans with fewer missed edge cases.
+
+This is a recommendation. Ask the user: "This skill works best with opus for thorough implementation planning. Confirm or override?"
+
+---
+
+## Plans Directory
+
+Save plans to the `/plans` directory at the project root by default. This makes plans easy to revisit and reference later.
+
+```
+plans/
+  [feature-slug]-implementation-plan.md
+  [feature-slug]-implementation-plan.md
+```
+
+If the project has an existing convention for plan storage (e.g., `docs/plans/`), follow that instead.
+
+---
+
 ## Exit Action
 
 When the plan is complete and passes self-review:

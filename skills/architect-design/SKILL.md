@@ -155,6 +155,28 @@ Searches past decisions and designs in the same domain. "Have we designed someth
 
 ---
 
+## Subagent Context Preservation
+
+When subagents (Explorer, Memory) complete their work, explicitly capture their key findings back to the main conversation before proceeding:
+
+- Existing patterns and conventions discovered
+- Architecture constraints and boundaries found
+- Prior decisions recalled from memory
+- File paths and components relevant to the design
+
+Do not assume the orchestrating agent retains subagent context automatically. Extract and summarize findings before using them in design discussion.
+
+---
+
+## Recommended Model
+
+**Primary:** opus (with extended thinking)
+**Why:** Architectural decisions require deep reasoning about tradeoffs, system boundaries, and long-term consequences. Extended thinking allows the model to explore multiple approaches before committing to a recommendation.
+
+This is a recommendation. Ask the user: "This skill works best with opus and extended thinking for deep architectural reasoning. Confirm or override?"
+
+---
+
 ## Entry
 
 None. This skill can be invoked directly at any time. It does not require a prior skill to have run.

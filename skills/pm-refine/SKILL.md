@@ -235,6 +235,28 @@ Graceful skip if memory tooling is not installed. The spec is still complete wit
 
 ---
 
+## Subagent Context Preservation
+
+When subagents (Refinement, QA Planner, Spec Reviewer, Memory) complete their work, explicitly capture their key findings back to the main conversation:
+
+- **Refinement subagent:** Affected files, service boundaries, subtask breakdown, per-area estimates
+- **QA Planner subagent:** Manual test plan table, Playwright scenarios, edge cases identified
+- **Spec Reviewer subagent:** Review findings, sections that need fixes, completeness assessment
+- **Memory subagent:** Prior art found, relevant patterns, past pitfalls
+
+Do not assume the orchestrating agent retains subagent context automatically. Extract and summarize findings before incorporating them into the spec.
+
+---
+
+## Recommended Model
+
+**Primary:** opus
+**Why:** Spec generation requires deep understanding of requirements, edge cases, estimation math, and cross-service dependencies. Opus produces more thorough specs with fewer gaps.
+
+This is a recommendation. Ask the user: "This skill works best with opus for thorough spec generation. Confirm or override?"
+
+---
+
 ## Default Spec Template
 
 The default spec template is located at `templates/spec-template.md`. Teams can override this by placing their own template at `docs/enggenie/templates/spec-template.md` or `templates/spec-template.md` in their repo.
