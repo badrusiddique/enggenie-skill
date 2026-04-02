@@ -31,10 +31,17 @@ Most AI coding tools only help with one thing: writing code. But software engine
 
 ```bash
 # Claude Code (recommended)
-claude plugin add --from github.com/badrusiddique/enggenie-skill
+# Step 1: Add the marketplace
+/plugin marketplace add badrusiddique/enggenie-skill
 
-# Other platforms - see Getting Started guides below
+# Step 2: Install the plugin
+/plugin install enggenie@badrusiddique-enggenie-skill
+
+# Step 3: Reload plugins
+/reload-plugins
 ```
+
+For other platforms, see [Getting Started guides](#getting-started) below.
 
 ## What's Inside
 
@@ -112,8 +119,10 @@ Pick your platform:
 ### Quick Start (Claude Code)
 
 ```bash
-# 1. Install
-claude plugin add --from github.com/badrusiddique/enggenie-skill
+# 1. Install (run these inside Claude Code)
+/plugin marketplace add badrusiddique/enggenie-skill
+/plugin install enggenie@badrusiddique-enggenie-skill
+/reload-plugins
 
 # 2. Open any project
 cd your-project
