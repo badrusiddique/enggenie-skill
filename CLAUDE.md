@@ -1,4 +1,4 @@
-# enggenie — AI Contributor Guidelines
+# enggenie - AI Contributor Guidelines
 
 ## If You Are an AI Agent
 
@@ -7,7 +7,7 @@ This repo contains skills that shape AI agent behavior. Changes to skill content
 ## Before Making Changes
 
 1. **Read the skill you're modifying** completely. Understand why each section exists before changing it.
-2. **Check for existing PRs** — open AND closed — that address the same area.
+2. **Check for existing PRs** - open AND closed - that address the same area.
 3. **Enforcement language is carefully tuned.** "Hard Rules", "Shortcut Tax" tables, and "Gut Check" sections use specific wording tested against agent rationalizations. Don't reword them without testing evidence.
 4. **Skills consume each other's outputs.** Changing one skill may break handoffs to another. Check the interconnection map in the plan.
 
@@ -28,7 +28,7 @@ This repo contains skills that shape AI agent behavior. Changes to skill content
 
 ## Enforcement Language
 
-enggenie uses its own terminology — do NOT use superpowers terminology:
+enggenie uses its own terminology - do NOT use superpowers terminology:
 
 | enggenie | NOT this (superpowers) |
 |----------|----------------------|

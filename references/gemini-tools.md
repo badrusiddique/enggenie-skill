@@ -1,4 +1,4 @@
-# Google Gemini CLI — Tool Name Mappings
+# Google Gemini CLI - Tool Name Mappings
 
 Reference for translating Claude Code tool names to their Gemini CLI equivalents.
 Consult this file when generating instructions or skills that target Gemini CLI.

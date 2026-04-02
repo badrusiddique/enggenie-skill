@@ -1,4 +1,4 @@
-# Cursor IDE — Tool Name Mappings
+# Cursor IDE - Tool Name Mappings
 
 Reference for translating Claude Code tool names to their Cursor IDE equivalents.
 Consult this file when generating instructions or skills that target Cursor.
@@ -10,7 +10,7 @@ Consult this file when generating instructions or skills that target Cursor.
 
 | Claude Code Tool | Cursor Equivalent | Notes |
 |-----------------|-------------------|-------|
-| `Read` | `read_file` | Same semantics — reads file contents by path |
+| `Read` | `read_file` | Same semantics - reads file contents by path |
 | `Edit` | `edit_file` | Both use old/new string replacement |
 | `Write` | `write_file` | Creates or overwrites a file |
 | `Bash` | `run_command` | Executes shell commands |

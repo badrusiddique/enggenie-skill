@@ -1,6 +1,6 @@
 ---
 name: deploy-ship
-description: Use when committing, pushing, creating PRs, or completing branches — conventional commits, PR creation, Jira updates, worktree cleanup
+description: Use when committing, pushing, creating PRs, or completing branches - conventional commits, PR creation, Jira updates, worktree cleanup
 ---
 
 # Deploy and Ship
@@ -9,7 +9,7 @@ description: Use when committing, pushing, creating PRs, or completing branches 
 
 ## The Last Mile
 
-Code is verified. Tests pass. Now ship it cleanly. This skill handles commits, PRs, Jira updates, and branch completion — the final steps before the next story begins.
+Code is verified. Tests pass. Now ship it cleanly. This skill handles commits, PRs, Jira updates, and branch completion - the final steps before the next story begins.
 
 ---
 
@@ -25,7 +25,7 @@ Format:
 ```
 <type>: <description>
 
-[optional body — explain WHY, not what]
+[optional body - explain WHY, not what]
 ```
 
 **Types:**
@@ -43,7 +43,7 @@ Format:
 - Present tense: "add search endpoint", not "added search endpoint"
 - Subject line under 72 characters
 - Body explains WHY, not just what changed
-- One logical change per commit — if the diff spans unrelated concerns, suggest splitting
+- One logical change per commit - if the diff spans unrelated concerns, suggest splitting
 
 ### Wait for Confirmation
 
@@ -79,7 +79,7 @@ Use `gh pr create` with this structure:
 - [2-3 bullets describing what shipped, drawn from spec/plan]
 
 ## Test Plan
-- [From qa-verify/qa-test results — actual evidence, not aspirations]
+- [From qa-verify/qa-test results - actual evidence, not aspirations]
 
 ## Spec
 - [Link to spec if one exists, omit section if none]
@@ -88,7 +88,7 @@ Use `gh pr create` with this structure:
 - [Link to Jira ticket if available, omit section if none]
 ```
 
-Keep the PR title short (under 70 characters), present tense, and descriptive. The title is not a commit message — it should communicate the change to reviewers scanning a list.
+Keep the PR title short (under 70 characters), present tense, and descriptive. The title is not a commit message - it should communicate the change to reviewers scanning a list.
 
 ---
 
@@ -103,7 +103,7 @@ If Jira MCP tools are NOT available:
 - Do not error. Do not block the flow.
 
 ```
-Jira MCP not available — update PROJ-1234 status to "In Review" manually.
+Jira MCP not available - update PROJ-1234 status to "In Review" manually.
 PR link: https://github.com/org/repo/pull/42
 ```
 
@@ -130,7 +130,7 @@ No other options. No hybrid paths. One choice, one outcome.
 
 ### Execute the Choice
 
-**Option 1 — Merge locally:**
+**Option 1 - Merge locally:**
 ```
 git checkout <base-branch>
 git merge <feature-branch>
@@ -139,15 +139,15 @@ After merging, run the full test suite on the merged result. If tests fail, abor
 
 Then cleanup worktree (see section 5).
 
-**Option 2 — Push and create PR:**
+**Option 2 - Push and create PR:**
 Follow section 2 (Push and Create PR) above.
 Worktree is preserved until PR is merged.
 
-**Option 3 — Keep as-is:**
+**Option 3 - Keep as-is:**
 Do nothing. Branch and worktree remain untouched.
 
-**Option 4 — Discard:**
-Require the user to type "discard" — not "y", not "yes", not enter.
+**Option 4 - Discard:**
+Require the user to type "discard" - not "y", not "yes", not enter.
 ```
 This will delete the branch and all uncommitted work. Type "discard" to confirm:
 ```
@@ -170,7 +170,7 @@ If the current directory is a worktree (not the main working tree), cleanup appl
 | Completion Option | Remove Worktree? |
 |-------------------|-----------------|
 | 1. Merge locally | Yes |
-| 2. Create PR | No — keep until PR merges |
+| 2. Create PR | No - keep until PR merges |
 | 3. Keep as-is | No |
 | 4. Discard | Yes |
 

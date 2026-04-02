@@ -1,4 +1,4 @@
-# GitHub Copilot CLI — Tool Name Mappings
+# GitHub Copilot CLI - Tool Name Mappings
 
 Reference for translating Claude Code tool names to their GitHub Copilot CLI equivalents.
 Consult this file when generating instructions or skills that target Copilot.

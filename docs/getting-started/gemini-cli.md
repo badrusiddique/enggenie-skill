@@ -4,7 +4,7 @@ This guide walks you through setting up enggenie with the Gemini CLI, verifying 
 
 No prior experience with AI coding plugins is required.
 
-> **Note:** Gemini CLI's extension system is evolving. The steps below reflect general guidance. If they do not match your version, check [Gemini CLI's documentation](https://github.com/google-gemini/gemini-cli) for the latest extension installation method. Tool names differ from Claude Code — see [gemini-tools.md](../../references/gemini-tools.md) for the mapping.
+> **Note:** Gemini CLI's extension system is evolving. The steps below reflect general guidance. If they do not match your version, check [Gemini CLI's documentation](https://github.com/google-gemini/gemini-cli) for the latest extension installation method. Tool names differ from Claude Code - see [gemini-tools.md](../../references/gemini-tools.md) for the mapping.
 
 ---
 
@@ -120,7 +120,7 @@ See [gemini-tools.md](../../references/gemini-tools.md) for the complete mapping
 
 ## What's Next?
 
-- **[Examples](../examples/)** — Full walkthroughs of enggenie skills.
-- **[Guides](../guides/)** — Deep dives on TDD, debugging, and planning workflows.
-- **[gemini-tools.md](../../references/gemini-tools.md)** — Complete tool name mapping.
-- **[Skill reference](../../README.md)** — Documentation for all 13 skills.
+- **[Examples](../examples/)** - Full walkthroughs of enggenie skills.
+- **[Guides](../guides/)** - Deep dives on TDD, debugging, and planning workflows.
+- **[gemini-tools.md](../../references/gemini-tools.md)** - Complete tool name mapping.
+- **[Skill reference](../../README.md)** - Documentation for all 13 skills.

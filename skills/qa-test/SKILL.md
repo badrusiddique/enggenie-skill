@@ -1,6 +1,6 @@
 ---
 name: qa-test
-description: Use for QA-perspective testing — Playwright automation or manual browser testing focused on user journeys, not implementation details
+description: Use for QA-perspective testing - Playwright automation or manual browser testing focused on user journeys, not implementation details
 ---
 
 # enggenie:qa-test
@@ -20,7 +20,7 @@ Replace `[automation/manual]` with the appropriate mode based on user request or
 - **enggenie:qa-verify** asks: "Does my code work?"
 - **enggenie:qa-test** asks: "Does the product work for users?"
 
-qa-verify is developer-facing — unit tests, integration tests, type checks, lint passes. qa-test is user-facing — can a real person accomplish their goal using this product? The difference matters. A feature can pass every unit test and still be broken for users.
+qa-verify is developer-facing - unit tests, integration tests, type checks, lint passes. qa-test is user-facing - can a real person accomplish their goal using this product? The difference matters. A feature can pass every unit test and still be broken for users.
 
 ---
 
@@ -32,7 +32,7 @@ Before writing any tests, check if `pm-refine` produced a spec for this feature.
 
 ### Writing Tests for User Journeys
 
-QA tests what the user does, not what the code does. Every test should represent a real user scenario — navigating, clicking, filling forms, waiting for results.
+QA tests what the user does, not what the code does. Every test should represent a real user scenario - navigating, clicking, filling forms, waiting for results.
 
 ```python
 # QA tests what the user does, not what the code does
@@ -88,7 +88,7 @@ For each test scenario:
 
 1. **Navigate** to the page under test.
 2. **Screenshot** the initial state before any interaction.
-3. **Execute** the steps — click, fill, submit, scroll, hover, whatever the scenario requires.
+3. **Execute** the steps - click, fill, submit, scroll, hover, whatever the scenario requires.
 4. **Screenshot** the result after the steps complete.
 5. **Compare** the actual result against the expected result from the test plan.
 6. **Report** the outcome as PASS or FAIL with screenshot evidence attached.
@@ -195,7 +195,7 @@ Prompt template: `agents/qa-manual-agent.md`
 
 ### Entry
 
-This skill is invoked after the feature has been implemented and dev-verified. The expected prior step is `enggenie:qa-verify` — the developer has confirmed that unit tests pass, linting is clean, and the build succeeds. Now it is time to verify the product works for users.
+This skill is invoked after the feature has been implemented and dev-verified. The expected prior step is `enggenie:qa-verify` - the developer has confirmed that unit tests pass, linting is clean, and the build succeeds. Now it is time to verify the product works for users.
 
 ### Exit
 

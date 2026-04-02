@@ -1,6 +1,6 @@
 ---
 name: architect-design
-description: Use when brainstorming new features, making architectural decisions, evaluating technical tradeoffs, or documenting decisions as ADRs — before any implementation planning or coding begins
+description: Use when brainstorming new features, making architectural decisions, evaluating technical tradeoffs, or documenting decisions as ADRs - before any implementation planning or coding begins
 ---
 
 # enggenie:architect-design

@@ -1,6 +1,6 @@
 ---
 name: dev-debug
-description: Use when encountering any bug, test failure, or unexpected behavior — systematic root cause investigation before proposing any fixes
+description: Use when encountering any bug, test failure, or unexpected behavior - systematic root cause investigation before proposing any fixes
 ---
 
 # dev-debug
@@ -241,7 +241,7 @@ STOP and reassess if you notice yourself:
 
 ---
 
-## User Signals — Change Approach If You See These
+## User Signals - Change Approach If You See These
 
 Your user's behavior tells you if your debugging approach is working:
 

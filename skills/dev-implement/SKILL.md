@@ -1,6 +1,6 @@
 ---
 name: dev-implement
-description: Use when executing an implementation plan task-by-task — dispatches subagents for implementation, manages git worktrees, handles phased multi-service deployment
+description: Use when executing an implementation plan task-by-task - dispatches subagents for implementation, manages git worktrees, handles phased multi-service deployment
 ---
 
 # dev-implement

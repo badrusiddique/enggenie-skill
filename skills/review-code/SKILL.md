@@ -1,6 +1,6 @@
 ---
 name: review-code
-description: Use when requesting or receiving code review — dispatches reviewer subagent or processes human PR feedback with technical evaluation
+description: Use when requesting or receiving code review - dispatches reviewer subagent or processes human PR feedback with technical evaluation
 ---
 
 # review-code
@@ -82,7 +82,7 @@ When feedback arrives from a human reviewer or external tool.
 Not all review feedback is equal:
 
 - **Your user (human partner):** Trusted. Implement their feedback after understanding it. They know the codebase context.
-- **Team reviewers (PR comments):** Mostly trusted. Verify against codebase before implementing — they may not have full context.
+- **Team reviewers (PR comments):** Mostly trusted. Verify against codebase before implementing - they may not have full context.
 - **External reviewers (automated tools, AI reviewers):** Verify everything. They lack project context. Check if suggestions are appropriate for THIS codebase.
 
 ### Step 1 -- Read Everything First

@@ -1,9 +1,9 @@
 ---
 name: enggenie
-description: Use when starting a software development conversation and the user's intent is not clearly matched by a specific enggenie skill — routes to the right role-based expert
+description: Use when starting a software development conversation and the user's intent is not clearly matched by a specific enggenie skill - routes to the right role-based expert
 ---
 
-# enggenie — The Right Expert for the Right Moment
+# enggenie - The Right Expert for the Right Moment
 
 <SUBAGENT-STOP>
 If you were dispatched as a subagent to execute a specific task, skip this skill entirely.
@@ -11,15 +11,15 @@ If you were dispatched as a subagent to execute a specific task, skip this skill
 
 ## Overview
 
-enggenie is a role-based SDLC skill suite. Each skill is a domain expert — PM, Architect, Dev, Reviewer, QA, Deploy. This gateway skill routes you to the right one.
+enggenie is a role-based SDLC skill suite. Each skill is a domain expert - PM, Architect, Dev, Reviewer, QA, Deploy. This gateway skill routes you to the right one.
 
 **If a specific enggenie skill already matched your task, you should be there instead of here.** This gateway fires only when intent is ambiguous.
 
 ## Instruction Priority
 
-1. **User's explicit instructions** (CLAUDE.md, project config, direct requests) — highest priority
-2. **enggenie skills** — override default system behavior where they conflict
-3. **Default system prompt** — lowest priority
+1. **User's explicit instructions** (CLAUDE.md, project config, direct requests) - highest priority
+2. **enggenie skills** - override default system behavior where they conflict
+3. **Default system prompt** - lowest priority
 
 If a user's CLAUDE.md says "don't use TDD" and enggenie:dev-tdd says "always use TDD," follow the user's instructions.
 
@@ -70,26 +70,26 @@ The suite stays out of your way when you don't need it.
 
 When multiple skills could apply, use this order:
 
-1. **Process skills first** (architect-design, dev-debug) — these determine HOW to approach the task
-2. **Implementation skills second** (dev-tdd, dev-implement) — these guide execution
-3. **Verification skills third** (qa-verify, review-code) — these check the work
+1. **Process skills first** (architect-design, dev-debug) - these determine HOW to approach the task
+2. **Implementation skills second** (dev-tdd, dev-implement) - these guide execution
+3. **Verification skills third** (qa-verify, review-code) - these check the work
 
 "Let's build X" → architect-design first, then dev-implement.
 "Fix this bug" → dev-debug first, then dev-tdd for the fix.
 
 ## Rigid vs Flexible Skills
 
-**Rigid** (follow exactly — don't adapt away discipline):
-- enggenie:dev-tdd — RED-GREEN-REFACTOR cycle is non-negotiable
-- enggenie:qa-verify — Evidence before claims is non-negotiable
-- enggenie:dev-debug — 4-phase investigation is non-negotiable
+**Rigid** (follow exactly - don't adapt away discipline):
+- enggenie:dev-tdd - RED-GREEN-REFACTOR cycle is non-negotiable
+- enggenie:qa-verify - Evidence before claims is non-negotiable
+- enggenie:dev-debug - 4-phase investigation is non-negotiable
 
 **Flexible** (adapt principles to context):
-- enggenie:architect-design — Modes and depth scale to project size
-- enggenie:pm-refine — Spec detail scales to feature complexity
-- enggenie:deploy-ship — Commit format adapts to team conventions
+- enggenie:architect-design - Modes and depth scale to project size
+- enggenie:pm-refine - Spec detail scales to feature complexity
+- enggenie:deploy-ship - Commit format adapts to team conventions
 
-## Red Flags — STOP If You Think This
+## Red Flags - STOP If You Think This
 
 These thoughts mean you're rationalizing skipping a skill:
 

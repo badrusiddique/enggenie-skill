@@ -1,6 +1,6 @@
 ---
 name: review-design
-description: Use when reviewing frontend implementation against design specs — design system compliance, responsive behavior, accessibility audit
+description: Use when reviewing frontend implementation against design specs - design system compliance, responsive behavior, accessibility audit
 ---
 
 # Frontend Design Quality Review
@@ -9,7 +9,7 @@ description: Use when reviewing frontend implementation against design specs —
 
 ## Overview
 
-Review frontend code for design quality — not just "does it work" but "does it look and feel professional." Catches the gap between functional code and production-quality UI.
+Review frontend code for design quality - not just "does it work" but "does it look and feel professional." Catches the gap between functional code and production-quality UI.
 
 ## What to Check
 
@@ -118,12 +118,12 @@ Common signs of AI-generated frontend code that looks "off":
 - [PASS/FAIL] Screen reader
 
 ### Issues Found
-1. [Severity] Description — How to fix
+1. [Severity] Description - How to fix
 ```
 
 ## Subagents
 
-- **Design Reviewer subagent** (sonnet) — Reads Figma context from spec, reviews component code, checks design system usage, identifies quality gaps
+- **Design Reviewer subagent** (sonnet) - Reads Figma context from spec, reviews component code, checks design system usage, identifies quality gaps
 
 **Subagent prompt template:** `agents/design-reviewer-agent.md`
 

@@ -79,9 +79,9 @@ Describe your system topology in `CLAUDE.md` so skills understand your architect
 
 Monorepo with three services:
 
-- **api-gateway** (Node.js/Express) — Routes requests, handles auth
-- **billing-service** (C#/.NET) — Invoice generation, payment processing
-- **notification-service** (Python/FastAPI) — Email, SMS, push notifications
+- **api-gateway** (Node.js/Express) - Routes requests, handles auth
+- **billing-service** (C#/.NET) - Invoice generation, payment processing
+- **notification-service** (Python/FastAPI) - Email, SMS, push notifications
 
 Shared:
 - PostgreSQL (billing-service owns schema)
@@ -117,9 +117,9 @@ Here is a complete example combining all configuration options:
 
 React frontend with .NET API backend.
 
-- **web-app** (React/TypeScript) — SPA, Vite build, deployed to CloudFront
-- **api** (C#/.NET 8) — REST API, Entity Framework, deployed to ECS
-- **worker** (C#/.NET 8) — Background job processor, SQS consumer
+- **web-app** (React/TypeScript) - SPA, Vite build, deployed to CloudFront
+- **api** (C#/.NET 8) - REST API, Entity Framework, deployed to ECS
+- **worker** (C#/.NET 8) - Background job processor, SQS consumer
 
 Database: PostgreSQL on RDS.
 Cache: Redis on ElastiCache.

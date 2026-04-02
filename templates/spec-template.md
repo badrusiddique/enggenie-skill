@@ -23,9 +23,9 @@ List of services involved:
 
 ## Functional Requirements
 
-1. {REQUIREMENT_1} — Acceptance: {TEST_CONDITION}
-2. {REQUIREMENT_2} — Acceptance: {TEST_CONDITION}
-3. {REQUIREMENT_3} — Acceptance: {TEST_CONDITION}
+1. {REQUIREMENT_1} - Acceptance: {TEST_CONDITION}
+2. {REQUIREMENT_2} - Acceptance: {TEST_CONDITION}
+3. {REQUIREMENT_3} - Acceptance: {TEST_CONDITION}
 
 ## Figma Design Reference
 
@@ -37,13 +37,13 @@ If provided, note: key dimensions, design tokens, colors, layout constraints.
 
 Phased, downstream-first. Each phase is independently deployable.
 
-### Phase 1 — {DOWNSTREAM_SERVICE}
+### Phase 1 - {DOWNSTREAM_SERVICE}
 
 - [ ] {WHAT_TO_BUILD}
 - [ ] {WHAT_TO_BUILD}
 - [ ] Deployment readiness: {CHECKLIST_ITEM}
 
-### Phase 2 — {MIDDLEWARE_SERVICE}
+### Phase 2 - {MIDDLEWARE_SERVICE}
 
 Depends on: Phase 1 deployed
 
@@ -51,7 +51,7 @@ Depends on: Phase 1 deployed
 - [ ] {WHAT_TO_BUILD}
 - [ ] Deployment readiness: {CHECKLIST_ITEM}
 
-### Phase 3 — {UPSTREAM_SERVICE}
+### Phase 3 - {UPSTREAM_SERVICE}
 
 Depends on: Phase 2 deployed
 

@@ -1,6 +1,6 @@
 ---
 name: pm-refine
-description: Use when refining user stories, writing feature specifications, estimating story points, creating subtasks, planning spikes, or generating QA test plans — covers the product management side of development before implementation begins
+description: Use when refining user stories, writing feature specifications, estimating story points, creating subtasks, planning spikes, or generating QA test plans - covers the product management side of development before implementation begins
 ---
 
 # enggenie:pm-refine
@@ -175,9 +175,9 @@ All estimates follow this process. The method is transparent -- show every step 
 
 3. **Round UP to nearest Fibonacci number** -- The buffered estimate maps to the Fibonacci scale: 1, 2, 3, 5, 8. Always round up, never down.
 
-**Note:** In this method, raw hour estimates map directly to the Fibonacci scale — the Fibonacci number IS the estimate, not a separate "points" concept. 3.6 hours rounds up to 5 on the Fibonacci scale.
+**Note:** In this method, raw hour estimates map directly to the Fibonacci scale - the Fibonacci number IS the estimate, not a separate "points" concept. 3.6 hours rounds up to 5 on the Fibonacci scale.
 
-4. **Estimate the story AS A WHOLE** -- Use the largest sub-area as the anchor. Do not sum sub-estimates — summing Fibonacci numbers produces non-Fibonacci totals.
+4. **Estimate the story AS A WHOLE** -- Use the largest sub-area as the anchor. Do not sum sub-estimates - summing Fibonacci numbers produces non-Fibonacci totals.
 
 5. **Cap at 8** -- Any estimate above 8 points means the story is too large. Decompose it into smaller stories. No exceptions.
 

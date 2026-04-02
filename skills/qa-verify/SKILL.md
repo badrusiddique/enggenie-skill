@@ -1,6 +1,6 @@
 ---
 name: qa-verify
-description: Use before claiming any work is complete — evidence-based verification that tests pass, builds succeed, and requirements are met
+description: Use before claiming any work is complete - evidence-based verification that tests pass, builds succeed, and requirements are met
 ---
 
 # Verification Before Completion
@@ -11,20 +11,20 @@ description: Use before claiming any work is complete — evidence-based verific
 
 No "should work." No "probably passes." No "looks good." Run the command. Read the output. State the evidence.
 
-**Current-turn binding:** If you haven't run the verification command in THIS response, you cannot claim it passes. Previous turns don't count — state may have changed.
+**Current-turn binding:** If you haven't run the verification command in THIS response, you cannot claim it passes. Previous turns don't count - state may have changed.
 
 ## The Verification Gate
 
 Before claiming ANYTHING is complete, follow this exact sequence:
 
 ```
-1. IDENTIFY — What command proves this claim?
-2. RUN     — Execute the FULL command. Fresh. Complete. Not partial.
-3. READ    — Full output. Exit code. Failure count. Warnings.
-4. VERIFY  — Does output actually confirm your claim?
+1. IDENTIFY - What command proves this claim?
+2. RUN     - Execute the FULL command. Fresh. Complete. Not partial.
+3. READ    - Full output. Exit code. Failure count. Warnings.
+4. VERIFY  - Does output actually confirm your claim?
    YES → State claim WITH evidence ("47/47 tests pass, exit 0")
    NO  → State actual status ("3 failures in auth module")
-5. ONLY THEN — Make the claim.
+5. ONLY THEN - Make the claim.
 ```
 
 Claiming work is complete without verification is dishonesty, not efficiency. Skip any step and you're lying, not verifying.
@@ -41,17 +41,17 @@ Claiming work is complete without verification is dishonesty, not efficiency. Sk
 | No regressions | Full test suite passes after change | "Only touched one file" |
 | Linter clean | Linter output: 0 errors, 0 warnings | "Fixed the ones I saw" |
 
-## Gut Check — About to Claim Success?
+## Gut Check - About to Claim Success?
 
 Stop if you notice yourself:
 
-- **Using hedge words** — "should", "probably", "seems to", "I think" → Run the command first.
-- **Celebrating early** — "Done!", "Perfect!", "All good!" before verification → Stop. Verify. Then state facts.
-- **Trusting a subagent** — Agent reports "DONE" or "success" → Check the diff yourself. Agents can hallucinate completion.
-- **Skipping "just this once"** — No exceptions. The one you skip is the one that breaks.
-- **Extrapolating** — "Linter passed, so build will too" → Linter is not compiler. Run the build.
-- **Relying on memory** — "Tests passed earlier" → Run them again. State may have changed.
-- **Feeling confident** — Confidence is not evidence. Evidence is evidence.
+- **Using hedge words** - "should", "probably", "seems to", "I think" → Run the command first.
+- **Celebrating early** - "Done!", "Perfect!", "All good!" before verification → Stop. Verify. Then state facts.
+- **Trusting a subagent** - Agent reports "DONE" or "success" → Check the diff yourself. Agents can hallucinate completion.
+- **Skipping "just this once"** - No exceptions. The one you skip is the one that breaks.
+- **Extrapolating** - "Linter passed, so build will too" → Linter is not compiler. Run the build.
+- **Relying on memory** - "Tests passed earlier" → Run them again. State may have changed.
+- **Feeling confident** - Confidence is not evidence. Evidence is evidence.
 - You're using ANY wording that implies success without evidence → This rule applies to:
   - Exact phrases ("tests pass", "build works")
   - Paraphrases ("I've confirmed the changes", "everything looks good")
@@ -122,11 +122,11 @@ Claim: "Subagent changes verified. 3 files modified, 2 tests added, all passing.
 
 If the output does NOT confirm your claim:
 
-1. **State the actual status** — "3 tests failing in auth module" (not "almost done")
-2. **Diagnose** — Read the failure output. What specifically failed?
-3. **Fix** — Address the specific failure
-4. **Re-verify** — Run the full gate again from step 1
-5. **Never claim partial success as success** — "47/50 tests pass" is not "tests pass"
+1. **State the actual status** - "3 tests failing in auth module" (not "almost done")
+2. **Diagnose** - Read the failure output. What specifically failed?
+3. **Fix** - Address the specific failure
+4. **Re-verify** - Run the full gate again from step 1
+5. **Never claim partial success as success** - "47/50 tests pass" is not "tests pass"
 
 ## TodoWrite Integration
 
@@ -138,7 +138,7 @@ Mark it completed only AFTER evidence is gathered and stated.
 
 ## Entry Condition
 
-None — fires before any completion claim:
+None - fires before any completion claim:
 - Before saying "done" or "complete"
 - Before committing code
 - Before creating a PR

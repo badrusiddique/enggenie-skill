@@ -1,6 +1,6 @@
 ---
 name: memory-recall
-description: Use when asking about previous sessions — cross-session context search via claude-mem with token-efficient 3-layer retrieval
+description: Use when asking about previous sessions - cross-session context search via claude-mem with token-efficient 3-layer retrieval
 ---
 
 # Cross-Session Memory Recall
@@ -19,7 +19,7 @@ Search past work across sessions using claude-mem's MCP tools. Token-efficient 3
 
 **Never fetch full details without filtering first. 10x token savings.**
 
-### Layer 1: Search — Get Index with IDs
+### Layer 1: Search - Get Index with IDs
 
 ```
 search(query="authentication", limit=20, project="my-project")
@@ -35,16 +35,16 @@ Returns a lightweight table (~50-100 tokens per result):
 ```
 
 **Parameters:**
-- `query` (string) — Search term
-- `limit` (number) — Max results, default 20, max 100
-- `project` (string) — Project name filter
-- `type` (string, optional) — "observations", "sessions", or "prompts"
-- `obs_type` (string, optional) — Comma-separated: bugfix, feature, decision, discovery, change
-- `dateStart` / `dateEnd` (string, optional) — YYYY-MM-DD or epoch ms
-- `offset` (number, optional) — Skip N results
-- `orderBy` (string, optional) — "date_desc" (default), "date_asc", "relevance"
+- `query` (string) - Search term
+- `limit` (number) - Max results, default 20, max 100
+- `project` (string) - Project name filter
+- `type` (string, optional) - "observations", "sessions", or "prompts"
+- `obs_type` (string, optional) - Comma-separated: bugfix, feature, decision, discovery, change
+- `dateStart` / `dateEnd` (string, optional) - YYYY-MM-DD or epoch ms
+- `offset` (number, optional) - Skip N results
+- `orderBy` (string, optional) - "date_desc" (default), "date_asc", "relevance"
 
-### Layer 2: Timeline — Get Context Around Interesting Results
+### Layer 2: Timeline - Get Context Around Interesting Results
 
 ```
 timeline(anchor=11131, depth_before=3, depth_after=3, project="my-project")
@@ -57,7 +57,7 @@ timeline(query="authentication", depth_before=3, depth_after=3, project="my-proj
 
 Returns chronologically ordered items around the anchor point.
 
-### Layer 3: Fetch — Get Full Details ONLY for Filtered IDs
+### Layer 3: Fetch - Get Full Details ONLY for Filtered IDs
 
 Review titles from Layer 1 and context from Layer 2. Pick relevant IDs. Discard the rest.
 
@@ -67,15 +67,15 @@ get_observations(ids=[11131, 10942])
 
 Returns complete observation objects (~500-1000 tokens each): title, subtitle, narrative, facts, concepts, files.
 
-**Always use `get_observations` for 2+ observations — single request vs N requests.**
+**Always use `get_observations` for 2+ observations - single request vs N requests.**
 
 ## Code Exploration (AST-Based)
 
 When exploring code structure, use token-efficient AST tools instead of full file reads:
 
-1. **smart_search** — Find symbols across codebase (~2-6k tokens vs ~39-59k for Explore agent)
-2. **smart_outline** — Get file structure (~1-2k tokens vs ~12k+ for full Read)
-3. **smart_unfold** — See specific function implementation (~400-2k tokens)
+1. **smart_search** - Find symbols across codebase (~2-6k tokens vs ~39-59k for Explore agent)
+2. **smart_outline** - Get file structure (~1-2k tokens vs ~12k+ for full Read)
+3. **smart_unfold** - See specific function implementation (~400-2k tokens)
 
 ## How Other Skills Use Memory
 
@@ -86,15 +86,15 @@ IF memory-recall MCP tools available:
   Search for relevant context
   Use findings in skill logic
 ELSE:
-  Skip silently — proceed without memory
+  Skip silently - proceed without memory
   No error message, no mention of missing feature
 ```
 
 Skills that use memory:
-- **enggenie:architect-design** — "Have we designed something similar?"
-- **enggenie:architect-plan** — "What patterns did we use last time?"
-- **enggenie:pm-refine** — "Have we built something similar?"
-- **enggenie:dev-debug** — "Have we seen this bug pattern before?"
+- **enggenie:architect-design** - "Have we designed something similar?"
+- **enggenie:architect-plan** - "What patterns did we use last time?"
+- **enggenie:pm-refine** - "Have we built something similar?"
+- **enggenie:dev-debug** - "Have we seen this bug pattern before?"
 
 ## Token Savings
 
@@ -129,9 +129,9 @@ get_observations(ids=[11131, 10942, 10855], orderBy="date_desc")
 
 ## When Search Returns No Results
 
-1. **Broaden the query** — try synonyms, related terms, or the feature area instead of specific implementation details
-2. **Check recent sessions** — use timeline with a recent anchor to see what was discussed recently
-3. **Skip gracefully** — if no relevant results after 2 search attempts, proceed without memory context. Say: "No relevant past context found. Proceeding fresh."
+1. **Broaden the query** - try synonyms, related terms, or the feature area instead of specific implementation details
+2. **Check recent sessions** - use timeline with a recent anchor to see what was discussed recently
+3. **Skip gracefully** - if no relevant results after 2 search attempts, proceed without memory context. Say: "No relevant past context found. Proceeding fresh."
 
 Do not spend more than 2 search attempts. Memory is a shortcut, not a requirement.
 
@@ -146,7 +146,7 @@ When in doubt, treat memory as a starting point for investigation, not as ground
 
 ## Entry Condition
 
-None — available anytime. Invoked by other skills as a utility, or directly by user.
+None - available anytime. Invoked by other skills as a utility, or directly by user.
 
 ## Exit Action
 

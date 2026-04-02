@@ -20,7 +20,7 @@ To confirm Claude Code is installed, open your terminal and run:
 claude --version
 ```
 
-**What you should see:** A version number like `1.x.x`. If you see "command not found," Claude Code is not installed yet — go to the link above first.
+**What you should see:** A version number like `1.x.x`. If you see "command not found," Claude Code is not installed yet - go to the link above first.
 
 ---
 
@@ -40,10 +40,10 @@ Added plugin enggenie from github.com/badrusiddique/enggenie-skill
 
 **If you see an error:**
 
-- `"not authenticated"` — Run `claude login` first, then retry the install command.
-- `"plugin not found"` — Double-check the URL. It must be exactly `github.com/badrusiddique/enggenie-skill` with no typos.
-- `"network error"` — Check your internet connection and try again.
-- `"permission denied"` — Try running with `sudo` or check your file permissions.
+- `"not authenticated"` - Run `claude login` first, then retry the install command.
+- `"plugin not found"` - Double-check the URL. It must be exactly `github.com/badrusiddique/enggenie-skill` with no typos.
+- `"network error"` - Check your internet connection and try again.
+- `"permission denied"` - Try running with `sudo` or check your file permissions.
 
 ---
 
@@ -98,7 +98,7 @@ Run the tests and tell me if they pass
 
 1. The `enggenie:qa-verify` skill activates automatically.
 2. Claude runs your actual test suite (it does not guess or assume).
-3. Claude shows you the real test output — pass counts, fail counts, error messages.
+3. Claude shows you the real test output - pass counts, fail counts, error messages.
 4. If tests fail, Claude shows the specific failures with details.
 
 **What you should see:** Real terminal output from your test runner, followed by a clear summary. For example:
@@ -135,15 +135,15 @@ Add a utility function that validates email addresses. Use TDD.
 **What you should see:** Three distinct phases with test output at each stage:
 
 ```
-RED: wrote test_validate_email.py — running tests...
+RED: wrote test_validate_email.py - running tests...
   FAIL: test_valid_email (ModuleNotFoundError)
 
-GREEN: wrote validate_email.py — running tests...
+GREEN: wrote validate_email.py - running tests...
   PASS: test_valid_email
   PASS: test_invalid_email
   PASS: test_empty_string
 
-REFACTOR: cleaned up edge case handling — running tests...
+REFACTOR: cleaned up edge case handling - running tests...
   PASS: all 3 tests
 ```
 
@@ -206,9 +206,9 @@ When enggenie skills activate, they will respect these project-level instruction
 
 Now that enggenie is installed and working, explore further:
 
-- **[Examples](../examples/)** — See full walkthroughs of enggenie skills on real tasks.
-- **[Guides](../guides/)** — Deep dives on specific workflows (TDD, debugging, planning).
-- **[Skill reference](../../README.md)** — Full documentation for all 13 skills.
-- **[Contributing](../../CONTRIBUTING.md)** — Want to add or improve a skill? Start here.
+- **[Examples](../examples/)** - See full walkthroughs of enggenie skills on real tasks.
+- **[Guides](../guides/)** - Deep dives on specific workflows (TDD, debugging, planning).
+- **[Skill reference](../../README.md)** - Full documentation for all 13 skills.
+- **[Contributing](../../CONTRIBUTING.md)** - Want to add or improve a skill? Start here.
 
 If you run into issues, open an issue at [github.com/badrusiddique/enggenie-skill/issues](https://github.com/badrusiddique/enggenie-skill/issues).

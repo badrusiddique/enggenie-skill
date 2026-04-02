@@ -69,7 +69,7 @@ STOP and report BLOCKED if:
 - You've spent 3+ attempts on the same error
 - The task requires external system access you don't have
 
-Reporting BLOCKED is not failure — it is honesty. Guessing is failure.
+Reporting BLOCKED is not failure - it is honesty. Guessing is failure.
 
 ## Report Format
 

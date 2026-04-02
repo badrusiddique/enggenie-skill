@@ -13,7 +13,7 @@ The principle: no single validation layer is trusted. Each layer assumes the pre
 Validate everything that enters the system from the outside. API inputs, user form data, file uploads, query parameters, webhook payloads. Trust nothing.
 
 ```typescript
-// API endpoint — validate shape, type, and constraints
+// API endpoint - validate shape, type, and constraints
 function createUser(req: Request, res: Response) {
   const { name, email, age } = req.body;
 
@@ -108,7 +108,7 @@ Environment guards catch deployment mistakes: missing env vars, disabled feature
 
 ### Layer 4: Debug Instrumentation
 
-Logging, monitoring, and alerts that make problems visible when they happen. This layer does not prevent bugs — it ensures you find them fast.
+Logging, monitoring, and alerts that make problems visible when they happen. This layer does not prevent bugs - it ensures you find them fast.
 
 ```typescript
 function processOrder(order: Order): ProcessedOrder {

@@ -1,6 +1,6 @@
 # Getting Started with enggenie
 
-enggenie gives your AI coding assistant real expertise across the entire software development lifecycle — not just coding. It activates the right expert (PM, Architect, Developer, Reviewer, QA, or Deploy) at the right moment, so your AI assistant enforces discipline instead of guessing. You do not invoke skills manually; they fire automatically based on what you ask.
+enggenie gives your AI coding assistant real expertise across the entire software development lifecycle - not just coding. It activates the right expert (PM, Architect, Developer, Reviewer, QA, or Deploy) at the right moment, so your AI assistant enforces discipline instead of guessing. You do not invoke skills manually; they fire automatically based on what you ask.
 
 ## Choose Your Platform
 
@@ -16,7 +16,7 @@ Follow the guide for the AI coding tool you use:
 
 ## What You Get
 
-13 skills covering 6 roles: PM, Architect, Developer, Reviewer, QA, and Deploy. Each skill enforces expert-level discipline — writing tests before code, providing evidence before claiming "done," investigating root causes before guessing at fixes.
+13 skills covering 6 roles: PM, Architect, Developer, Reviewer, QA, and Deploy. Each skill enforces expert-level discipline - writing tests before code, providing evidence before claiming "done," investigating root causes before guessing at fixes.
 
 ## Quick Links
 

@@ -4,24 +4,24 @@ Thank you for considering a contribution to enggenie. This guide will help you c
 
 ## Before You Start
 
-1. **Check existing issues and PRs** — both open AND closed — for your topic. If someone already addressed it, build on their work.
+1. **Check existing issues and PRs** - both open AND closed - for your topic. If someone already addressed it, build on their work.
 2. **One problem per PR.** Don't bundle unrelated changes.
 3. **Test your changes.** Skills are code that shapes agent behavior. A typo can change how an AI assistant works.
 
 ## What We Accept
 
-- **Bug fixes** — Skills that don't trigger correctly, incorrect instructions, broken references
-- **Reference docs** — New debugging techniques, testing patterns, platform adapters
-- **Platform support** — Tool mappings for new AI coding platforms
-- **Skill improvements** — Better enforcement language, new Shortcut Tax entries from real testing, closed loopholes
-- **Documentation** — Getting-started guides, examples, team setup improvements
+- **Bug fixes** - Skills that don't trigger correctly, incorrect instructions, broken references
+- **Reference docs** - New debugging techniques, testing patterns, platform adapters
+- **Platform support** - Tool mappings for new AI coding platforms
+- **Skill improvements** - Better enforcement language, new Shortcut Tax entries from real testing, closed loopholes
+- **Documentation** - Getting-started guides, examples, team setup improvements
 
 ## What We Don't Accept
 
-- **Third-party dependencies** — enggenie is zero-dependency by design
-- **Domain-specific skills** — Skills for specific frameworks, tools, or workflows belong in a separate plugin
-- **Cosmetic rewording** — Don't restructure carefully-tuned enforcement language (Shortcut Tax tables, Gut Check sections) without evidence the change improves agent compliance
-- **Speculative features** — Every change must solve a real problem someone actually experienced
+- **Third-party dependencies** - enggenie is zero-dependency by design
+- **Domain-specific skills** - Skills for specific frameworks, tools, or workflows belong in a separate plugin
+- **Cosmetic rewording** - Don't restructure carefully-tuned enforcement language (Shortcut Tax tables, Gut Check sections) without evidence the change improves agent compliance
+- **Speculative features** - Every change must solve a real problem someone actually experienced
 
 ## How to Contribute
 
@@ -29,10 +29,10 @@ Thank you for considering a contribution to enggenie. This guide will help you c
 
 Skills shape AI behavior. Changes require evidence:
 
-1. **Describe the problem** — What went wrong? What did the agent do? What should it have done?
-2. **Baseline test** — Show the agent's behavior WITHOUT your change
-3. **Show the fix** — Your proposed change
-4. **Test with change** — Show the agent's improved behavior WITH your change
+1. **Describe the problem** - What went wrong? What did the agent do? What should it have done?
+2. **Baseline test** - Show the agent's behavior WITHOUT your change
+3. **Show the fix** - Your proposed change
+4. **Test with change** - Show the agent's improved behavior WITH your change
 5. **Submit PR** with before/after evidence
 
 ### For reference docs
@@ -58,7 +58,7 @@ Skills shape AI behavior. Changes require evidence:
 [What you changed and why]
 
 ## Testing
-[How you verified the change works — include before/after if skill change]
+[How you verified the change works - include before/after if skill change]
 ```
 
 ## Code of Conduct

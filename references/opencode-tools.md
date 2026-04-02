@@ -1,4 +1,4 @@
-# OpenCode.ai — Tool Name Mappings
+# OpenCode.ai - Tool Name Mappings
 
 Reference for translating Claude Code tool names to their OpenCode.ai equivalents.
 Consult this file when generating instructions or skills that target OpenCode.

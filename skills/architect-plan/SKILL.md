@@ -1,6 +1,6 @@
 ---
 name: architect-plan
-description: Use when creating implementation plans from specs or requirements — phased task breakdown with deployment readiness gates before any coding begins
+description: Use when creating implementation plans from specs or requirements - phased task breakdown with deployment readiness gates before any coding begins
 ---
 
 # enggenie:architect-plan
@@ -84,14 +84,14 @@ Produce a complete file map. Every file that will be created, modified, or delet
 
 ```
 Files to CREATE:
-  src/services/billing/invoice-generator.ts    — generates invoice PDFs from order data
-  src/services/billing/invoice-generator.test.ts — unit tests for invoice generation
-  src/api/routes/invoices.ts                   — REST endpoints for invoice CRUD
+  src/services/billing/invoice-generator.ts    - generates invoice PDFs from order data
+  src/services/billing/invoice-generator.test.ts - unit tests for invoice generation
+  src/api/routes/invoices.ts                   - REST endpoints for invoice CRUD
 
 Files to MODIFY:
-  src/api/routes/index.ts                      — register new invoice routes
-  src/services/billing/index.ts                — export invoice-generator module
-  src/config/permissions.ts                    — add invoice-related permission scopes
+  src/api/routes/index.ts                      - register new invoice routes
+  src/services/billing/index.ts                - export invoice-generator module
+  src/config/permissions.ts                    - add invoice-related permission scopes
 
 Files to DELETE:
   (none)

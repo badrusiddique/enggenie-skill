@@ -4,7 +4,7 @@ This guide walks you through setting up enggenie in Cursor, verifying it works, 
 
 No prior experience with AI coding plugins is required.
 
-> **Note:** Cursor's plugin system is evolving. If the steps below do not match your version of Cursor, check [Cursor's documentation](https://docs.cursor.com) for the latest plugin installation method. Tool names in Cursor differ from Claude Code — see [cursor-tools.md](../../references/cursor-tools.md) for the mapping.
+> **Note:** Cursor's plugin system is evolving. If the steps below do not match your version of Cursor, check [Cursor's documentation](https://docs.cursor.com) for the latest plugin installation method. Tool names in Cursor differ from Claude Code - see [cursor-tools.md](../../references/cursor-tools.md) for the mapping.
 
 ---
 
@@ -72,7 +72,7 @@ Run the tests and tell me if they pass
 
 1. The `enggenie:qa-verify` skill activates.
 2. Cursor's AI runs your test suite using `run_command` (Cursor's equivalent of a shell command).
-3. You see real test output — not guesses.
+3. You see real test output - not guesses.
 
 **What you should see:** Actual test runner output with pass/fail counts and specific failure details if any tests fail.
 
@@ -136,7 +136,7 @@ Cursor uses different tool names than Claude Code. If you are reading skill docu
 
 ## What's Next?
 
-- **[Examples](../examples/)** — Full walkthroughs of enggenie skills.
-- **[Guides](../guides/)** — Deep dives on TDD, debugging, and planning workflows.
-- **[cursor-tools.md](../../references/cursor-tools.md)** — Complete tool name mapping for Cursor.
-- **[Skill reference](../../README.md)** — Documentation for all 13 skills.
+- **[Examples](../examples/)** - Full walkthroughs of enggenie skills.
+- **[Guides](../guides/)** - Deep dives on TDD, debugging, and planning workflows.
+- **[cursor-tools.md](../../references/cursor-tools.md)** - Complete tool name mapping for Cursor.
+- **[Skill reference](../../README.md)** - Documentation for all 13 skills.

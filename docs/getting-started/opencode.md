@@ -4,7 +4,7 @@ This guide walks you through setting up enggenie with OpenCode.ai, verifying it 
 
 No prior experience with AI coding plugins is required.
 
-> **Note:** OpenCode's plugin system is evolving. The steps below reflect general guidance. If they do not match your version, check [OpenCode's documentation](https://opencode.ai) for the latest plugin installation method. Tool names differ slightly from Claude Code — see [opencode-tools.md](../../references/opencode-tools.md) for the mapping.
+> **Note:** OpenCode's plugin system is evolving. The steps below reflect general guidance. If they do not match your version, check [OpenCode's documentation](https://opencode.ai) for the latest plugin installation method. Tool names differ slightly from Claude Code - see [opencode-tools.md](../../references/opencode-tools.md) for the mapping.
 
 ---
 
@@ -119,7 +119,7 @@ See [opencode-tools.md](../../references/opencode-tools.md) for the complete map
 
 ## What's Next?
 
-- **[Examples](../examples/)** — Full walkthroughs of enggenie skills.
-- **[Guides](../guides/)** — Deep dives on TDD, debugging, and planning workflows.
-- **[opencode-tools.md](../../references/opencode-tools.md)** — Complete tool name mapping.
-- **[Skill reference](../../README.md)** — Documentation for all 13 skills.
+- **[Examples](../examples/)** - Full walkthroughs of enggenie skills.
+- **[Guides](../guides/)** - Deep dives on TDD, debugging, and planning workflows.
+- **[opencode-tools.md](../../references/opencode-tools.md)** - Complete tool name mapping.
+- **[Skill reference](../../README.md)** - Documentation for all 13 skills.

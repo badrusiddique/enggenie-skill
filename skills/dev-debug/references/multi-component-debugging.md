@@ -165,7 +165,7 @@ Look for the first boundary where things go wrong:
 [BOUNDARY] Payment gateway result: { paymentId: null, paymentStatus: null, error: "invalid_amount" }
 ```
 
-The data was correct through validation and database save. The payment gateway returned an error. Now investigate only the payment integration — not the route handler, not the database.
+The data was correct through validation and database save. The payment gateway returned an error. Now investigate only the payment integration - not the route handler, not the database.
 
 ---
 

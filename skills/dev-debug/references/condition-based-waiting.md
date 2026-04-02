@@ -116,7 +116,7 @@ The condition function must fetch fresh data on each call. Capturing a stale ref
 // Bad: captured stale reference
 const element = document.querySelector(".status");
 await waitFor(() => element?.textContent === "Done");
-// element was captured once — even if the DOM updates, this checks the old reference
+// element was captured once - even if the DOM updates, this checks the old reference
 
 // Good: fresh query each poll
 await waitFor(() => {

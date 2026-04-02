@@ -8,7 +8,7 @@ Reference guide for common testing mistakes that erode test suite value. Each pa
 
 Mocks are scaffolding. They exist to isolate the unit under test. If your assertions verify what the mock did, you are testing your test setup, not your code.
 
-**Bad — asserting on mock calls:**
+**Bad - asserting on mock calls:**
 ```typescript
 const mockRepo = jest.fn().mockReturnValue({ id: 1, name: "Alice" });
 const service = new UserService(mockRepo);
@@ -16,7 +16,7 @@ service.getUser(1);
 expect(mockRepo).toHaveBeenCalledWith(1); // tests the mock, not the service
 ```
 
-**Good — asserting on real behavior:**
+**Good - asserting on real behavior:**
 ```typescript
 const mockRepo = jest.fn().mockReturnValue({ id: 1, name: "Alice" });
 const service = new UserService(mockRepo);
@@ -42,7 +42,7 @@ class OrderProcessor {
 }
 ```
 
-**Good — test through observable behavior:**
+**Good - test through observable behavior:**
 ```typescript
 class OrderProcessor {
   private queue: Order[] = [];
@@ -77,16 +77,16 @@ If you cannot answer these, read the real implementation first.
 
 Returning `{ id: 1 }` when the real object has 12 fields hides bugs. Code that accesses `user.email` will get `undefined` in the test but a real value in production. The test passes. Production breaks.
 
-**Bad — partial mock hides missing field access:**
+**Bad - partial mock hides missing field access:**
 ```typescript
 const mockUser = { id: 1, name: "Alice" };
 // Real User has: id, name, email, role, createdAt, preferences...
 const result = formatUserCard(mockUser);
 expect(result).toContain("Alice");
-// formatUserCard also uses user.email — undefined here, but test passes
+// formatUserCard also uses user.email - undefined here, but test passes
 ```
 
-**Good — complete mock data:**
+**Good - complete mock data:**
 ```typescript
 function createTestUser(overrides: Partial<User> = {}): User {
   return {
@@ -125,14 +125,14 @@ Write at least one integration test per user-facing flow before calling the feat
 
 If renaming a private method breaks your test, the test is coupled to implementation. Tests should describe what the code does, not how it does it.
 
-**Bad — coupled to internal method name:**
+**Bad - coupled to internal method name:**
 ```typescript
 const spy = jest.spyOn(service, "internalCalculate" as any);
 service.processPayment(100);
 expect(spy).toHaveBeenCalled();
 ```
 
-**Good — tests observable output:**
+**Good - tests observable output:**
 ```typescript
 const result = service.processPayment(100);
 expect(result.charged).toBe(100);
@@ -147,14 +147,14 @@ Refactoring should not break tests. If it does, the tests are testing the wrong 
 
 `setTimeout(() => expect(...), 500)` is a coin flip. On a slow CI machine, 500ms is not enough. On a fast machine, it wastes time.
 
-**Bad — arbitrary wait:**
+**Bad - arbitrary wait:**
 ```typescript
 setTimeout(() => {
   expect(element.textContent).toBe("Loaded");
 }, 500);
 ```
 
-**Good — condition-based waiting:**
+**Good - condition-based waiting:**
 ```typescript
 await waitFor(() => {
   expect(element.textContent).toBe("Loaded");
@@ -175,4 +175,4 @@ Before merging any test, verify:
 4. Mock data structures are complete, not partial
 5. Integration tests exist for the flow, not just unit tests
 6. Tests break only when behavior changes, not when implementation changes
-7. No arbitrary timeouts — all waits are condition-based
+7. No arbitrary timeouts - all waits are condition-based

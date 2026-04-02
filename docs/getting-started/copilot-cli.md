@@ -4,14 +4,14 @@ This guide walks you through setting up enggenie with GitHub Copilot CLI, verify
 
 No prior experience with AI coding plugins is required.
 
-> **Note:** GitHub Copilot's plugin and extension system is evolving. The steps below reflect general guidance. If they do not match your version, check [GitHub Copilot's documentation](https://docs.github.com/en/copilot) for the latest plugin installation method. Tool names differ from Claude Code — see [copilot-tools.md](../../references/copilot-tools.md) for the mapping.
+> **Note:** GitHub Copilot's plugin and extension system is evolving. The steps below reflect general guidance. If they do not match your version, check [GitHub Copilot's documentation](https://docs.github.com/en/copilot) for the latest plugin installation method. Tool names differ from Claude Code - see [copilot-tools.md](../../references/copilot-tools.md) for the mapping.
 
 ---
 
 ## Prerequisites
 
 - **GitHub Copilot CLI installed.** Follow GitHub's official setup instructions at [docs.github.com/en/copilot](https://docs.github.com/en/copilot).
-- **An active GitHub Copilot subscription.** Free tier or paid — either works.
+- **An active GitHub Copilot subscription.** Free tier or paid - either works.
 - **A code project to work in.** Any project with source code and tests is ideal.
 - **Terminal access.** Copilot CLI runs in your terminal.
 
@@ -120,7 +120,7 @@ See [copilot-tools.md](../../references/copilot-tools.md) for the complete mappi
 
 ## What's Next?
 
-- **[Examples](../examples/)** — Full walkthroughs of enggenie skills.
-- **[Guides](../guides/)** — Deep dives on TDD, debugging, and planning workflows.
-- **[copilot-tools.md](../../references/copilot-tools.md)** — Complete tool name mapping.
-- **[Skill reference](../../README.md)** — Documentation for all 13 skills.
+- **[Examples](../examples/)** - Full walkthroughs of enggenie skills.
+- **[Guides](../guides/)** - Deep dives on TDD, debugging, and planning workflows.
+- **[copilot-tools.md](../../references/copilot-tools.md)** - Complete tool name mapping.
+- **[Skill reference](../../README.md)** - Documentation for all 13 skills.

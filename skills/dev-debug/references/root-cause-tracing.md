@@ -37,7 +37,7 @@ function UserCard({ user }: Props) {
 }
 ```
 
-The immediate cause: `user` prop is undefined. But this is not the root cause — something passed undefined here.
+The immediate cause: `user` prop is undefined. But this is not the root cause - something passed undefined here.
 
 ### 3. Ask "What Called This?"
 
@@ -87,7 +87,7 @@ Root cause found: the API returns null entries for deleted users. The frontend a
 
 ### 6. Fix at the Source and Add Defense-in-Depth
 
-**Fix at source** — filter nulls where data enters the frontend:
+**Fix at source** - filter nulls where data enters the frontend:
 ```typescript
 async function fetchUsers(): Promise<User[]> {
   const response = await api.get("/users");
@@ -95,7 +95,7 @@ async function fetchUsers(): Promise<User[]> {
 }
 ```
 
-**Add defense layer** — guard in the component too:
+**Add defense layer** - guard in the component too:
 ```typescript
 function UserList({ users }: Props) {
   return users
