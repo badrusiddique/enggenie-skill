@@ -1,0 +1,16 @@
+{
+  "name": "enggenie-marketplace",
+  "description": "enggenie — Role-based SDLC skill suite for AI coding assistants",
+  "owner": {
+    "name": "Badru Siddique",
+    "url": "https://github.com/badrusiddique"
+  },
+  "plugins": [
+    {
+      "name": "enggenie",
+      "description": "Role-based SDLC skill suite: PM, Architect, Dev, Reviewer, QA, Deploy — the right expert for the right moment",
+      "version": "1.0.0",
+      "source": "./"
+    }
+  ]
+}

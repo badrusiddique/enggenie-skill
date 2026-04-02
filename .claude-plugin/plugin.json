@@ -1,0 +1,27 @@
+{
+  "name": "enggenie",
+  "description": "Role-based SDLC skill suite for AI coding assistants — PM, Architect, Dev, Reviewer, QA, Deploy: the right expert for the right moment",
+  "version": "1.0.0",
+  "author": {
+    "name": "Badru Siddique",
+    "url": "https://github.com/badrusiddique"
+  },
+  "homepage": "https://github.com/badrusiddique/enggenie-skill",
+  "repository": "https://github.com/badrusiddique/enggenie-skill",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "sdlc",
+    "tdd",
+    "debugging",
+    "planning",
+    "code-review",
+    "qa-testing",
+    "deployment",
+    "agile",
+    "pm",
+    "architecture",
+    "subagents",
+    "workflows"
+  ]
+}
