@@ -1,6 +1,8 @@
 # enggenie - The Right Expert for the Right Moment
 
-> Role-based SDLC skills for AI coding assistants. Your AI assistant becomes a PM, Architect, Developer, Code Reviewer, QA Engineer, and DevOps specialist - all in one plugin.
+> Role-based skills for AI coding assistants across the entire software development lifecycle (SDLC). Your AI assistant becomes a PM, Architect, Developer, Code Reviewer, QA Engineer, and DevOps specialist - all in one plugin.
+
+**What's a "skill"?** A skill is a set of instructions that teaches your AI coding assistant to behave like an expert in a specific area. Skills activate automatically based on what you're doing - you don't need to invoke them manually.
 
 ## Why enggenie?
 
@@ -23,23 +25,25 @@ Most AI coding tools only help with one thing: writing code. But software engine
 - **Zero configuration** - skills activate automatically based on your intent
 - **Multi-platform** - works with Claude Code, Cursor, GitHub Copilot CLI, Google Gemini CLI, and OpenCode
 - **Team customizable** - spec templates, commit format, estimation method, all configurable
-- **TDD enforced** - never lets your AI skip writing tests first
+- **TDD enforced** - never lets your AI skip writing tests first (TDD = Test-Driven Development: write the test before the code)
 - **Evidence-based** - never claims "done" without running the tests and showing proof
-- **Subagent-powered** - dispatches specialized agents for implementation, review, and QA
+- **Subagent-powered** - dispatches specialized AI sub-agents (smaller focused assistants) for implementation, review, and QA
 
 ## Install
 
-**Any platform (Claude Code, Cursor, Gemini CLI, Copilot, OpenCode, Amp, and more):**
+**Prerequisites:** [Node.js](https://nodejs.org) (for the `npx` installer)
+
+**Any platform (Claude Code, Cursor, Gemini CLI, Copilot, OpenCode, and more):**
 
 ```bash
 npx skills add badrusiddique/enggenie-skill
 ```
 
-This auto-detects your installed AI coding tools and installs all 13 skills.
+This auto-detects your installed AI coding tools and installs all 13 skills. The `skills` CLI is from [skillkit.sh](https://www.skillkit.sh/) (by Vercel).
 
 **Claude Code only (native plugin system):**
 
-```bash
+```
 /plugin marketplace add badrusiddique/enggenie-skill
 /plugin install enggenie@badrusiddique-enggenie-skill
 /reload-plugins
@@ -52,7 +56,7 @@ For platform-specific setup, see [Getting Started guides](#getting-started) belo
 | Role | Skill | What It Does | Try Saying... |
 |------|-------|-------------|---------------|
 | **PM** | `enggenie:pm-refine` | Generates specs, refines stories, estimates points | "Write a spec for user notifications" |
-| **Architect** | `enggenie:architect-design` | Brainstorms approaches, writes ADRs | "What's the best caching strategy?" |
+| **Architect** | `enggenie:architect-design` | Brainstorms approaches, writes architecture decision records | "What's the best caching strategy?" |
 | **Architect** | `enggenie:architect-plan` | Creates phased implementation plans | "Create a plan from this spec" |
 | **Dev** | `enggenie:dev-implement` | Executes plans with TDD subagents | "Execute the plan" |
 | **Dev** | `enggenie:dev-tdd` | Enforces RED-GREEN-REFACTOR on every code change | "Add a validate email function" |
@@ -63,6 +67,7 @@ For platform-specific setup, see [Getting Started guides](#getting-started) belo
 | **QA** | `enggenie:qa-test` | Playwright automation + manual browser testing | "Test the login flow as a QA engineer" |
 | **Deploy** | `enggenie:deploy-ship` | Conventional commits, PR creation, Jira updates | "Create a PR for this work" |
 | **Memory** | `enggenie:memory-recall` | Cross-session context with 10x token savings | "What did we work on last session?" |
+| **Gateway** | `enggenie` | Routes to the right skill when intent is ambiguous | "Help me with this feature" |
 
 ## How It Works
 
@@ -89,8 +94,8 @@ Each skill knows what comes next. The PM hands off to the Architect. The Archite
 
 ## What Makes enggenie Different
 
-### Test-Driven Development - Enforced, Not Optional
-enggenie:dev-tdd ensures your AI writes tests BEFORE code. Every time. No exceptions. If it catches itself writing code first, it deletes it and starts over.
+### Test-Driven Development (TDD) - Enforced, Not Optional
+TDD means writing a test first, then writing the code to make it pass, then cleaning up. enggenie:dev-tdd ensures your AI follows this cycle (called RED-GREEN-REFACTOR) every time. No exceptions. If it catches itself writing code first, it deletes it and starts over.
 
 ### Evidence Before Claims
 enggenie:qa-verify prevents your AI from saying "tests pass" without actually running them. Every claim requires proof: command output, exit codes, failure counts.
@@ -157,6 +162,12 @@ enggenie adapts to your team's conventions:
 - **Architecture context** - Describe your system in CLAUDE.md
 
 See [Team Setup Guide](docs/guides/team-setup.md).
+
+**Want your team to use enggenie?** Share this one-liner:
+```bash
+npx skills add badrusiddique/enggenie-skill
+```
+It works with whatever AI coding tool they use. No configuration needed.
 
 ## Architecture
 
