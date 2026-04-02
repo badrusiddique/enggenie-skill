@@ -29,19 +29,23 @@ Most AI coding tools only help with one thing: writing code. But software engine
 
 ## Install
 
+**Any platform (Claude Code, Cursor, Gemini CLI, Copilot, OpenCode, Amp, and more):**
+
 ```bash
-# Claude Code (recommended)
-# Step 1: Add the marketplace
+npx skills add badrusiddique/enggenie-skill
+```
+
+This auto-detects your installed AI coding tools and installs all 13 skills.
+
+**Claude Code only (native plugin system):**
+
+```bash
 /plugin marketplace add badrusiddique/enggenie-skill
-
-# Step 2: Install the plugin
 /plugin install enggenie@badrusiddique-enggenie-skill
-
-# Step 3: Reload plugins
 /reload-plugins
 ```
 
-For other platforms, see [Getting Started guides](#getting-started) below.
+For platform-specific setup, see [Getting Started guides](#getting-started) below.
 
 ## What's Inside
 
@@ -116,13 +120,11 @@ Pick your platform:
 - **[Google Gemini CLI](docs/getting-started/gemini-cli.md)** - Full setup guide
 - **[OpenCode.ai](docs/getting-started/opencode.md)** - Full setup guide
 
-### Quick Start (Claude Code)
+### Quick Start
 
 ```bash
-# 1. Install (run these inside Claude Code)
-/plugin marketplace add badrusiddique/enggenie-skill
-/plugin install enggenie@badrusiddique-enggenie-skill
-/reload-plugins
+# 1. Install (works with any AI coding tool)
+npx skills add badrusiddique/enggenie-skill
 
 # 2. Open any project
 cd your-project
