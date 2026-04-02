@@ -1,15 +1,31 @@
 # enggenie - The Right Expert for the Right Moment
 
-> Role-based SDLC skills for AI coding assistants.
-> **PM** · **Architect** · **Dev** · **Reviewer** · **QA** · **Deploy**
+> Role-based SDLC skills for AI coding assistants. Your AI assistant becomes a PM, Architect, Developer, Code Reviewer, QA Engineer, and DevOps specialist - all in one plugin.
 
-**enggenie** gives your AI coding assistant expertise across the entire software development lifecycle - not just coding. Each skill is a domain expert that activates when you need it.
+## Why enggenie?
 
-## What is a "skill"?
+Most AI coding tools only help with one thing: writing code. But software engineering is more than coding. You also need to:
 
-A skill is a set of instructions that makes your AI assistant behave like an expert in a specific area. When you say "debug this test failure," enggenie automatically activates its debugging skill - which enforces systematic root cause investigation instead of random guessing.
+- **Plan features** before building them
+- **Design architecture** before coding
+- **Write tests first** (not after)
+- **Debug systematically** (not by guessing)
+- **Review code** with technical rigor
+- **Test like QA** (not like a developer)
+- **Ship with confidence** (commits, PRs, deployment)
 
-**You don't invoke skills manually.** They activate based on what you're doing.
+**enggenie makes your AI assistant an expert at ALL of these.** Each skill is a domain expert that activates automatically based on what you're doing.
+
+## Highlights
+
+- **13 skills** covering the entire software development lifecycle
+- **7 expert roles** - PM, Architect, Dev, Reviewer, QA, Deploy, Memory
+- **Zero configuration** - skills activate automatically based on your intent
+- **Multi-platform** - works with Claude Code, Cursor, GitHub Copilot CLI, Google Gemini CLI, and OpenCode
+- **Team customizable** - spec templates, commit format, estimation method, all configurable
+- **TDD enforced** - never lets your AI skip writing tests first
+- **Evidence-based** - never claims "done" without running the tests and showing proof
+- **Subagent-powered** - dispatches specialized agents for implementation, review, and QA
 
 ## Install
 
@@ -17,44 +33,81 @@ A skill is a set of instructions that makes your AI assistant behave like an exp
 # Claude Code (recommended)
 claude plugin add --from github.com/badrusiddique/enggenie-skill
 
-# Cursor
-# Copy this repo to your Cursor plugins directory
-
 # Other platforms - see Getting Started guides below
 ```
 
 ## What's Inside
 
-| Role | Skill | What It Does | Example Trigger |
-|------|-------|-------------|-----------------|
-| **PM** | `enggenie:pm-refine` | Spec generation, story refinement, estimation | "Write a spec for user search" |
-| **Architect** | `enggenie:architect-design` | Brainstorming, ADRs, technical decisions | "Let's brainstorm the caching approach" |
-| **Architect** | `enggenie:architect-plan` | Implementation plans with deployment phases | "Create a plan from this spec" |
-| **Dev** | `enggenie:dev-implement` | Subagent-driven TDD execution | "Execute the plan" |
-| **Dev** | `enggenie:dev-tdd` | TDD discipline (RED-GREEN-REFACTOR) | "Add a validate email function" |
-| **Dev** | `enggenie:dev-debug` | Systematic root cause investigation | "This test is failing" |
-| **Reviewer** | `enggenie:review-code` | Request + receive code reviews | "Review my changes" |
-| **Reviewer** | `enggenie:review-design` | Frontend/UI quality enforcement | "Check the dashboard against the design" |
-| **QA** | `enggenie:qa-verify` | Evidence before completion claims | "Are the tests passing?" |
-| **QA** | `enggenie:qa-test` | Playwright + manual browser testing | "Test the login flow as a QA engineer" |
-| **Deploy** | `enggenie:deploy-ship` | Commit, PR, branch completion, Jira | "Create a PR for this work" |
-| **Memory** | `enggenie:memory-recall` | Cross-session context (requires claude-mem) | "What did we do last session?" |
+| Role | Skill | What It Does | Try Saying... |
+|------|-------|-------------|---------------|
+| **PM** | `enggenie:pm-refine` | Generates specs, refines stories, estimates points | "Write a spec for user notifications" |
+| **Architect** | `enggenie:architect-design` | Brainstorms approaches, writes ADRs | "What's the best caching strategy?" |
+| **Architect** | `enggenie:architect-plan` | Creates phased implementation plans | "Create a plan from this spec" |
+| **Dev** | `enggenie:dev-implement` | Executes plans with TDD subagents | "Execute the plan" |
+| **Dev** | `enggenie:dev-tdd` | Enforces RED-GREEN-REFACTOR on every code change | "Add a validate email function" |
+| **Dev** | `enggenie:dev-debug` | 4-phase systematic root cause investigation | "This test is failing, help me fix it" |
+| **Reviewer** | `enggenie:review-code` | Dispatches code reviewer, handles PR feedback | "Review my changes before I push" |
+| **Reviewer** | `enggenie:review-design` | Checks UI against design system, states, a11y | "Check the dashboard against our design" |
+| **QA** | `enggenie:qa-verify` | Requires evidence before any completion claim | "Are the tests passing?" |
+| **QA** | `enggenie:qa-test` | Playwright automation + manual browser testing | "Test the login flow as a QA engineer" |
+| **Deploy** | `enggenie:deploy-ship` | Conventional commits, PR creation, Jira updates | "Create a PR for this work" |
+| **Memory** | `enggenie:memory-recall` | Cross-session context with 10x token savings | "What did we work on last session?" |
 
-## Why enggenie?
+## How It Works
 
-### vs. no skills
+Skills activate automatically. You don't invoke them manually.
 
-AI assistants without skills skip tests, guess at bugs, claim "done" without evidence, and write code before designing. enggenie enforces discipline at every stage - from spec generation through deployment - so you get expert-level assistance across the entire SDLC, not just coding.
+```
+You say: "I want to build a user dashboard"
+enggenie:architect-design activates -> brainstorms approaches
+
+You say: "Create a plan for the dashboard"
+enggenie:architect-plan activates -> generates phased implementation plan
+
+You say: "Execute the plan"
+enggenie:dev-implement activates -> TDD with subagent review per task
+
+You say: "Are tests passing?"
+enggenie:qa-verify activates -> runs tests, shows evidence
+
+You say: "Create a PR"
+enggenie:deploy-ship activates -> commits, pushes, creates PR
+```
+
+Each skill knows what comes next. The PM hands off to the Architect. The Architect hands off to the Dev. The Dev hands off to QA. QA hands off to Deploy. It's a complete pipeline.
+
+## What Makes enggenie Different
+
+### Test-Driven Development - Enforced, Not Optional
+enggenie:dev-tdd ensures your AI writes tests BEFORE code. Every time. No exceptions. If it catches itself writing code first, it deletes it and starts over.
+
+### Evidence Before Claims
+enggenie:qa-verify prevents your AI from saying "tests pass" without actually running them. Every claim requires proof: command output, exit codes, failure counts.
+
+### Systematic Debugging - No Guessing
+enggenie:dev-debug follows a 4-phase investigation: Investigate, Find Pattern, Test Hypothesis, Fix. After 3 failed fix attempts, it escalates as an architecture problem instead of thrashing.
+
+### Full Spec-to-Ship Pipeline
+Other tools help with coding. enggenie helps with the ENTIRE workflow:
+1. **PM** writes the spec with estimation
+2. **Architect** designs the approach and plans implementation
+3. **Dev** builds it with TDD and subagent review
+4. **Reviewer** checks code quality and design compliance
+5. **QA** tests from the user's perspective
+6. **Deploy** commits, creates PRs, updates Jira
+
+### Phased Deployment
+Multi-service features are broken into independently deployable phases. Each phase has a readiness checklist. No big-bang releases.
 
 ## Getting Started
 
 Pick your platform:
 
-- **[Claude Code](docs/getting-started/claude-code.md)** - Full guide with examples
-- **[Cursor](docs/getting-started/cursor.md)** - Full guide with examples
-- **[GitHub Copilot CLI](docs/getting-started/copilot-cli.md)** - Full guide with examples
-- **[Google Gemini CLI](docs/getting-started/gemini-cli.md)** - Full guide with examples
-- **[OpenCode.ai](docs/getting-started/opencode.md)** - Full guide with examples
+- **[Claude Code](docs/getting-started/claude-code.md)** - Full setup guide with examples
+- **[Cursor](docs/getting-started/cursor.md)** - Full setup guide
+- **[GitHub Copilot CLI](docs/getting-started/copilot-cli.md)** - Full setup guide
+- **[Google Gemini CLI](docs/getting-started/gemini-cli.md)** - Full setup guide
+- **[OpenCode.ai](docs/getting-started/opencode.md)** - Full setup guide
 
 ### Quick Start (Claude Code)
 
@@ -65,7 +118,7 @@ claude plugin add --from github.com/badrusiddique/enggenie-skill
 # 2. Open any project
 cd your-project
 
-# 3. Start coding - skills activate automatically
+# 3. Start working - skills activate automatically
 # Try: "Add a function that validates email addresses"
 # enggenie:dev-tdd will enforce RED-GREEN-REFACTOR
 
@@ -75,47 +128,44 @@ cd your-project
 
 ## Examples
 
-- [Full Feature Walkthrough](docs/examples/full-feature-walkthrough.md) - Idea → spec → plan → code → test → ship
+See real-world walkthroughs of each skill in action:
+
+- [Full Feature Walkthrough](docs/examples/full-feature-walkthrough.md) - Idea to spec to plan to code to test to ship
 - [Debugging Session](docs/examples/debug-session.md) - Systematic root cause investigation
 - [Code Review Session](docs/examples/code-review-session.md) - Requesting and receiving reviews
-- [QA Testing Session](docs/examples/qa-testing-session.md) - Playwright + manual testing
+- [QA Testing Session](docs/examples/qa-testing-session.md) - Playwright + manual browser testing
+- [All Skills Usage Examples](docs/skills/usage-examples.md) - Quick examples for every skill
 
 ## For Teams
 
-enggenie is customizable per team:
+enggenie adapts to your team's conventions:
 
-- **Spec templates** - Override the default with your team's format
+- **Spec templates** - Use your team's format instead of the default
 - **Commit format** - Conventional commits, emoji prefixes, Jira ticket references
 - **Estimation method** - Fibonacci, T-shirt sizing, or linear
 - **Architecture context** - Describe your system in CLAUDE.md
 
 See [Team Setup Guide](docs/guides/team-setup.md).
 
-## How It Works
-
-enggenie uses a **role-based architecture**. Each skill is an expert in one part of the SDLC:
+## Architecture
 
 ```
 PM (enggenie:pm-refine)
-  ↓ spec
-Architect (enggenie:architect-design → enggenie:architect-plan)
-  ↓ plan
+  -> spec
+Architect (enggenie:architect-design -> enggenie:architect-plan)
+  -> plan
 Dev (enggenie:dev-implement + enggenie:dev-tdd)
-  ↓ code
+  -> code
 Reviewer (enggenie:review-code + enggenie:review-design)
-  ↓ reviewed code
+  -> reviewed code
 QA (enggenie:qa-verify + enggenie:qa-test)
-  ↓ verified
+  -> verified
 Deploy (enggenie:deploy-ship)
-  ↓ shipped
+  -> shipped
 
 Debug (enggenie:dev-debug) - interrupts any stage when something breaks
-Memory (enggenie:memory-recall) - available to all stages
+Memory (enggenie:memory-recall) - available at all stages
 ```
-
-Skills consume each other's outputs: the plan inherits phases from the spec, the implementation follows the plan, verification checks the acceptance criteria. Each handoff is explicit.
-
-See [How It Works](docs/guides/how-it-works.md) for the full architecture.
 
 ## Contributing
 
@@ -125,6 +175,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). We welcome contributions - especially ne
 
 [MIT](LICENSE)
 
-## Credits
+---
 
-Created by [Badru Siddique](https://github.com/badrusiddique). Built on the philosophy that engineers deserve expert assistance at every stage of their work, not just coding.
+Built by [Badru Siddique](https://github.com/badrusiddique).
