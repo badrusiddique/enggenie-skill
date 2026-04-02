@@ -50,7 +50,7 @@ enggenie uses its own terminology, distinct from other skill frameworks:
 
 ## Skills Consume Each Other's Outputs
 
-The suite is not 13 isolated tools. It is a pipeline:
+The suite is not 14 isolated tools. It is a pipeline:
 
 ```
 pm-refine produces a spec
