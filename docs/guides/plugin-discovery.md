@@ -82,14 +82,8 @@ Or clone and reference in `GEMINI.md` - see [Gemini getting-started guide](../ge
 
 ## GitHub Copilot
 
-### GitHub Marketplace (Copilot Apps)
+Copilot does not have a public marketplace for skill-based plugins. Install directly:
 
-Official marketplace for Copilot extensions. Requires verified publisher status.
-
-- **URL:** [github.com/marketplace](https://github.com/marketplace?type=apps&copilot_app=true) (filter: Copilot Apps)
-- **How to submit:** Create a Copilot Extension as a GitHub App, verify your org, then list in Marketplace.
-
-**Manual install (no marketplace listing needed):**
 ```bash
 npx skills add badrusiddique/enggenie-skill
 ```
@@ -125,7 +119,7 @@ Or clone and reference in `.opencode/instructions.md` - see [OpenCode getting-st
 | Claude Code | [ClaudePluginHub](https://www.claudepluginhub.com) | Yes (every 2h) | `/plugin marketplace add` |
 | Cursor | [Cursor Marketplace](https://cursor.com/marketplace) | No (submit) | `npx skills add` or `.cursorrules` |
 | Gemini CLI | [Extensions Gallery](https://geminicli.com/extensions/) | Yes (daily) | `npx skills add` or `GEMINI.md` |
-| Copilot | [GitHub Marketplace](https://github.com/marketplace) | No (verified pub) | `npx skills add` or `AGENTS.md` |
+| Copilot | Direct install only | N/A | `npx skills add` or `AGENTS.md` |
 | OpenCode | [Awesome OpenCode](https://awesomeopencode.com/) | No (PR) | `npx skills add` or `.opencode/instructions.md` |
 
 ## Submission Status
@@ -137,7 +131,6 @@ Or clone and reference in `.opencode/instructions.md` - see [OpenCode getting-st
 | SkillsMP | Pending auto-index | GitHub topic `skill-md-skillsmp` set. Wait for crawler. |
 | Gemini Extensions | Requires submission | File `[Extension Submission]` issue on [google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli/issues/new). |
 | Cursor Marketplace | Requires submission | Submit at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish). May need `displayName` and `keywords` in plugin.json. |
-| GitHub Marketplace | Requires verified publisher | Create Copilot Extension as GitHub App, verify org, then list. |
 | Awesome OpenCode | Requires PR | Submit YAML to [awesome-opencode repo](https://github.com/awesome-opencode/awesome-opencode). |
 
 ## For Contributors

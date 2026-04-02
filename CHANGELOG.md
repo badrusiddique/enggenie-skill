@@ -36,7 +36,7 @@ Format: [Semantic Versioning](https://semver.org/). Each version lists what was 
 ## [1.2.0] - 2026-04-02
 
 ### Added
-- Plugin discovery guide covering 7 directories (skills.sh, ClaudePluginHub, SkillsMP, Gemini Extensions Gallery, Cursor Marketplace, GitHub Marketplace, Awesome OpenCode)
+- Plugin discovery guide covering 6 directories (skills.sh, ClaudePluginHub, SkillsMP, Gemini Extensions Gallery, Cursor Marketplace, Awesome OpenCode)
 - README plugin discovery section with marketplace table
 - GitHub topics for discoverability: `gemini-cli-extension`, `cursor-plugin`, `copilot-extension`, `opencode-plugin`
 
