@@ -8,7 +8,17 @@
 
 ## Step 1: Install enggenie
 
-Clone the enggenie plugin into your Copilot skills directory:
+**Option A: Universal install (recommended)**
+
+```bash
+npx skills add badrusiddique/enggenie-skill
+```
+
+This auto-detects Copilot CLI and installs all 13 skills. Skip to Step 2.
+
+**Option B: Manual install**
+
+Clone the repo and add instructions:
 
 ```bash
 git clone https://github.com/badrusiddique/enggenie-skill.git ~/.copilot/skills/enggenie

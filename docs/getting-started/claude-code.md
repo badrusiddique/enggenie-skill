@@ -8,6 +8,16 @@
 
 ## Step 1: Install enggenie
 
+**Option A: Universal install (recommended)**
+
+```bash
+npx skills add badrusiddique/enggenie-skill
+```
+
+This auto-detects Claude Code and installs all 13 skills.
+
+**Option B: Native plugin system**
+
 Run these commands inside Claude Code:
 
 ```
@@ -19,8 +29,7 @@ Run these commands inside Claude Code:
 **What you should see:**
 
 ```
-Marketplace "badrusiddique-enggenie-skill" added successfully
-Plugin "enggenie" installed successfully
+Installed 13 skills
 ```
 
 **If you see an error:**
