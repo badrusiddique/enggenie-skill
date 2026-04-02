@@ -44,29 +44,7 @@ claude plugin add --from github.com/badrusiddique/enggenie-skill
 
 ### vs. no skills
 
-AI assistants without skills skip tests, guess at bugs, claim "done" without evidence, and write code before designing. enggenie enforces discipline at every stage.
-
-### vs. superpowers
-
-[superpowers](https://github.com/obra/superpowers) covers coding (TDD, debugging, planning, code review). enggenie covers the **entire SDLC**:
-
-| Capability | superpowers | enggenie |
-|-----------|-------------|----------|
-| TDD discipline | Yes | Yes |
-| Systematic debugging | Yes | Yes |
-| Implementation planning | Flat task lists | Phased plans with deployment gates |
-| Code review | 2 separate skills | 1 unified skill |
-| Verification | Yes | Yes |
-| **Spec generation** | No | Yes - full specs with estimation |
-| **QA testing** | No | Yes - Playwright + manual |
-| **Design review** | No | Yes - accessibility, responsive, states |
-| **Deployment/PR** | Basic branch completion | Commits, PRs, Jira updates |
-| **Cross-session memory** | No | Yes - via claude-mem |
-| **Brainstorming modes** | 1 rigid flow | 3 modes (brainstorm/architecture/discussion) |
-
-Everything superpowers does, enggenie does. enggenie just does more.
-
-[Full migration guide →](docs/guides/switching-from-superpowers.md)
+AI assistants without skills skip tests, guess at bugs, claim "done" without evidence, and write code before designing. enggenie enforces discipline at every stage - from spec generation through deployment - so you get expert-level assistance across the entire SDLC, not just coding.
 
 ## Getting Started
 
@@ -149,4 +127,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). We welcome contributions - especially ne
 
 ## Credits
 
-Created by [Badru Siddique](https://github.com/badrusiddique). Inspired by the discipline of [superpowers](https://github.com/obra/superpowers) and the philosophy that engineers deserve expert assistance at every stage of their work, not just coding.
+Created by [Badru Siddique](https://github.com/badrusiddique). Built on the philosophy that engineers deserve expert assistance at every stage of their work, not just coding.

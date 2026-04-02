@@ -28,13 +28,13 @@ This repo contains skills that shape AI agent behavior. Changes to skill content
 
 ## Enforcement Language
 
-enggenie uses its own terminology - do NOT use superpowers terminology:
+enggenie uses specific terminology consistently across all skills:
 
-| enggenie | NOT this (superpowers) |
-|----------|----------------------|
-| Hard Rule | Iron Law |
-| Shortcut Tax | Rationalization Prevention |
-| Gut Check | Red Flags |
+| Term | Purpose |
+|------|---------|
+| Hard Rule | Non-negotiable constraints agents must follow |
+| Shortcut Tax | Extra work imposed when agents try to skip steps |
+| Gut Check | Warning signs that an agent is about to cut corners |
 
 ## Testing Skills
 
