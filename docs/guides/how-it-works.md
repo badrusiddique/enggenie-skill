@@ -29,41 +29,40 @@ The gateway also defines what is explicitly outside the suite: quick questions, 
 
 ## Skill Interconnection Map
 
-```
-                         pm-refine
-                            |
-                          spec
-                            |
-                   architect-design
-                            |
-                     approved design
-                            |
-                    architect-plan
-                            |
-                      phased plan
-                            |
-                    dev-implement
-                     /     |     \
-            dev-tdd    dev-tdd    dev-tdd     (discipline overlay, active during all coding)
-                     \     |     /
-                   implemented code
-                     /           \
-              review-code    review-design
-                     \           /
-                   reviewed code
-                     /           \
-               qa-verify       qa-test
-                     \           /
-                   verified code
-                            |
-                      deploy-ship
-                            |
-                        shipped
+```mermaid
+flowchart LR
+    PM["pm-refine\n(Spec)"] --> AD["architect-design\n(Design)"]
+    AD --> AP["architect-plan\n(Plan)"]
+    AP --> DI["dev-implement\n(Build)"]
+    AP --> DT["dev-tdd\n(TDD)"]
+    DI --> DC["dev-commit\n(Commit)"]
+    DT --> DC
+    DC --> RC["review-code\n(Review)"]
+    DC --> RD["review-design\n(UI Review)"]
+    RC --> QV["qa-verify\n(Verify)"]
+    RD --> QV
+    QV --> QT["qa-test\n(QA Test)"]
+    QT --> DS["deploy-ship\n(Ship)"]
 
-        dev-debug -------- interrupts any stage when something breaks
+    DB["dev-debug"] -.->|interrupts any stage| DI
+    MR["memory-recall"] -.->|available everywhere| PM
 
-        memory-recall ---- available to all stages as a utility
+    style PM fill:#4CAF50,color:#fff
+    style AD fill:#2196F3,color:#fff
+    style AP fill:#2196F3,color:#fff
+    style DI fill:#FF9800,color:#fff
+    style DT fill:#FF9800,color:#fff
+    style DC fill:#FF9800,color:#fff
+    style RC fill:#9C27B0,color:#fff
+    style RD fill:#9C27B0,color:#fff
+    style QV fill:#F44336,color:#fff
+    style QT fill:#F44336,color:#fff
+    style DS fill:#607D8B,color:#fff
+    style DB fill:#795548,color:#fff
+    style MR fill:#009688,color:#fff
 ```
+
+> Green = PM | Blue = Architect | Orange = Dev | Purple = Reviewer | Red = QA | Gray = Deploy | Brown = Debug | Teal = Memory
 
 Skills consume each other's outputs through explicit handoffs:
 

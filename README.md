@@ -94,6 +94,70 @@ enggenie:deploy-ship activates -> commits, pushes, creates PR
 
 Each skill knows what comes next. The PM hands off to the Architect. The Architect hands off to the Dev. The Dev hands off to QA. QA hands off to Deploy. It's a complete pipeline.
 
+## Real-World Scenarios
+
+When do you use which skill? Here's how enggenie maps to your daily SDLC activities:
+
+| Scenario | What You Say | Skill That Activates |
+|----------|-------------|---------------------|
+| **Refinement & Specs** | | |
+| PM drops a vague feature request | "I want to build email notifications for signups" | `enggenie:pm-refine` |
+| Existing Jira ticket needs tightening | "Refine PROJ-1234, the AC is weak" | `enggenie:pm-refine` |
+| Need story point estimate | "How big is this ticket? Break down the estimate" | `enggenie:pm-refine` |
+| Tech research before committing | "Spike: should we use Redis or DynamoDB for sessions?" | `enggenie:pm-refine` |
+| **Brainstorming & Architecture** | | |
+| New feature design discussion | "We need real-time notifications, what are our options?" | `enggenie:architect-design` |
+| Choosing between approaches | "Monolith vs microservice for billing - tradeoffs?" | `enggenie:architect-design` |
+| Database schema design | "Design the schema for multi-tenant invoicing" | `enggenie:architect-design` |
+| API contract design | "What should the REST API look like for this feature?" | `enggenie:architect-design` |
+| **Planning & Task Breakdown** | | |
+| Sprint planning breakdown | "Create an implementation plan from this spec" | `enggenie:architect-plan` |
+| Phased delivery plan | "Break this into independently deployable phases" | `enggenie:architect-plan` |
+| Execution roadmap | "Plan the work for this feature across 3 services" | `enggenie:architect-plan` |
+| **Pair Programming (TDD)** | | |
+| Writing new code from scratch | "Add a validateEmail function" | `enggenie:dev-tdd` |
+| Adding a new endpoint | "Add a POST /invoices endpoint" | `enggenie:dev-tdd` |
+| Building a React component | "Build a DataTable component with sorting" | `enggenie:dev-tdd` |
+| Any feature work | "Implement the search filter from the spec" | `enggenie:dev-tdd` |
+| **Execution (Plan-Driven)** | | |
+| Executing an architect-plan | "Execute Phase 1 of the implementation plan" | `enggenie:dev-implement` |
+| Multi-file coordinated changes | "Implement Task 2.3 from the plan" | `enggenie:dev-implement` |
+| Following a spec step by step | "Start building from the spec, phase by phase" | `enggenie:dev-implement` |
+| **Debugging** | | |
+| Test failure investigation | "This test is failing, help me fix it" | `enggenie:dev-debug` |
+| CI is broken | "CI passed locally but fails in pipeline" | `enggenie:dev-debug` |
+| Production bug triage | "Users are seeing 500 errors on the dashboard" | `enggenie:dev-debug` |
+| "It worked yesterday" | "This was passing before the merge, now it's broken" | `enggenie:dev-debug` |
+| Flaky test | "This test passes sometimes and fails sometimes" | `enggenie:dev-debug` |
+| **Git Commits** | | |
+| Committing staged changes | "Commit this" | `enggenie:dev-commit` |
+| Crafting a good commit message | "Help me write a commit message for these changes" | `enggenie:dev-commit` |
+| **Code Review** | | |
+| Reviewing a PR | "Review PR #42" | `enggenie:review-code` |
+| Reviewing local changes | "Review my changes before I push" | `enggenie:review-code` |
+| Addressing PR feedback | "I got 12 comments on my PR, help me address them" | `enggenie:review-code` |
+| **UI/Design Review** | | |
+| Checking implementation vs Figma | "Does this match the design?" | `enggenie:review-design` |
+| Accessibility audit | "Check if this component is accessible" | `enggenie:review-design` |
+| Responsive layout check | "Does this work on mobile, tablet, desktop?" | `enggenie:review-design` |
+| **Dev Testing (Verification)** | | |
+| Pre-PR sanity check | "Are we done? Prove it" | `enggenie:qa-verify` |
+| Full verification | "Run all tests and show me proof" | `enggenie:qa-verify` |
+| **QA / Manual Testing** | | |
+| Playwright automation | "Write Playwright tests for the login flow" | `enggenie:qa-test` |
+| Manual browser testing | "Walk through the checkout flow and screenshot each step" | `enggenie:qa-test` |
+| Edge case testing | "What happens with empty inputs, double clicks, slow network?" | `enggenie:qa-test` |
+| **Deployment & PRs** | | |
+| Creating a PR | "Open a PR for this branch" | `enggenie:deploy-ship` |
+| Release with changelog | "Ship this - tag, changelog, PR, the works" | `enggenie:deploy-ship` |
+| **Cross-Session Memory** | | |
+| Recalling past decisions | "What pattern did we use last time for caching?" | `enggenie:memory-recall` |
+| Finding prior art | "Have we built a notification system before?" | `enggenie:memory-recall` |
+| **Don't Know Where to Start** | | |
+| General entry point | "I need to work on the billing feature" | `enggenie` (gateway) |
+
+For detailed examples with terminal output, see [All Skills Usage Examples](docs/skills/usage-examples.md).
+
 ## What Makes enggenie Different
 
 ### Test-Driven Development (TDD) - Enforced, Not Optional
@@ -173,23 +237,40 @@ It works with whatever AI coding tool they use. No configuration needed.
 
 ## Architecture
 
-```
-PM (enggenie:pm-refine)
-  -> spec
-Architect (enggenie:architect-design -> enggenie:architect-plan)
-  -> plan
-Dev (enggenie:dev-implement + enggenie:dev-tdd)
-  -> code
-Reviewer (enggenie:review-code + enggenie:review-design)
-  -> reviewed code
-QA (enggenie:qa-verify + enggenie:qa-test)
-  -> verified
-Deploy (enggenie:deploy-ship)
-  -> shipped
+```mermaid
+flowchart LR
+    PM["pm-refine\n(Spec)"] --> AD["architect-design\n(Design)"]
+    AD --> AP["architect-plan\n(Plan)"]
+    AP --> DI["dev-implement\n(Build)"]
+    AP --> DT["dev-tdd\n(TDD)"]
+    DI --> DC["dev-commit\n(Commit)"]
+    DT --> DC
+    DC --> RC["review-code\n(Review)"]
+    DC --> RD["review-design\n(UI Review)"]
+    RC --> QV["qa-verify\n(Verify)"]
+    RD --> QV
+    QV --> QT["qa-test\n(QA Test)"]
+    QT --> DS["deploy-ship\n(Ship)"]
 
-Debug (enggenie:dev-debug) - interrupts any stage when something breaks
-Memory (enggenie:memory-recall) - available at all stages
+    DB["dev-debug"] -.->|interrupts any stage| DI
+    MR["memory-recall"] -.->|available everywhere| PM
+
+    style PM fill:#4CAF50,color:#fff
+    style AD fill:#2196F3,color:#fff
+    style AP fill:#2196F3,color:#fff
+    style DI fill:#FF9800,color:#fff
+    style DT fill:#FF9800,color:#fff
+    style DC fill:#FF9800,color:#fff
+    style RC fill:#9C27B0,color:#fff
+    style RD fill:#9C27B0,color:#fff
+    style QV fill:#F44336,color:#fff
+    style QT fill:#F44336,color:#fff
+    style DS fill:#607D8B,color:#fff
+    style DB fill:#795548,color:#fff
+    style MR fill:#009688,color:#fff
 ```
+
+> Green = PM | Blue = Architect | Orange = Dev | Purple = Reviewer | Red = QA | Gray = Deploy | Brown = Debug | Teal = Memory
 
 ## Plugin Discovery
 
