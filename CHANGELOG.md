@@ -6,6 +6,13 @@ Format: [Semantic Versioning](https://semver.org/). Each version lists what was 
 
 ---
 
+## [2.2.0] - 2026-04-03
+
+### Fixed
+- **Model selection wait gate** - all 13 domain skills now explicitly stop and wait for user confirmation on model selection before proceeding (previously asked but did not wait for response)
+
+---
+
 ## [2.1.0] - 2026-04-03
 
 ### Fixed
