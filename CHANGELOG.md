@@ -6,6 +6,18 @@ Format: [Semantic Versioning](https://semver.org/). Each version lists what was 
 
 ---
 
+## [2.1.0] - 2026-04-03
+
+### Fixed
+- **Security audit remediation** - removed external file path references (`agents/*.md`, `scripts/*.py`) flagged by skills.sh Gen, Snyk, and Socket scanners in architect-plan, pm-refine, and qa-test
+- **Jira ticket creation gate** - pm-refine now requires explicit user approval before creating Jira tickets
+- **Generic server lifecycle guidance** - qa-test replaced hardcoded script reference with pattern-based guidance
+
+### Changed
+- Subagent descriptions inlined directly in skill files instead of referencing external prompt template paths
+
+---
+
 ## [2.0.0] - 2026-04-02
 
 ### Added
