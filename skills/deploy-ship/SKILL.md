@@ -234,7 +234,7 @@ The skill reads these settings and applies them to the commit message proposal. 
 
 Override: Use sonnet for complex multi-service deployments with phased rollout.
 
-This is a recommendation. Ask the user: "Confirm model selection or override?"
+This is a recommendation. Ask the user: "Confirm model selection or override?" Do not proceed until the user responds.
 
 ---
 

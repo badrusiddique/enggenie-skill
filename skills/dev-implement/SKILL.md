@@ -310,7 +310,7 @@ This context feeds into subsequent tasks. If you lose it, the next subagent star
 - Code quality reviewer -> sonnet
 - Final reviewer (after all tasks) -> opus
 
-This is a recommendation. Ask the user: "Confirm model selection or override?"
+This is a recommendation. Ask the user: "Confirm model selection or override?" Do not proceed until the user responds.
 
 ---
 

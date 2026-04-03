@@ -249,7 +249,7 @@ Do not assume the orchestrating agent retains subagent context automatically. Ex
 **Primary:** opus
 **Why:** Spec generation requires deep understanding of requirements, edge cases, estimation math, and cross-service dependencies. Opus produces more thorough specs with fewer gaps.
 
-This is a recommendation. Ask the user: "This skill works best with opus for thorough spec generation. Confirm or override?"
+This is a recommendation. Ask the user: "This skill works best with opus for thorough spec generation. Confirm or override?" Do not proceed until the user responds.
 
 ---
 

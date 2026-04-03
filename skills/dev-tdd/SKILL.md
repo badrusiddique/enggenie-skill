@@ -236,7 +236,7 @@ When `dev-implement` is NOT active (ad-hoc coding, quick fixes, explorations tha
 **Primary:** sonnet
 **Why:** TDD requires balanced speed and code quality. Sonnet writes good tests and clean implementations without the latency of opus. For complex domain logic, override to opus.
 
-This is a recommendation. Ask the user: "Confirm model selection or override?"
+This is a recommendation. Ask the user: "Confirm model selection or override?" Do not proceed until the user responds.
 
 ---
 

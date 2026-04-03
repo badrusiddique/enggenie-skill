@@ -131,6 +131,8 @@ Report the result: commit hash, branch, and files committed.
 
 Override: Use sonnet for complex commits spanning many files where understanding relationships matters.
 
+This is a recommendation. Ask the user: "Confirm model selection or override?" Do not proceed until the user responds.
+
 ---
 
 ## Entry Condition

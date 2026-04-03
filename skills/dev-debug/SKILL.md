@@ -330,7 +330,7 @@ Do not assume the orchestrating agent retains subagent context automatically. Ex
 **Primary:** sonnet
 **Why:** Debugging requires methodical reasoning and code comprehension. Sonnet balances analytical depth with speed for iterative hypothesis testing.
 
-This is a recommendation. Ask the user: "Confirm model selection or override?"
+This is a recommendation. Ask the user: "Confirm model selection or override?" Do not proceed until the user responds.
 
 ---
 

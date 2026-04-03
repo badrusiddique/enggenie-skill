@@ -217,7 +217,7 @@ Do not assume the orchestrating agent retains subagent context automatically. Ex
 **Primary:** sonnet
 **Why:** QA testing requires understanding user journeys, writing robust Playwright tests, and identifying edge cases. Sonnet balances quality with speed.
 
-This is a recommendation. Ask the user: "Confirm model selection or override?"
+This is a recommendation. Ask the user: "Confirm model selection or override?" Do not proceed until the user responds.
 
 ---
 

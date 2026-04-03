@@ -173,7 +173,7 @@ Do not assume the orchestrating agent retains subagent context automatically. Ex
 **Primary:** opus (with extended thinking)
 **Why:** Architectural decisions require deep reasoning about tradeoffs, system boundaries, and long-term consequences. Extended thinking allows the model to explore multiple approaches before committing to a recommendation.
 
-This is a recommendation. Ask the user: "This skill works best with opus and extended thinking for deep architectural reasoning. Confirm or override?"
+This is a recommendation. Ask the user: "This skill works best with opus and extended thinking for deep architectural reasoning. Confirm or override?" Do not proceed until the user responds.
 
 ---
 

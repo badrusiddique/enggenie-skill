@@ -149,7 +149,7 @@ When in doubt, treat memory as a starting point for investigation, not as ground
 **Primary:** haiku
 **Why:** Memory retrieval is about searching indexes and fetching observations. Haiku is fast and efficient for this lookup-heavy work.
 
-This is a recommendation. Ask the user: "Confirm model selection or override?"
+This is a recommendation. Ask the user: "Confirm model selection or override?" Do not proceed until the user responds.
 
 ---
 

@@ -251,7 +251,7 @@ Do not assume the orchestrating agent retains subagent context automatically. Ex
 **Primary:** sonnet
 **Why:** Code review requires understanding patterns, spotting bugs, and evaluating design decisions. Sonnet provides sufficient depth without the cost of opus.
 
-This is a recommendation. Ask the user: "Confirm model selection or override?"
+This is a recommendation. Ask the user: "Confirm model selection or override?" Do not proceed until the user responds.
 
 ---
 

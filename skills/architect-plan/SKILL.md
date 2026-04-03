@@ -218,7 +218,7 @@ Do not assume the orchestrating agent retains subagent context automatically. Ex
 **Primary:** opus
 **Why:** Multi-phase planning with deployment gates requires understanding complex dependencies, service boundaries, and sequencing. Opus produces more thorough plans with fewer missed edge cases.
 
-This is a recommendation. Ask the user: "This skill works best with opus for thorough implementation planning. Confirm or override?"
+This is a recommendation. Ask the user: "This skill works best with opus for thorough implementation planning. Confirm or override?" Do not proceed until the user responds.
 
 ---
 

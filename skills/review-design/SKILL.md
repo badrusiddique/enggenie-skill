@@ -146,7 +146,7 @@ Do not assume the orchestrating agent retains subagent context automatically. Ex
 **Primary:** sonnet
 **Why:** Design review requires understanding visual patterns, accessibility standards, and responsive behavior. Sonnet provides sufficient visual reasoning capability.
 
-This is a recommendation. Ask the user: "Confirm model selection or override?"
+This is a recommendation. Ask the user: "Confirm model selection or override?" Do not proceed until the user responds.
 
 ---
 
