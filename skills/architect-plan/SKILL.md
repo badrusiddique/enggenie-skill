@@ -53,7 +53,7 @@ If no spec exists, ask the user: "No spec found. Should I work from your descrip
 
 ### Step 3: Codebase Discovery
 
-Dispatch an Explorer subagent (model: sonnet, execution: background) using the prompt template at `agents/explorer-agent.md`.
+Use an Explorer subagent (model: sonnet, execution: background) to search the codebase.
 
 The Explorer searches the codebase for:
 - Existing patterns that the implementation should reuse (not reinvent)
@@ -68,7 +68,7 @@ Do not proceed to task breakdown until discovery is complete. The plan must buil
 
 ### Step 4: Doc Discovery
 
-Dispatch a Doc Discovery subagent (model: haiku, execution: standard) using the prompt template at `agents/doc-discovery-agent.md`.
+Use a Doc Discovery subagent (model: haiku, execution: standard) to read external documentation.
 
 The Doc Discovery agent reads external API documentation and extracts:
 - Specific method signatures and parameters needed
@@ -167,7 +167,7 @@ If you cannot be specific about a step, that step is not ready for the plan. Rem
 
 ### Step 8: Self-Review
 
-Dispatch a Plan Reviewer subagent using the prompt template at `agents/plan-reviewer-agent.md`.
+Use a Plan Reviewer subagent to validate the plan before presenting it.
 
 The reviewer checks four things:
 
@@ -197,18 +197,6 @@ Every plan starts with this header:
 **Spec:** [path to spec file if one exists, or "None -- built from user description"]
 **Prior Art:** [patterns found by memory-recall, or "None found"]
 ```
-
----
-
-## Subagent Prompt Templates
-
-This skill requires the following agent prompt templates:
-
-- `agents/explorer-agent.md` -- Codebase pattern and convention discovery
-- `agents/doc-discovery-agent.md` -- External API documentation extraction
-- `agents/plan-reviewer-agent.md` -- Plan quality and completeness validation
-
-These templates define the exact prompts, constraints, and output formats for each subagent. The skill will not produce reliable plans without them.
 
 ---
 

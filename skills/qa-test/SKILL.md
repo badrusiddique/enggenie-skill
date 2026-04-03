@@ -49,14 +49,13 @@ Do not test internal functions, database queries, or API response shapes. Test w
 
 ### Server Lifecycle Management
 
-Use `scripts/with_server.py` for server lifecycle management. This script handles:
+If the project has a server lifecycle script (e.g., a wrapper that starts the server, waits for readiness, runs tests, and stops the server), use it. This pattern avoids orphaned server processes and ensures clean test runs.
 
-- Starting the application server
-- Waiting for the server to be ready (health check)
-- Running the test suite
-- Stopping the server after tests complete (regardless of pass/fail)
-
-This avoids orphaned server processes and ensures clean test runs.
+Recommended lifecycle steps:
+- Start the application server
+- Wait for the server to be ready (health check)
+- Run the test suite
+- Stop the server after tests complete (regardless of pass/fail)
 
 ### Recon-Then-Action Pattern
 
@@ -171,11 +170,9 @@ Writes and runs Playwright tests with a QA mindset. This subagent:
 
 - Reads the spec or acceptance criteria
 - Writes Playwright test files covering user journeys
-- Runs tests using `scripts/with_server.py`
+- Runs tests with proper server lifecycle management
 - Reports results in test matrix format
 - Follows the recon-then-action pattern strictly
-
-Prompt template: `agents/qa-automation-agent.md`
 
 ### QA Manual Subagent (sonnet)
 
@@ -186,8 +183,6 @@ Executes a manual test plan via browser interaction and screenshots. This subage
 - Walks through each scenario step by step
 - Captures before/after screenshots
 - Compiles results into a test matrix report
-
-Prompt template: `agents/qa-manual-agent.md`
 
 ---
 
@@ -231,11 +226,11 @@ This is a recommendation. Ask the user: "Confirm model selection or override?"
 | Aspect | Detail |
 |--------|--------|
 | Automation tool | Playwright (Python) |
-| Server management | `scripts/with_server.py` |
+| Server management | Project server lifecycle script |
 | Test focus | User journeys, not implementation |
 | Page interaction pattern | Recon-then-action |
-| Automation subagent | `agents/qa-automation-agent.md` (sonnet) |
-| Manual subagent | `agents/qa-manual-agent.md` (sonnet) |
+| Automation subagent | QA Automation (sonnet) |
+| Manual subagent | QA Manual (sonnet) |
 | Predecessor | enggenie:qa-verify |
 | Successor (pass) | enggenie:deploy-ship |
 | Successor (fail) | Back to developer |

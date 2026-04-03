@@ -155,7 +155,9 @@ Minimum 8 scenarios covering the happy path, error cases, edge cases, and bounda
 
 ### Step 6: Create Jira Tickets
 
-If Jira MCP is available and the user specified a project board:
+If Jira MCP is available and the user specified a project board, ask the user for confirmation before creating any tickets:
+- Present the proposed ticket structure (story + subtasks) for user review
+- Only create tickets after the user explicitly approves
 - Create the story with the full spec as the description
 - Create subtasks linked to the story
 - Set estimates on each ticket
@@ -206,13 +208,9 @@ This skill dispatches the following subagents to produce a thorough spec.
 
 Explores the codebase to identify affected files, existing patterns, and service boundaries. Proposes the subtask breakdown and per-area estimates. Runs before the spec is finalized so the spec reflects actual code structure, not assumptions.
 
-Prompt template: `agents/refinement-agent.md`
-
 ### QA Planner Subagent (model: sonnet)
 
 Generates the QA test plan from the acceptance criteria. Thinks with a QA mindset: what will the developer miss? What breaks under load? What happens with empty inputs, duplicate submissions, concurrent edits, expired sessions? Produces both the manual test plan table and the Playwright automation scenario list.
-
-Prompt template: `agents/qa-planner-agent.md`
 
 ### Spec Reviewer Subagent (model: sonnet)
 
@@ -224,8 +222,6 @@ Reviews the complete spec before it is saved. Checks for:
 - Open questions that should have been answered during clarifying questions
 
 The spec does not ship until the reviewer passes it. Fix all findings before presenting the spec to the user.
-
-Prompt template: `agents/spec-reviewer-agent.md`
 
 ### Memory Subagent (model: haiku, optional)
 
