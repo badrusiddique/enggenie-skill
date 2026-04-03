@@ -6,6 +6,14 @@ Format: [Semantic Versioning](https://semver.org/). Each version lists what was 
 
 ---
 
+## [2.3.0] - 2026-04-03
+
+### Added
+- **Real-world SDLC scenario table** - 35+ scenarios mapping everyday developer activities to skills in the README (refinement, brainstorming, TDD, debugging, code review, QA, deployment, and more)
+- **Mermaid flow diagram** - color-coded pipeline visualization replacing ASCII art in both README and how-it-works guide
+
+---
+
 ## [2.2.0] - 2026-04-03
 
 ### Fixed
