@@ -97,6 +97,18 @@ For each piece of feedback:
 2. **Verify** -- Check the codebase. Is the reviewer correct about the current state? Reviewers sometimes comment on stale diffs or misread context.
 3. **Evaluate** -- Is this change technically correct for THIS codebase? Not in theory. Not in general. Here, now, with these constraints.
 
+### Verification Checklist for External Feedback
+
+Before implementing any suggestion from a team reviewer or external tool, run through this checklist:
+
+1. **Technically correct for THIS codebase?** -- Does the suggestion work with our patterns, dependencies, and constraints?
+2. **Breaks existing functionality?** -- Will applying this change break callers, consumers, or integrations?
+3. **Reason for current implementation?** -- Is there a reason the code was written this way? Check git blame, PR descriptions, and comments.
+4. **Works across all contexts?** -- Does it work in all environments, platforms, and versions we support?
+5. **Reviewer has full context?** -- Does the reviewer understand the full picture, or are they commenting on an isolated snippet?
+
+If you cannot verify a suggestion: say so. "I cannot verify this without [specific thing]. Should I [investigate further / ask the reviewer / proceed with caution]?" Admitting uncertainty is better than implementing blindly.
+
 ### Step 3 -- Clarify Before Implementing
 
 If ANY item is unclear: **STOP.**
@@ -179,6 +191,8 @@ Not every review comment is correct. Push back when:
 
 Be specific. Cite code. Do not push back with vibes.
 
+**When pushing back feels uncomfortable:** If pushing back publicly in a PR thread would create friction or political problems, flag the concern privately to your user instead. Let the user decide how to handle it. Silence is not politeness -- it is a bug that ships.
+
 ---
 
 ## YAGNI Check
@@ -193,6 +207,8 @@ grep -r "FunctionOrClassName" --include="*.{ts,js,py,cs,go}" .
 - **If multiple callers:** The reviewer has a point. Implement properly.
 
 Do not build for hypothetical future callers. Build for the callers that exist.
+
+Both you and the reviewer serve the user's goals. If a feature is not needed, the user decides whether to add it -- not the reviewer. Escalate YAGNI disagreements to the user rather than debating in the PR thread.
 
 ---
 

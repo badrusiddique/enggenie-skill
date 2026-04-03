@@ -140,6 +140,58 @@ Every shortcut has a cost. Here's what you're actually paying.
 
 ---
 
+## Deep Rebuttals -- When the Shortcut Tax Table Is Not Enough
+
+The table above is quick reference. Below are the full arguments for the 5 most dangerous rationalizations. Use these when you (or the user) need the complete reasoning.
+
+### "I'll write tests after to verify it works"
+
+Tests written after code pass immediately. Passing immediately proves nothing:
+- You might test the wrong thing (testing what you built, not what was required)
+- You might test implementation details instead of behavior
+- You missed edge cases you forgot about during implementation
+- You never saw the test catch the bug -- so you cannot trust it catches anything
+
+Test-first forces you to see the test fail, proving it actually tests something. A test that never failed is a test you cannot trust.
+
+### "I already manually tested all the edge cases"
+
+Manual testing is ad-hoc. You think you tested everything but:
+- There is no record of what you tested
+- You cannot re-run the same tests when code changes next week
+- Under pressure, you forget cases
+- "It worked when I tried it" is anecdote, not evidence
+
+Automated tests are systematic. They run the same way every time. They catch regressions you forgot to re-test. They document what was verified.
+
+### "Deleting X hours of work is wasteful"
+
+Sunk cost fallacy. The time is already spent. Your choice now:
+- Delete and rewrite with TDD (X more hours, but high confidence the code works)
+- Keep it and add tests after (30 minutes, but low confidence -- likely bugs hiding)
+
+The "waste" is keeping code you cannot trust. Working code without real tests is technical debt that compounds every sprint. The faster path is the disciplined path.
+
+### "TDD is dogmatic -- being pragmatic means adapting"
+
+TDD IS pragmatic:
+- Finds bugs before commit (faster than debugging after deployment)
+- Prevents regressions (tests catch breaks immediately, not in QA or production)
+- Documents behavior (tests show how to use the code -- they are living documentation)
+- Enables fearless refactoring (change anything, tests catch breaks)
+
+"Pragmatic" shortcuts lead to debugging in production, which is slower, more expensive, and more stressful. Discipline IS pragmatism.
+
+### "Tests after achieve the same goals -- it's the spirit, not the ritual"
+
+No. Tests-after answer "What does this code do?" Tests-first answer "What should this code do?"
+
+Tests-after are biased by your implementation. You test what you built, not what was required. You verify the edge cases you remembered, not the ones you would have discovered by writing the test first.
+
+Tests-first force edge case discovery BEFORE implementation. You think about failure modes while designing the interface, not while verifying the output. 30 minutes of tests-after gives you coverage. TDD gives you proof that the tests actually work.
+
+---
+
 ## Gut Check
 
 STOP and start over if any of these are true:

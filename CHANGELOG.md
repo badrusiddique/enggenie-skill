@@ -6,6 +6,24 @@ Format: [Semantic Versioning](https://semver.org/). Each version lists what was 
 
 ---
 
+## [2.4.0] - 2026-04-03
+
+### Added
+- **Deep anti-rationalization rebuttals in dev-tdd** - 5 multi-paragraph arguments dismantling the most dangerous TDD shortcuts (tests-after, sunk cost, dogmatism, pragmatism, spirit-vs-letter)
+- **Architectural problem pattern indicators in dev-debug** - 3-Attempt Rule now includes specific patterns to recognize (hidden coupling, cascading symptoms, inertia) and explicit "question fundamentals" self-check
+- **External feedback verification checklist in review-code** - 5-point checklist for evaluating suggestions from team and external reviewers before implementing, plus "I cannot verify this" admission pattern
+- **Private pushback escape in review-code** - guidance for flagging concerns to user privately when public pushback would create friction
+- **YAGNI power-dynamics framing in review-code** - escalation path for YAGNI disagreements (user decides, not reviewer)
+- **Parallel dispatch decision criteria in dev-implement** - decision tree for evaluating task independence, agent prompt quality guidelines (Focused, Self-contained, Specific), and common dispatch mistakes table
+- **Visual companion decision framework in architect-design** - per-question visual-vs-terminal decision test, 5 visual cases, 5 text cases, consent-first browser offering, Mermaid/ASCII fallback
+- **Active Shortcut Tax surfacing in dev-commit** - directive to show relevant Shortcut Tax row to users when they attempt a commit shortcut
+
+### Changed
+- 6 skill files enhanced (dev-tdd, dev-debug, review-code, dev-commit, dev-implement, architect-design)
+- All enhancements are additive — zero original content removed or modified
+
+---
+
 ## [2.3.0] - 2026-04-03
 
 ### Added

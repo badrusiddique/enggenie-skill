@@ -121,13 +121,35 @@ Use when the user is weighing two or more technical options and needs to reach a
 
 ### Visual Support
 
-When the design benefits from diagrams or visual aids:
-1. Describe the architecture as a text-based diagram (ASCII art or Mermaid syntax)
-2. If browser preview tools are available (MCP), generate an HTML visualization
-3. For UI-heavy features, suggest the user share screenshots or mockups for reference
-4. Save diagrams alongside the design document
+**Per-question decision:** For each design question, decide whether visual or text is better. The test: **would the user understand this better by seeing it than by reading it?**
 
-Not every design needs visuals. Use them when component relationships, data flow, or UI layout would benefit from a picture.
+**Use visuals (Mermaid, diagrams, HTML mockups) for:**
+- Component relationships and service boundaries
+- Data flow between systems
+- UI layout proposals and wireframes
+- Architecture comparisons (side-by-side)
+- Sequence diagrams for multi-step interactions
+
+**Use text (terminal) for:**
+- Requirements clarification questions
+- Conceptual option lists (A vs B vs C)
+- Tradeoff analysis and decision matrices
+- Scope decisions and boundary definitions
+- Configuration or naming discussions
+
+**When browser preview tools are available (MCP):**
+Offer the visual companion once for consent before using it:
+> "Some of what we're designing might be easier to explain visually in a browser. I can generate mockups, diagrams, and architecture visualizations as we go. Want to try it?"
+
+This offer must be its own message -- do not combine with other questions. If the user declines, use Mermaid diagrams in markdown instead.
+
+**When browser preview is NOT available:**
+1. Use Mermaid syntax for architecture diagrams (renders on GitHub)
+2. Use ASCII art for quick sketches
+3. For UI-heavy features, suggest the user share screenshots or Figma links
+4. Save all diagrams alongside the design document
+
+Not every design needs visuals. But component relationships, data flow, and UI layout almost always benefit from a picture.
 
 ---
 

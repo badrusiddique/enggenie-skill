@@ -253,6 +253,36 @@ When multiple tasks in the same phase are independent (no shared state, no impor
 3. **Independence must be real.** If task B might import something from task A, they are not independent. When in doubt, run sequentially.
 4. **Merge carefully.** After parallel tasks complete, run the full test suite before proceeding. Parallel work can create integration conflicts that individual task tests will not catch.
 
+### Decision Criteria
+
+Before dispatching in parallel, evaluate:
+
+```
+Multiple tasks in the same phase?
+  -> Are they independent? (no shared state, no import dependencies)
+    -> NO: Run sequentially. Parallel investigation of coupled tasks produces conflicts.
+    -> YES: Can they realistically run in parallel?
+      -> YES: Parallel dispatch (max 3)
+      -> NO (e.g., same file, same test suite): Sequential.
+```
+
+### Agent Prompt Quality
+
+Every parallel agent prompt must be:
+
+1. **Focused** -- One clear task, one domain. Not "fix everything."
+2. **Self-contained** -- All context the agent needs is inline. No "read the plan file."
+3. **Specific about output** -- What should the agent return? (files changed, tests added, commit hash, issues found)
+
+### Common Dispatch Mistakes
+
+| Mistake | Problem | Fix |
+|---------|---------|-----|
+| "Implement the feature" | Too broad -- agent gets lost | "Add the HeistCard component with CSS module and barrel export" |
+| No error context | Agent does not know where to look | Paste the error messages and test names inline |
+| No constraints | Agent might refactor everything | "Do NOT change existing tests. Add new files only." |
+| Vague output expectation | You do not know what changed | "Return: root cause, files modified, tests added, commit hash" |
+
 ### Dispatch Pattern
 
 ```

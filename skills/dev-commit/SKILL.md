@@ -104,6 +104,8 @@ Report the result: commit hash, branch, and files committed.
 
 ## Shortcut Tax
 
+When the user's request matches a shortcut pattern from this table, show them the relevant row and explain the cost before proposing a proper alternative. Do not silently ignore shortcuts -- surface the cost explicitly.
+
 | Shortcut | What it costs you |
 |----------|------------------|
 | "Just commit it, I'll fix the message later" | You won't. Commit history becomes unreadable. Future you wastes time deciphering cryptic messages. |

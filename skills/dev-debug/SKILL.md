@@ -203,7 +203,18 @@ If you have attempted 3 fixes and none of them resolved the bug:
 
 This is not a bug. This is an architecture problem. The system's design makes this failure mode possible or even likely. Patching it will not hold.
 
-Discuss with the team. Describe what you found in Phases 1-3. Propose a design change, not another patch.
+**Patterns indicating an architectural problem:**
+- Each fix reveals new issues in a different place (shared state, hidden coupling)
+- Fixes require "massive refactoring" to implement correctly
+- Each fix creates new symptoms elsewhere in the system
+- You are "sticking with it through sheer inertia" rather than questioning fundamentals
+
+**STOP and question fundamentals:**
+- Is this pattern fundamentally sound for what we need?
+- Should we refactor the architecture rather than continue patching symptoms?
+- Are we persisting because of sunk cost, not because the approach is correct?
+
+This is NOT a failed hypothesis -- this is a wrong architecture. Discuss with the team. Describe what you found in Phases 1-3. Propose a design change, not another patch.
 
 **Phase 4 exit criteria:** Regression test passes. Full suite passes. Root cause is addressed, not papered over.
 
