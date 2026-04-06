@@ -24,11 +24,33 @@ qa-verify is developer-facing - unit tests, integration tests, type checks, lint
 
 ---
 
+## Jira Ticket Entry
+
+When the user references a Jira ticket (e.g., "Test PROJ-1234", "QA PROJ-1234"):
+
+1. Read the Jira ticket using MCP tools
+2. Find the "For QA" section in the ticket description — it contains the spec path, key edge cases, and Playwright scenarios written by the PM
+3. Find the "Dev Handoff" comment — it contains the PR link, what was built, known limitations, and focus areas written by the Dev
+4. Open the linked spec file. Extract the acceptance criteria, QA test plan table, and Playwright automation scenarios
+5. Open the PR to understand what code changed
+
+This gives you the full chain: what PM specified → what Dev built → what QA should verify. If any piece is missing, ask the user for clarification.
+
+If Jira MCP is not available, ask: "I can't read PROJ-1234 directly. Can you share the spec path and PR link?"
+
+---
+
 ## Automation Mode (Playwright)
 
 ### Reading Acceptance Criteria
 
-Before writing any tests, check if `pm-refine` produced a spec for this feature. If a spec exists, extract the acceptance criteria and map each criterion to one or more test scenarios. If no spec exists, ask the user for the expected behavior or derive it from the feature description.
+Before writing any tests, check for context in this order:
+
+1. **Jira ticket** (if referenced) — read the "For QA" section and "Dev Handoff" comment for spec path, focus areas, and known limitations
+2. **Spec file** (if `pm-refine` produced one) — extract acceptance criteria, QA test plan table, and Playwright scenarios
+3. **User description** — if neither Jira nor spec exists, ask the user for the expected behavior
+
+Map each acceptance criterion to one or more test scenarios. Pay special attention to the "Focus areas" from the Dev Handoff — these are the areas the Dev flagged as needing QA attention.
 
 ### Writing Tests for User Journeys
 
@@ -198,6 +220,24 @@ After testing is complete:
 
 - **All tests pass:** Proceed to `enggenie:deploy-ship`.
 - **Any tests fail:** Route failures back to the developer with the test matrix report, screenshot evidence, and reproduction steps. Do not proceed to deploy-ship until failures are resolved and retested.
+
+### Update Jira with QA Results
+
+If a Jira ticket is associated with this work, add a comment with the QA results:
+
+```markdown
+## QA Results
+- Status: [PASS / FAIL — X of Y scenarios passed]
+- Test matrix: [summary or link to full report]
+- Bugs found:
+  - [Bug 1: description, severity, reproduction steps]
+  - [Bug 2: description, severity, reproduction steps]
+  - Or "None — all scenarios passed"
+- Automation coverage: [X Playwright tests added at path/to/tests/]
+- Areas not tested: [anything skipped with reason — or "Full coverage per spec"]
+```
+
+This closes the loop. The PM who wrote the spec can see what passed and what didn't. The Dev who built it can see exactly what failed and reproduce it. No Slack threads needed.
 
 ---
 

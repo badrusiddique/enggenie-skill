@@ -373,7 +373,28 @@ This template defines the investigator subagent's instructions:
 
 **Entry:** None -- bugs happen anytime. This skill interrupts any workflow. When a bug, test failure, or unexpected behavior is encountered, this skill activates immediately regardless of what other skill is running.
 
-**Exit:** Bug fixed, regression test written, full suite passes. Resume the previous workflow from where it was interrupted.
+### Jira Bug Entry
+
+When the user references a Jira ticket with QA findings (e.g., "Fix bugs from PROJ-1234", "QA found issues on PROJ-1234"):
+
+1. Read the Jira ticket using MCP tools
+2. Find the "QA Results" comment — it contains bug descriptions, severity, and reproduction steps
+3. Find the "Dev Handoff" comment — it contains the PR link and what was built
+4. Use the reproduction steps from QA as your Phase 1 starting point — QA already documented how to trigger the bug
+
+This skips the "gather evidence" portion of Phase 1 and lets you jump to reproduction verification. Verify QA's reproduction steps work, then proceed to Phase 2.
+
+**Exit:** Bug fixed, regression test written, full suite passes. Update the Jira ticket with a comment:
+
+```markdown
+## Bug Fix
+- Root cause: [what caused the bug]
+- Fix: [what was changed]
+- PR: [link to fix PR]
+- Regression test: [test name and file path]
+```
+
+Resume the previous workflow from where it was interrupted.
 
 ---
 

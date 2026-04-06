@@ -6,6 +6,26 @@ Format: [Semantic Versioning](https://semver.org/). Each version lists what was 
 
 ---
 
+## [2.5.0] - 2026-04-06
+
+### Added
+- **Jira-based handoff protocol across SDLC roles** — the Jira ticket becomes the living contract between PM, Dev, and QA. Each role reads context from the ticket and writes back for the next role.
+- **pm-refine: Handoff Context (Step 7)** — writes structured "For Dev" and "For QA" sections into the Jira ticket with spec links, key decisions, edge cases, and constraints
+- **architect-plan: Jira ticket entry** — reads PM's handoff context from the Jira ticket, extracts spec path and decisions, writes back plan file link and design decisions as a comment
+- **dev-implement: Jira ticket entry** — reads ticket for spec path, plan link, and PM/Architect context before starting implementation
+- **deploy-ship: Dev Handoff to QA** — writes structured comment to Jira with PR link, what was built vs planned, spec deviations, known limitations, test coverage, and QA focus areas
+- **qa-test: Jira ticket entry** — reads PM's "For QA" section and Dev's "Dev Handoff" comment to get full chain context (spec → implementation → what to test)
+- **qa-test: QA Results writeback** — writes test results, bugs found, automation coverage back to Jira ticket
+- **dev-debug: Jira bug entry** — reads QA Results comment for bug reproduction steps, writes back root cause and fix PR
+- **Gateway: Jira ticket routing** — "Pick up PROJ-1234" auto-detects the ticket's phase (fresh → plan, has PR → QA, has bugs → debug) and routes to the right skill
+
+### Changed
+- 7 skill files enhanced (pm-refine, architect-plan, dev-implement, deploy-ship, qa-test, dev-debug, enggenie gateway)
+- All enhancements are additive — zero original content removed or modified
+- The handoff protocol works with or without Jira MCP — when MCP is unavailable, handoff sections are written to spec files and output for manual Jira updates
+
+---
+
 ## [2.4.0] - 2026-04-03
 
 ### Added

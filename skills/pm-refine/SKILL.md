@@ -165,6 +165,41 @@ If Jira MCP is available and the user specified a project board, ask the user fo
 
 If Jira MCP is not available, output the ticket structure in the spec so the user can create them manually. Do not block the spec on Jira availability.
 
+### Step 7: Write the Handoff Context to the Jira Ticket
+
+The Jira ticket is the contract between PM, Dev, and QA. Different people will pick this up in different sessions with no shared conversation context. The ticket must carry everything they need.
+
+After creating or updating the Jira ticket, ensure the ticket description includes these sections:
+
+```markdown
+## Spec
+[Link to spec file in repo, e.g., specs/heist-timer-spec.md]
+
+## Key Decisions
+- [Decision 1 from clarifying questions — e.g., "Timer logic: client-side useEffect, not server-side"]
+- [Decision 2 — e.g., "Warning threshold: 30 minutes (turns red)"]
+- [Decision 3 — e.g., "Expired state: show 'Expired' badge, disable all actions"]
+
+## Edge Cases
+- [Edge case 1 and its expected behavior]
+- [Edge case 2 and its expected behavior]
+
+## For Dev
+- Spec file: [path in repo]
+- Start with: "Pick up PROJ-1234" or "Plan and build PROJ-1234 based on [spec path]"
+- Key constraints: [anything Dev must know — performance targets, API contracts, backward compatibility]
+
+## For QA
+- Test against: [spec path]
+- QA test plan: [section reference or file path]
+- Key edge cases to verify: [top 3-5 edge cases that are easy to miss]
+- Playwright scenarios: [list from spec or "see spec section X"]
+```
+
+**Why this matters:** A Dev picking up this ticket two weeks later — with no context from the PM conversation — reads the ticket and has everything needed to start. A QA engineer picking it up after the PR reads the ticket and knows exactly what to verify. No Slack messages needed. No "hey, what did we decide about X?"
+
+If Jira MCP is not available, include these sections in the spec .md file under a "## Handoff Context" heading at the end.
+
 ---
 
 ## Estimation Method
@@ -292,12 +327,13 @@ Common entry points:
 When the spec is complete and passes the Spec Reviewer:
 
 1. Save the spec to a file (e.g., `specs/[slug]-spec.md` or the team's configured spec directory)
-2. Present the full spec to the user for review
-3. Wait for explicit approval -- do not proceed without it
+2. Write the handoff context to the Jira ticket (Step 7) — this ensures whoever picks up the ticket next has full context
+3. Present the full spec to the user for review
+4. Wait for explicit approval -- do not proceed without it
 
 After the user approves, offer the next step:
 
-> Spec approved. Next: invoke enggenie:architect-design (if design decisions need discussion) or enggenie:architect-plan (if the design is clear and you are ready to plan implementation).
+> Spec approved. Jira ticket PROJ-1234 updated with handoff context for Dev and QA. Next: invoke enggenie:architect-design (if design decisions need discussion) or enggenie:architect-plan (if the design is clear and you are ready to plan implementation).
 
 Do not auto-invoke the next skill. The user decides the next step.
 

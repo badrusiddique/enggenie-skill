@@ -24,11 +24,23 @@ When this skill activates, announce:
 This skill requires one of:
 
 1. An approved plan produced by enggenie:architect-plan
-2. A direct user request to implement specific tasks
+2. A Jira ticket reference (e.g., "Pick up PROJ-1234", "Implement PROJ-1234")
+3. A direct user request to implement specific tasks
 
-**If no plan is found:**
+### Jira Ticket Entry
 
-> No plan found. Should I create one with enggenie:architect-plan first, or proceed without a plan?
+When the user references a Jira ticket, read the ticket first using MCP tools. The ticket contains handoff context from PM and/or Architect:
+
+1. Read the ticket description — look for "For Dev" section with spec path and constraints
+2. Read the "Implementation Plan" comment (if architect-plan added one) — get the plan file path
+3. Open the linked spec and plan files. Do not work from the Jira description alone — it is a summary, not the full context.
+4. If anything is unclear or missing, ask the user for clarification before starting. Do not guess.
+
+If Jira MCP is not available, ask: "I can't read PROJ-1234 directly. Can you share the plan file path or paste the relevant details?"
+
+**If no plan or Jira ticket is found:**
+
+> No plan or Jira ticket found. Should I create a plan with enggenie:architect-plan first, or proceed without a plan?
 
 Wait for the user's answer. Do not assume.
 

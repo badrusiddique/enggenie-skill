@@ -38,7 +38,19 @@ Before starting the plan, verify scope is manageable:
 - Check if the feature spans frontend + backend + infrastructure. If yes, confirm with the user that a single plan is appropriate.
 - If the spec (from pm-refine) already has phases, use those as your starting decomposition.
 
-### Step 2: Check for Spec
+### Step 2: Check for Spec and Jira Context
+
+**If the user references a Jira ticket (e.g., "Pick up PROJ-1234", "Plan PROJ-1234"):**
+
+Read the Jira ticket first using MCP tools. The ticket contains the handoff context written by the PM — spec file link, key decisions, edge cases, and constraints. Extract:
+- Spec file path from the "For Dev" section
+- Key decisions from the "Key Decisions" section
+- Edge cases and constraints
+- Then READ the linked spec file. Do not summarize from the Jira description alone — the spec file has the full detail.
+
+If Jira MCP is not available, ask the user: "I can't read PROJ-1234 directly. Can you share the spec file path or paste the ticket description?"
+
+**If no Jira ticket is referenced but a spec file exists:**
 
 If enggenie:pm-refine produced a spec, READ IT. Do not summarize from memory. Open the file.
 
@@ -49,7 +61,9 @@ Inherit from the spec:
 - Edge cases and error scenarios
 - Non-functional requirements (performance, security, etc.)
 
-If no spec exists, ask the user: "No spec found. Should I work from your description, or should we run enggenie:pm-refine first?"
+**If neither exists:**
+
+Ask the user: "No spec or Jira ticket found. Should I work from your description, or should we run enggenie:pm-refine first?"
 
 ### Step 3: Codebase Discovery
 
@@ -244,9 +258,26 @@ When the plan is complete and passes self-review:
 2. Present the full plan to the user for review
 3. Wait for explicit approval -- do not proceed without it
 
+### Update Jira with Plan Context
+
+If a Jira ticket is associated with this work, add a comment to the ticket with:
+
+```markdown
+## Implementation Plan
+- Plan file: [path in repo]
+- Phases: [count] phases, [count] tasks total
+- Key design decisions:
+  - [Decision 1 — e.g., "Client-side timer with useEffect, synced to Firestore expiry field"]
+  - [Decision 2 — e.g., "Warning state at 30min threshold, red visual treatment"]
+- Constraints discovered during planning:
+  - [Constraint 1 — e.g., "Firestore listener already exists in heists/[id]/page.tsx, reuse it"]
+```
+
+This ensures the next person in the chain (Dev implementing, QA testing, or another Dev picking up mid-sprint) can read the ticket and understand what was planned and why.
+
 After the user approves, offer the execution choice:
 
-> Plan ready. Execute with enggenie:dev-implement?
+> Plan ready. Jira updated with plan context. Execute with enggenie:dev-implement?
 
 Do not auto-execute. The user decides when to start building.
 

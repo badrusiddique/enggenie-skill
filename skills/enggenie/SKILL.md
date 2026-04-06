@@ -42,6 +42,22 @@ Match the user's intent to the right skill:
 | "Commit this", "Create a PR", "Ship it", "Done with this branch" | enggenie:deploy-ship | Deploy |
 | "Create a commit message", "Commit with a good message" | enggenie:dev-commit | Dev |
 | "What did we do last time?", "Did we solve this before?" | enggenie:memory-recall | Memory |
+| "Pick up PROJ-1234", "Work on PROJ-1234" | Read Jira ticket → route by context | See below |
+| "Test PROJ-1234", "QA PROJ-1234" | enggenie:qa-test (with Jira context) | QA |
+| "Fix bugs from PROJ-1234" | enggenie:dev-debug (with Jira QA results) | Dev |
+
+### Jira Ticket Routing
+
+When the user references a Jira ticket without specifying what to do:
+
+1. Read the ticket using Jira MCP tools
+2. Check the ticket's comments and status to determine what phase it's in:
+   - **No Dev comments, no PR** → Dev is picking up fresh work → route to enggenie:architect-plan or enggenie:dev-implement
+   - **Has PR, no QA results** → QA is picking up for testing → route to enggenie:qa-test
+   - **Has QA Results with bugs** → Dev is fixing QA bugs → route to enggenie:dev-debug
+3. Ask the user to confirm: "PROJ-1234 looks like it's [in phase X]. Should I [suggested action]?"
+
+If Jira MCP is not available, ask: "What would you like to do with PROJ-1234? Plan it, build it, test it, or fix bugs?"
 
 ## When No Skill Matches
 

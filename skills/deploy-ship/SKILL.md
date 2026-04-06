@@ -93,19 +93,38 @@ Keep the PR title short (under 70 characters), present tense, and descriptive. T
 
 ---
 
-## 3. Jira Update
+## 3. Jira Update and Dev Handoff to QA
 
 If Jira MCP tools are available:
-- Transition the ticket status (e.g., In Progress to In Review)
-- Add a comment with the PR link
+- Transition the ticket status (e.g., In Progress → In Review)
+- Add a structured comment with the Dev handoff context for QA:
+
+```markdown
+## Dev Handoff
+- PR: [GitHub PR link]
+- What was built: [2-3 bullet summary of what shipped vs what was planned]
+- Spec deviations: [anything that changed from the original spec, or "None — built as specified"]
+- Known limitations: [anything not covered, deferred, or working differently than spec — or "None"]
+- Test coverage:
+  - Unit tests: [count] tests added/modified
+  - Integration tests: [count if applicable]
+  - Manual testing done: [brief summary of what Dev verified]
+- For QA:
+  - Test against: [spec file path]
+  - Focus areas: [top 3 areas that need QA attention — e.g., "timer behavior at exactly 0, expired heist state, page refresh during countdown"]
+  - Environment notes: [anything QA needs to know — env vars, feature flags, test data setup]
+```
+
+This comment is the handoff to QA. A QA engineer picking up this ticket — with no knowledge of what the Dev did — reads this comment and knows exactly what to test, where to focus, and what the Dev already verified.
 
 If Jira MCP tools are NOT available:
-- Skip gracefully. Mention it so the user can update manually.
+- Skip gracefully. Output the handoff context so the user can paste it into Jira manually.
 - Do not error. Do not block the flow.
 
 ```
 Jira MCP not available - update PROJ-1234 status to "In Review" manually.
 PR link: https://github.com/org/repo/pull/42
+[paste the Dev Handoff block above into the ticket as a comment]
 ```
 
 ---
