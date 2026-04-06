@@ -257,6 +257,21 @@ This is a recommendation. Ask the user: "Confirm model selection or override?" D
 
 ---
 
+## Jira Fallback
+
+If no Jira ticket is referenced in the current conversation when creating a PR, ask:
+
+> "Is there a Jira ticket for this work? I can read it to write a better PR summary and update the ticket status."
+
+If the user provides one:
+1. Read the ticket using MCP tools — get the spec summary for the PR description
+2. Use the acceptance criteria to write a more specific test plan section in the PR
+3. Transition the ticket status and add the Dev Handoff comment (Section 3)
+
+If Jira MCP is not available, just use the ticket ID for the PR Jira section. This is a soft fallback — if the user says no, proceed with the PR using git context alone.
+
+---
+
 ## Entry Condition
 
 After verification (enggenie:qa-verify) or QA (enggenie:qa-test). Code is proven correct before this skill activates.

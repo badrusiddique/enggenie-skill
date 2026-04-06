@@ -173,7 +173,7 @@ After creating or updating the Jira ticket, ensure the ticket description includ
 
 ```markdown
 ## Spec
-[Link to spec file in repo, e.g., specs/heist-timer-spec.md]
+[Link to spec file in repo, e.g., enggenie/spec_heist-timer.md]
 
 ## Key Decisions
 - [Decision 1 from clarifying questions — e.g., "Timer logic: client-side useEffect, not server-side"]
@@ -326,7 +326,7 @@ Common entry points:
 
 When the spec is complete and passes the Spec Reviewer:
 
-1. Save the spec to a file (e.g., `specs/[slug]-spec.md` or the team's configured spec directory)
+1. Save the spec to `enggenie/spec_[slug].md` (e.g., `enggenie/spec_heist-timer.md`). If the team has a configured spec directory in CLAUDE.md, use that instead.
 2. Write the handoff context to the Jira ticket (Step 7) — this ensures whoever picks up the ticket next has full context
 3. Present the full spec to the user for review
 4. Wait for explicit approval -- do not proceed without it

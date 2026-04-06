@@ -137,6 +137,18 @@ This is a recommendation. Ask the user: "Confirm model selection or override?" D
 
 ---
 
+## Jira Fallback
+
+If no Jira ticket is referenced in the current conversation and the commit is for feature work (not a quick fix or chore), ask:
+
+> "Is there a Jira ticket for this work? I can include the ticket ID in the commit message."
+
+If the user provides one, read the ticket using MCP tools to get the ticket title, and use it to write a better "why" in the commit body. If Jira MCP is not available, just use the ticket ID the user provides.
+
+This is a soft fallback, not a blocking gate. If the user says no or skips it, proceed with the commit.
+
+---
+
 ## Entry Condition
 
 None - can be invoked anytime there are staged changes.

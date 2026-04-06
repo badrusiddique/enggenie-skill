@@ -238,15 +238,16 @@ This is a recommendation. Ask the user: "This skill works best with opus for tho
 
 ## Plans Directory
 
-Save plans to the `/plans` directory at the project root by default. This makes plans easy to revisit and reference later.
+Save plans to the `enggenie/` directory at the project root with the `plan_` prefix. This keeps all skill artifacts in one place — specs, designs, ADRs, and plans are co-located per feature.
 
 ```
-plans/
-  [feature-slug]-implementation-plan.md
-  [feature-slug]-implementation-plan.md
+enggenie/
+  plan_[feature-slug].md
 ```
 
-If the project has an existing convention for plan storage (e.g., `docs/plans/`), follow that instead.
+Example: `enggenie/plan_heist-timer.md`
+
+If the project has an existing convention for plan storage configured in CLAUDE.md, follow that instead.
 
 ---
 
@@ -254,7 +255,7 @@ If the project has an existing convention for plan storage (e.g., `docs/plans/`)
 
 When the plan is complete and passes self-review:
 
-1. Save the plan to a file (e.g., `plans/[feature]-implementation-plan.md`)
+1. Save the plan to `enggenie/plan_[feature-slug].md` (e.g., `enggenie/plan_heist-timer.md`)
 2. Present the full plan to the user for review
 3. Wait for explicit approval -- do not proceed without it
 

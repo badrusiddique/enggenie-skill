@@ -6,6 +6,21 @@ Format: [Semantic Versioning](https://semver.org/). Each version lists what was 
 
 ---
 
+## [2.6.0] - 2026-04-06
+
+### Added
+- **Jira ticket entry for cold-start skills** — architect-design, review-code, review-design, and qa-verify can now be picked up by someone with no prior context by reading the Jira ticket
+- **Jira soft fallback for dev-commit** — prompts for ticket ID when no ticket is in context, for better commit messages and traceability
+- **Jira soft fallback for deploy-ship** — prompts for ticket ID when creating a PR, for richer PR summaries and ticket status updates
+- **Unified artifact directory** — all skill-generated files now save to `enggenie/` with role prefixes (`spec_`, `design_`, `adr_`, `decision_`, `plan_`) so all feature artifacts are co-located
+
+### Changed
+- 8 skill files enhanced (architect-design, architect-plan, pm-refine, review-code, review-design, qa-verify, dev-commit, deploy-ship)
+- Artifact paths consolidated: `specs/`, `plans/`, `docs/enggenie/specs/`, `docs/enggenie/adrs/`, `docs/enggenie/decisions/` all replaced with unified `enggenie/` directory
+- Every skill that can be picked up cold now has Jira context reading or a soft fallback prompt
+
+---
+
 ## [2.5.0] - 2026-04-06
 
 ### Added

@@ -60,7 +60,7 @@ Use when the user has a feature idea, a vague requirement, or a "what if we..." 
 
 5. **Present the design section by section.** Walk through the design one piece at a time. Get approval (or pushback) after each section before moving to the next. Sections depend on the feature but typically include: data model, component boundaries, key interactions, error handling, and migration path.
 
-6. **Save the approved design.** Write to `docs/enggenie/specs/` or the team's preferred location. The saved artifact should be self-contained -- someone reading it six months later should understand what was decided and why.
+6. **Save the approved design.** Write to `enggenie/design_[slug].md` (e.g., `enggenie/design_heist-timer.md`). The saved artifact should be self-contained -- someone reading it six months later should understand what was decided and why.
 
 ---
 
@@ -96,7 +96,7 @@ Use when the user needs to design or redesign a system, define service boundarie
    What maintenance burden does this create? What would reversal cost?
    ```
 
-4. **Save to `docs/enggenie/adrs/`.** Number sequentially. If prior ADRs exist, read them to maintain numbering and to check for superseded decisions.
+4. **Save to `enggenie/adr_NNN-[slug].md`** (e.g., `enggenie/adr_003-timer-approach.md`). Number sequentially. If prior ADRs exist in `enggenie/`, read them to maintain numbering and to check for superseded decisions.
 
 ---
 
@@ -112,7 +112,7 @@ Use when the user is weighing two or more technical options and needs to reach a
 
 3. **Reach a decision.** Summarize the tradeoffs, state the recommendation, and get the user's call. If the user is stuck, narrow the decision: "Both options work. The tiebreaker is [specific factor]. Given your constraints, I'd go with X."
 
-4. **Document the decision.** Save to `docs/enggenie/decisions/` with this minimum structure:
+4. **Document the decision.** Save to `enggenie/decision_[slug].md` (e.g., `enggenie/decision_kafka-vs-sqs.md`) with this minimum structure:
 
    ```markdown
    # Decision: [Title]
