@@ -1,7 +1,7 @@
 {
   "name": "enggenie",
   "description": "Role-based SDLC skill suite for AI coding assistants - PM, Architect, Dev, Reviewer, QA, Deploy: the right expert for the right moment",
-  "version": "2.0.0",
+  "version": "2.4.0",
   "author": {
     "name": "Badru Siddique",
     "url": "https://github.com/badrusiddique"
