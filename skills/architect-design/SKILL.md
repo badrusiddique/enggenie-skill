@@ -29,6 +29,21 @@ Do not generate implementation code, pseudocode, or skeleton files during this s
 
 ---
 
+## Jira Ticket Entry
+
+When the user references a Jira ticket (e.g., "Brainstorm PROJ-1234", "Design PROJ-1234", "What are our options for PROJ-1234"):
+
+1. Read the Jira ticket using MCP tools
+2. Find the spec link in the "For Dev" section or ticket description — extract the feature scope, constraints, and edge cases
+3. If the PM documented key decisions, use them as starting context (do not re-debate settled decisions unless the user asks)
+4. Open the linked spec file for full requirements detail
+
+If Jira MCP is not available, ask: "I can't read PROJ-1234 directly. Can you share the spec or describe the feature?"
+
+This ensures a Dev picking up a ticket for design work has the PM's full context without needing to have been in the original conversation.
+
+---
+
 ## Mode 1: Brainstorm -- Exploring an Idea
 
 Use when the user has a feature idea, a vague requirement, or a "what if we..." question. The goal is to turn fuzzy thinking into a concrete, approved design.

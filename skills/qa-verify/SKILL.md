@@ -145,14 +145,37 @@ This is a recommendation. Ask the user: "Confirm model selection or override?" D
 
 ---
 
+## Jira Ticket Entry
+
+When a QA engineer or anyone outside the original dev session runs verification against a ticket (e.g., "Verify PROJ-1234", "Is PROJ-1234 actually done?"):
+
+1. Read the Jira ticket using MCP tools
+2. Find the spec link — extract every acceptance criterion. Each AC becomes a verification checklist item.
+3. Find the "Dev Handoff" comment — extract what was built, test coverage summary, and known limitations
+4. Find the PR — check if tests pass in CI, review the diff against the spec
+5. Build the verification checklist from the AC and run each check with evidence
+
+If Jira MCP is not available, ask: "I can't read PROJ-1234 directly. Can you share the spec and PR link so I can verify against the acceptance criteria?"
+
+This ensures a QA person verifying a Dev's "done" claim has the full spec context and knows exactly what to check — not just "do tests pass" but "does the implementation match what was specified."
+
+---
+
 ## Entry Condition
 
-None - fires before any completion claim:
+Fires in two contexts:
+
+**Within a dev session (no Jira needed):**
 - Before saying "done" or "complete"
 - Before committing code
 - Before creating a PR
 - Before claiming a bug is fixed
 - Before reporting subagent success
+
+**From a different person/session (Jira entry):**
+- QA verifying a Dev's completion claim
+- Tech lead spot-checking a ticket before release
+- Anyone running "Verify PROJ-1234" without prior context
 
 ## Exit Action
 

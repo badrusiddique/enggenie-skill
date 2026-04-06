@@ -11,6 +11,19 @@ description: Use when reviewing frontend implementation against design specs - d
 
 Review frontend code for design quality - not just "does it work" but "does it look and feel professional." Catches the gap between functional code and production-quality UI.
 
+## Jira Ticket Entry
+
+When the user references a Jira ticket for design review (e.g., "Check design for PROJ-1234", "Review UI on PROJ-1234"):
+
+1. Read the Jira ticket using MCP tools
+2. Find the spec link — extract Figma references, design tokens, layout requirements, and responsive breakpoints documented by PM
+3. Find the "Dev Handoff" comment — extract the PR link and what was built
+4. Use the spec's design requirements as the review baseline — compare implementation against what was specified, not against generic best practices alone
+
+If Jira MCP is not available, ask: "I can't read PROJ-1234 directly. Can you share the design specs or Figma link?"
+
+---
+
 ## What to Check
 
 ### 1. Design System Compliance

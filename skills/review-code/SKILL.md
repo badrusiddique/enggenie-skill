@@ -19,6 +19,21 @@ Pick the correct variant based on the trigger.
 
 ---
 
+## Jira Ticket Entry
+
+When the user references a Jira ticket for review (e.g., "Review PROJ-1234", "Check the PR for PROJ-1234"):
+
+1. Read the Jira ticket using MCP tools
+2. Find the "Dev Handoff" comment — extract the PR link, what was built, spec deviations, and known limitations
+3. Find the spec link — understand what was supposed to be built so you can review against requirements, not just code quality
+4. Open the PR from the Dev Handoff and use it as the review target
+
+This gives the reviewer full context: what was specified (PM), what was planned (Architect), and what was built (Dev). Review against all three, not just the diff.
+
+If Jira MCP is not available, ask: "I can't read PROJ-1234 directly. Can you share the PR link and spec?"
+
+---
+
 ## Entry Condition
 
 This skill activates when:
@@ -26,6 +41,7 @@ This skill activates when:
 1. A dev-implement task completes and needs review (automatic in subagent flow)
 2. Human PR review feedback is received
 3. User explicitly requests a code review
+4. User references a Jira ticket for review
 
 ---
 
