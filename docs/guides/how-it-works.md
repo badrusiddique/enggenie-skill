@@ -25,7 +25,9 @@ When intent is ambiguous, the `enggenie` gateway skill activates. It routes the 
 
 If the gateway cannot determine intent, it asks the user to choose from six categories: plan, build, fix, review, test, or ship.
 
-The gateway also defines what is explicitly outside the suite: quick questions, simple edits, file exploration, and git queries bypass enggenie entirely.
+The gateway also handles Jira ticket routing. When a user says "Pick up PROJ-1234," the gateway reads the ticket, detects its phase (fresh, has PR, has bugs), and routes to the appropriate skill automatically.
+
+The gateway defines what is explicitly outside the suite: quick questions, simple edits, file exploration, and git queries bypass enggenie entirely.
 
 ## Skill Interconnection Map
 
@@ -47,6 +49,18 @@ flowchart LR
     DB["dev-debug"] -.->|interrupts any stage| DI
     MR["memory-recall"] -.->|available everywhere| PM
 
+    JIRA["Jira Ticket\n(Context Bridge)"]
+    PM -.->|For Dev + For QA| JIRA
+    AP -.->|Plan Context| JIRA
+    DS -.->|Dev Handoff| JIRA
+    QT -.->|QA Results| JIRA
+    DB -.->|Bug Fix| JIRA
+    JIRA -.->|reads context| AP
+    JIRA -.->|reads context| DI
+    JIRA -.->|reads context| QT
+    JIRA -.->|reads context| DB
+    JIRA -.->|auto-routes| GW["enggenie\n(Gateway)"]
+
     style PM fill:#4CAF50,color:#fff
     style AD fill:#2196F3,color:#fff
     style AP fill:#2196F3,color:#fff
@@ -60,9 +74,11 @@ flowchart LR
     style DS fill:#607D8B,color:#fff
     style DB fill:#795548,color:#fff
     style MR fill:#009688,color:#fff
+    style JIRA fill:#FFD600,color:#000
+    style GW fill:#455A64,color:#fff
 ```
 
-> Green = PM | Blue = Architect | Orange = Dev | Purple = Reviewer | Red = QA | Gray = Deploy | Brown = Debug | Teal = Memory
+> Green = PM | Blue = Architect | Orange = Dev | Purple = Reviewer | Red = QA | Gray = Deploy | Brown = Debug | Teal = Memory | Yellow = Jira
 
 Skills consume each other's outputs through explicit handoffs:
 
@@ -72,6 +88,53 @@ Skills consume each other's outputs through explicit handoffs:
 - deploy-ship uses evidence from qa-verify in the PR description
 
 Each skill offers the next step but never auto-invokes it. The user decides when to advance.
+
+## Cross-Session Handoffs via Jira (optional)
+
+When different people handle different SDLC phases (PM specs it, Dev builds it, QA tests it), they work in separate sessions with no shared context. The Jira ticket becomes the persistent context bridge.
+
+### How It Works
+
+Each role reads from and writes to the Jira ticket using structured comment sections:
+
+| Role | Reads | Writes |
+|------|-------|--------|
+| **PM** (pm-refine) | — | "For Dev" and "For QA" sections in ticket description |
+| **Architect** (architect-plan) | PM's handoff context, spec link | "Implementation Plan" comment with plan file link and design decisions |
+| **Dev** (dev-implement) | PM's "For Dev", Architect's plan link | — |
+| **Deploy** (deploy-ship) | — | "Dev Handoff" comment (PR link, what was built, spec deviations, QA focus areas) |
+| **QA** (qa-test) | PM's "For QA", Dev's "Dev Handoff" | "QA Results" comment (pass/fail, bugs, coverage) |
+| **Debug** (dev-debug) | QA's bug reproduction steps | "Bug Fix" comment (root cause, fix PR, regression test) |
+
+### Cold-Start Capability
+
+Any skill can be picked up by someone with zero prior context. Reference a Jira ticket and the skill reads the full chain of handoff comments from previous roles. The gateway (`enggenie`) auto-detects the ticket's phase:
+
+- No PR exists → routes to architect-plan or dev-implement
+- Has a PR → routes to qa-test or review-code
+- Has bugs in QA Results → routes to dev-debug
+
+### Graceful Degradation
+
+Jira integration requires the Atlassian MCP. When MCP is not available:
+- Handoff context is saved in spec files instead of Jira
+- Skills output the handoff text for manual pasting into Jira
+- No errors, no blocking — the workflow continues
+
+## Unified Artifact Directory
+
+All skill-generated files save to a single `enggenie/` directory at the project root with role prefixes:
+
+```
+enggenie/
+  spec_user-notifications.md       # pm-refine
+  design_notification-system.md    # architect-design (brainstorm)
+  adr_001-websocket-vs-sse.md      # architect-design (ADR)
+  decision_auth-provider.md        # architect-design (decision)
+  plan_user-notifications.md       # architect-plan
+```
+
+This keeps all feature artifacts co-located and discoverable. If a project has an existing convention configured in CLAUDE.md, skills follow that instead.
 
 ## Subagent Architecture
 

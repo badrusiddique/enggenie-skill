@@ -26,6 +26,8 @@ Most AI coding tools only help with one thing: writing code. But software engine
 - **Zero configuration** - skills activate automatically based on your intent
 - **Multi-platform** - works with Claude Code, Cursor, GitHub Copilot CLI, Google Gemini CLI, and OpenCode
 - **Team customizable** - spec templates, commit format, estimation method, all configurable
+- **Jira-powered handoffs** (optional) - PM → Dev → QA context flows through Jira tickets, so any role can pick up work cold
+- **Unified artifacts** - all skill outputs live in one `enggenie/` directory with role prefixes (`spec_`, `design_`, `adr_`, `decision_`, `plan_`)
 - **TDD enforced** - never lets your AI skip writing tests first (TDD = Test-Driven Development: write the test before the code)
 - **Evidence-based** - never claims "done" without running the tests and showing proof
 - **Subagent-powered** - dispatches specialized AI sub-agents (smaller focused assistants) for implementation, review, and QA
@@ -67,7 +69,7 @@ For platform-specific setup, see [Getting Started guides](#getting-started) belo
 | **QA** | `enggenie:qa-verify` | Requires evidence before any completion claim | "Are the tests passing?" |
 | **QA** | `enggenie:qa-test` | Playwright automation + manual browser testing | "Test the login flow as a QA engineer" |
 | **Dev** | `enggenie:dev-commit` | Analyzes diffs, proposes conventional commit messages | "Create a commit message" |
-| **Deploy** | `enggenie:deploy-ship` | Conventional commits, PR creation, Jira updates | "Create a PR for this work" |
+| **Deploy** | `enggenie:deploy-ship` | PR creation, Jira handoff updates, branch completion | "Create a PR for this work" |
 | **Memory** | `enggenie:memory-recall` | Cross-session context with 10x token savings | "What did we work on last session?" |
 | **Gateway** | `enggenie` | Routes to the right skill when intent is ambiguous | "Help me with this feature" |
 
@@ -93,6 +95,32 @@ enggenie:deploy-ship activates -> commits, pushes, creates PR
 ```
 
 Each skill knows what comes next. The PM hands off to the Architect. The Architect hands off to the Dev. The Dev hands off to QA. QA hands off to Deploy. It's a complete pipeline.
+
+That flow assumes one person driving the whole pipeline. When multiple people are involved across sessions, enggenie uses Jira as the handoff mechanism.
+
+### Cross-Session Handoffs via Jira (optional — requires Atlassian MCP)
+
+When different people handle different phases (PM specs it, Dev builds it, QA tests it), the Jira ticket becomes the context bridge:
+
+```
+PM runs enggenie:pm-refine
+  → Writes "For Dev" and "For QA" sections to the Jira ticket
+
+Dev picks up the ticket
+  → Reads PM's handoff context, builds the feature
+  → Writes "Dev Handoff" comment (PR link, what was built, QA focus areas)
+
+QA picks up the ticket
+  → Reads PM's "For QA" + Dev's "Dev Handoff"
+  → Writes "QA Results" comment (pass/fail, bugs found, coverage)
+
+Dev picks up bugs
+  → Reads QA's bug reproduction steps, fixes, writes "Bug Fix" comment
+```
+
+Any skill can be picked up cold — just reference the Jira ticket and enggenie reads the full chain of context from previous roles. When Jira MCP is not available, handoff context saves to spec files instead and skills output the text for manual pasting.
+
+For the full handoff protocol details, see [How It Works](docs/guides/how-it-works.md).
 
 ## Real-World Scenarios
 
@@ -153,6 +181,11 @@ When do you use which skill? Here's how enggenie maps to your daily SDLC activit
 | **Cross-Session Memory** | | |
 | Recalling past decisions | "What pattern did we use last time for caching?" | `enggenie:memory-recall` |
 | Finding prior art | "Have we built a notification system before?" | `enggenie:memory-recall` |
+| **Jira-Powered Handoffs** | | |
+| Pick up a ticket cold | "Pick up PROJ-1234" | `enggenie` (gateway auto-detects phase) |
+| PM hands off to Dev via Jira | "Write the handoff context to the ticket" | `enggenie:pm-refine` |
+| Dev hands off to QA via Jira | "Create a PR and update the ticket for QA" | `enggenie:deploy-ship` |
+| QA writes results back to Jira | "Write QA results to the ticket" | `enggenie:qa-test` |
 | **Don't Know Where to Start** | | |
 | General entry point | "I need to work on the billing feature" | `enggenie` (gateway) |
 
@@ -177,6 +210,8 @@ Other tools help with coding. enggenie helps with the ENTIRE workflow:
 4. **Reviewer** checks code quality and design compliance
 5. **QA** tests from the user's perspective
 6. **Deploy** commits, creates PRs, updates Jira
+
+When different people handle different phases, the Jira ticket carries context between roles automatically (see [Cross-Session Handoffs](#cross-session-handoffs-via-jira-optional--requires-atlassian-mcp) above).
 
 ### Phased Deployment
 Multi-service features are broken into independently deployable phases. Each phase has a readiness checklist. No big-bang releases.
@@ -222,6 +257,7 @@ See real-world walkthroughs of each skill in action:
 
 enggenie adapts to your team's conventions:
 
+- **Jira integration** - Handoff context flows through tickets automatically (requires Atlassian MCP)
 - **Spec templates** - Use your team's format instead of the default
 - **Commit format** - Conventional commits, emoji prefixes, Jira ticket references
 - **Estimation method** - Fibonacci, T-shirt sizing, or linear
@@ -255,6 +291,18 @@ flowchart LR
     DB["dev-debug"] -.->|interrupts any stage| DI
     MR["memory-recall"] -.->|available everywhere| PM
 
+    JIRA["Jira Ticket\n(Context Bridge)"]
+    PM -.->|For Dev + For QA| JIRA
+    AP -.->|Plan Context| JIRA
+    DS -.->|Dev Handoff| JIRA
+    QT -.->|QA Results| JIRA
+    DB -.->|Bug Fix| JIRA
+    JIRA -.->|reads context| AP
+    JIRA -.->|reads context| DI
+    JIRA -.->|reads context| QT
+    JIRA -.->|reads context| DB
+    JIRA -.->|auto-routes| GW["enggenie\n(Gateway)"]
+
     style PM fill:#4CAF50,color:#fff
     style AD fill:#2196F3,color:#fff
     style AP fill:#2196F3,color:#fff
@@ -268,9 +316,11 @@ flowchart LR
     style DS fill:#607D8B,color:#fff
     style DB fill:#795548,color:#fff
     style MR fill:#009688,color:#fff
+    style JIRA fill:#FFD600,color:#000
+    style GW fill:#455A64,color:#fff
 ```
 
-> Green = PM | Blue = Architect | Orange = Dev | Purple = Reviewer | Red = QA | Gray = Deploy | Brown = Debug | Teal = Memory
+> Green = PM | Blue = Architect | Orange = Dev | Purple = Reviewer | Red = QA | Gray = Deploy | Brown = Debug | Teal = Memory | Yellow = Jira
 
 ## Plugin Discovery
 
