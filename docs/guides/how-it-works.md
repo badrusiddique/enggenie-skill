@@ -99,10 +99,10 @@ Each role reads from and writes to the Jira ticket using structured comment sect
 
 | Role | Reads | Writes |
 |------|-------|--------|
-| **PM** (pm-refine) | — | "For Dev" and "For QA" sections in ticket description |
+| **PM** (pm-refine) | - | "For Dev" and "For QA" sections in ticket description |
 | **Architect** (architect-plan) | PM's handoff context, spec link | "Implementation Plan" comment with plan file link and design decisions |
-| **Dev** (dev-implement) | PM's "For Dev", Architect's plan link | — |
-| **Deploy** (deploy-ship) | — | "Dev Handoff" comment (PR link, what was built, spec deviations, QA focus areas) |
+| **Dev** (dev-implement) | PM's "For Dev", Architect's plan link | - |
+| **Deploy** (deploy-ship) | - | "Dev Handoff" comment (PR link, what was built, spec deviations, QA focus areas) |
 | **QA** (qa-test) | PM's "For QA", Dev's "Dev Handoff" | "QA Results" comment (pass/fail, bugs, coverage) |
 | **Debug** (dev-debug) | QA's bug reproduction steps | "Bug Fix" comment (root cause, fix PR, regression test) |
 
@@ -119,7 +119,7 @@ Any skill can be picked up by someone with zero prior context. Reference a Jira 
 Jira integration requires the Atlassian MCP. When MCP is not available:
 - Handoff context is saved in spec files instead of Jira
 - Skills output the handoff text for manual pasting into Jira
-- No errors, no blocking — the workflow continues
+- No errors, no blocking - the workflow continues
 
 ## Unified Artifact Directory
 

@@ -98,7 +98,7 @@ Each skill knows what comes next. The PM hands off to the Architect. The Archite
 
 That flow assumes one person driving the whole pipeline. When multiple people are involved across sessions, enggenie uses Jira as the handoff mechanism.
 
-### Cross-Session Handoffs via Jira (optional — requires Atlassian MCP)
+### Cross-Session Handoffs via Jira (optional - requires Atlassian MCP)
 
 When different people handle different phases (PM specs it, Dev builds it, QA tests it), the Jira ticket becomes the context bridge:
 
@@ -118,7 +118,7 @@ Dev picks up bugs
   → Reads QA's bug reproduction steps, fixes, writes "Bug Fix" comment
 ```
 
-Any skill can be picked up cold — just reference the Jira ticket and enggenie reads the full chain of context from previous roles. When Jira MCP is not available, handoff context saves to spec files instead and skills output the text for manual pasting.
+Any skill can be picked up cold - just reference the Jira ticket and enggenie reads the full chain of context from previous roles. When Jira MCP is not available, handoff context saves to spec files instead and skills output the text for manual pasting.
 
 For the full handoff protocol details, see [How It Works](docs/guides/how-it-works.md).
 
