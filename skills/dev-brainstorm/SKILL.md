@@ -34,7 +34,7 @@ Do not generate implementation code, pseudocode, or skeleton files during this s
 When the user references a Jira ticket (e.g., "Brainstorm PROJ-1234", "Design PROJ-1234", "What are our options for PROJ-1234"):
 
 1. Read the Jira ticket using MCP tools
-2. Find the spec link in the "For Dev" section or ticket description — extract the feature scope, constraints, and edge cases
+2. Find the spec link in the "For Dev" section or ticket description - extract the feature scope, constraints, and edge cases
 3. If the PM documented key decisions, use them as starting context (do not re-debate settled decisions unless the user asks)
 4. Open the linked spec file for full requirements detail
 

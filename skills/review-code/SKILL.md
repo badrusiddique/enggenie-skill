@@ -24,8 +24,8 @@ Pick the correct variant based on the trigger.
 When the user references a Jira ticket for review (e.g., "Review PROJ-1234", "Check the PR for PROJ-1234"):
 
 1. Read the Jira ticket using MCP tools
-2. Find the "Dev Handoff" comment — extract the PR link, what was built, spec deviations, and known limitations
-3. Find the spec link — understand what was supposed to be built so you can review against requirements, not just code quality
+2. Find the "Dev Handoff" comment - extract the PR link, what was built, spec deviations, and known limitations
+3. Find the spec link - understand what was supposed to be built so you can review against requirements, not just code quality
 4. Open the PR from the Dev Handoff and use it as the review target
 
 This gives the reviewer full context: what was specified (PM), what was planned (Architect), and what was built (Dev). Review against all three, not just the diff.
@@ -58,34 +58,64 @@ HEAD_SHA=$(git rev-parse HEAD)
 
 Use the actual base branch if it is not `main`. The diff between these two SHAs is what gets reviewed.
 
-### Step 2 -- Dispatch Code Reviewer Subagent
+### Step 2 -- Dispatch Three Lens Subagents in Parallel
 
-Provide the subagent with:
+Dispatch all 3 lens subagents simultaneously (model: sonnet). Each lens sees the same diff but reports ONLY within its domain - no lens crosses into another's territory.
 
+| Lens | Agent template | Domain |
+|------|---------------|--------|
+| Security | `agents/security-lens-agent.md` | Auth paths, secrets, input validation, injection, token storage, permissions |
+| Engineering | `agents/engineering-lens-agent.md` | SOLID violations, naming, coupling, YAGNI, god classes, error hiding |
+| Test | `agents/test-lens-agent.md` | Coverage gaps, missing failure paths, mocking anti-patterns, test naming |
+
+Provide each lens with the same inputs:
 1. **The diff** -- `git diff $BASE_SHA $HEAD_SHA`
 2. **The spec/requirements** -- inline the full task description or ticket. Do not pass a file reference.
-3. **Review checklist:**
-   - Does the implementation match the spec?
-   - Is anything specified but missing?
-   - Is anything present but not specified? (scope creep)
-   - Are edge cases handled?
-   - Clean code: readable, well-named, no dead code
-   - No bugs: null checks, error handling, boundary conditions
-   - Good tests: meaningful assertions, edge cases, no testing implementation details
-   - YAGNI: nothing built that was not asked for
+3. **The round number** -- Round 1 (fresh review) or Round 2+ (re-review - see Review Etiquette below)
 
-The reviewer follows the prompt template at `agents/code-reviewer-agent.md`.
+Do not wait for one lens before dispatching the next. All three run concurrently.
 
-### Step 3 -- Act on Reviewer Feedback
+### Step 3 -- Consolidation
 
-Categorize each item and act accordingly:
+After all 3 lenses complete, capture their full outputs and dispatch the consolidation agent (`agents/code-reviewer-agent.md`).
+
+Provide the consolidation agent with:
+1. Security lens findings (full output)
+2. Engineering lens findings (full output)
+3. Test lens findings (full output)
+4. The original diff and spec
+
+The consolidation agent deduplicates overlapping findings (the same issue may appear in two lenses from different angles), ranks by severity, and produces a single structured report with three tiers:
+- **Blocking** -- must fix before merge (security holes, broken functionality, missing required tests)
+- **Advisory** -- worth addressing before shipping (code smell, missing edge case tests, tight coupling)
+- **Observation** -- noted for awareness, author decides (naming preferences, style, minor refactor opportunities)
+
+### Step 4 -- Act on Consolidated Findings
+
+Categorize each consolidated finding and act:
 
 | Severity | Action |
 |----------|--------|
-| **Critical/Blocking** | Fix immediately. Do not proceed until resolved. |
-| **Important** | Fix before moving to the next task. |
-| **Minor/Nitpick** | Note for later. Do not block progress. |
+| **Blocking** | Fix immediately. Do not proceed until resolved. |
+| **Advisory** | Fix before moving to the next task. |
+| **Observation** | Note for later. Author decides. Do not block progress. |
 | **Wrong** | Push back with reasoning. See "Push Back When Justified" below. |
+
+---
+
+## Review Etiquette -- Rounds 2+
+
+On the first review of a PR, all lenses report every finding within their domain.
+
+On round 2 or later, each lens checks whether the finding existed in the previous review:
+
+- **Code unchanged in that area:** do not surface the finding again. The author has seen it and made a decision.
+- **Code changed and issue got worse:** surface it again, clearly marking it as a regression.
+- **New since the previous review:** surface it as a new finding.
+
+The author's choice to defer or deprioritize a finding stands. Lenses do not relitigate prior decisions. They catch new problems, not recycle old opinions.
+
+**How to implement round 2+:** Before dispatching lenses, ask the user: "Can you share the previous review's findings? I'll configure each lens to surface only new or worsened issues." If prior findings are not available, run as a fresh round 1 review.
 
 ---
 
@@ -254,25 +284,29 @@ Pause and check yourself:
 
 ---
 
-## Subagent Prompt Template
+## Subagent Prompt Templates
 
-The Code Reviewer subagent follows the prompt template at:
+The review uses four agent templates:
 
 ```
-agents/code-reviewer-agent.md
+agents/security-lens-agent.md    -- Auth, secrets, input validation, injection, token storage
+agents/engineering-lens-agent.md -- SOLID, naming, coupling, YAGNI, god classes, error hiding
+agents/test-lens-agent.md        -- Coverage gaps, failure paths, mocking anti-patterns
+agents/code-reviewer-agent.md    -- Consolidation: deduplicates and ranks findings from all 3 lenses
 ```
 
-When dispatching, load the template and inject the task-specific context (diff, spec, checklist) into the designated sections.
+Dispatch the 3 lens agents simultaneously. Feed their combined output to the consolidation agent after all 3 complete.
 
 ---
 
 ## Subagent Context Preservation
 
-When the Code Reviewer subagent completes, explicitly capture its findings back to the main conversation:
+When all subagents complete, explicitly capture their findings back to the main conversation before acting:
 
-- All review items with severity (critical, important, minor, wrong)
-- Specific file paths and line numbers referenced
-- Whether blocking issues were found
+- Security lens: auth findings, secrets, injection vectors
+- Engineering lens: SOLID violations, naming, coupling issues
+- Test lens: coverage gaps, missing failure paths, anti-patterns
+- Consolidation output: ranked findings (Blocking / Advisory / Observation)
 
 Do not assume the orchestrating agent retains subagent context automatically. Extract the full review before acting on it.
 
@@ -291,7 +325,7 @@ This is a recommendation. Ask the user: "Confirm model selection or override?" D
 
 Review is complete when:
 
-- All blocking and important items are resolved
+- All Blocking and Advisory items are resolved
 - All fixes are tested individually
 - Full test suite passes with no regressions
 - All GitHub threads are replied to (if applicable)

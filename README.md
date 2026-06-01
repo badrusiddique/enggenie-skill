@@ -1,109 +1,293 @@
-# enggenie - The Right Expert for the Right Moment
+# enggenie
 
-> Role-based skills for AI coding assistants across the entire software development lifecycle (SDLC). Your AI assistant becomes a PM, Architect, Developer, Code Reviewer, QA Engineer, and DevOps specialist - all in one plugin.
+> "every skill is a domain expert that activates when you need it and stays silent when you don't."
 
-**What's a "skill"?** A skill is a set of instructions that teaches your AI coding assistant to behave like an expert in a specific area. Skills activate automatically based on what you're doing - you don't need to invoke them manually.
+Role-based AI skills that cover the full software development lifecycle - from vague idea to shipped PR - without letting your AI cut corners.
 
-## Why enggenie?
+---
 
-Most AI coding tools only help with one thing: writing code. But software engineering is more than coding. You also need to:
+**Without enggenie:**
+```
+You: "Add a user profile feature."
+AI: Writes 200 lines of code. No plan. No tests. No review.
+You: Spend 3 days in review cycles, find 2 bugs in QA, rewrite 30% after spec ambiguity.
+```
 
-- **Plan features** before building them
-- **Design architecture** before coding
-- **Write tests first** (not after)
-- **Debug systematically** (not by guessing)
-- **Review code** with technical rigor
-- **Test like QA** (not like a developer)
-- **Ship with confidence** (commits, PRs, deployment)
+**With enggenie:**
+```
+You: "Add a user profile feature."
+→ pm-refine creates a spec with requirements, edge cases, and a QA plan
+→ dev-plan phases the work into independently deployable chunks
+→ dev-implement enforces TDD - failing test before any code, green before moving on
+→ review-code runs security, engineering, and test lenses in parallel (new in v3.0.0)
+→ qa-verify requires actual evidence before any "done" claim
+→ deploy-ship creates the PR with full spec context for your reviewers
 
-**enggenie makes your AI assistant an expert at ALL of these.** Each skill is a domain expert that activates automatically based on what you're doing.
+Result: Ships clean. Tests prove it. Your team can read what was built and why.
+```
 
-## Highlights
+---
 
-- **14 skills** covering the entire software development lifecycle
-- **7 expert roles** - PM, Architect, Dev, Reviewer, QA, Deploy, Memory
-- **Model recommendations** - each skill suggests the optimal model (opus/sonnet/haiku) for best results
-- **Zero configuration** - skills activate automatically based on your intent
-- **Multi-platform** - works with Claude Code, Cursor, GitHub Copilot CLI, Google Gemini CLI, and OpenCode
-- **Team customizable** - spec templates, commit format, estimation method, all configurable
-- **Jira-powered handoffs** (optional) - PM → Dev → QA context flows through Jira tickets, so any role can pick up work cold
-- **Unified artifacts** - all skill outputs live in one `enggenie/` directory with role prefixes (`spec_`, `design_`, `adr_`, `decision_`, `plan_`)
-- **TDD enforced** - never lets your AI skip writing tests first (TDD = Test-Driven Development: write the test before the code)
-- **Evidence-based** - never claims "done" without running the tests and showing proof
-- **Subagent-powered** - dispatches specialized AI sub-agents (smaller focused assistants) for implementation, review, and QA
+## What it looks like
 
-## Install
+Here is a compressed real session. The project is a Next.js + TypeScript + Firebase heist-themed game. The task: add a player inventory system.
 
-**Prerequisites:** [Node.js](https://nodejs.org) 18+ (for the `npx` installer)
+**Step 1 - dev-implement writes a failing test first:**
 
-**Any platform (Claude Code, Cursor, Gemini CLI, Copilot, OpenCode, and more):**
+```typescript
+// src/services/inventory/player-inventory.test.ts
+import { addItemToInventory, getInventory } from './player-inventory';
+import { db } from '@/lib/firebase';
+
+vi.mock('@/lib/firebase');
+
+describe('player inventory', () => {
+  it('adds an item and returns updated inventory', async () => {
+    const mockGet = vi.fn().mockResolvedValue({ exists: () => false });
+    const mockSet = vi.fn().mockResolvedValue(undefined);
+    (db.collection as vi.Mock).mockReturnValue({
+      doc: () => ({ get: mockGet, set: mockSet }),
+    });
+
+    const result = await addItemToInventory('session-abc', 'lockpick');
+
+    expect(mockSet).toHaveBeenCalledWith(
+      expect.objectContaining({ items: ['lockpick'] })
+    );
+    expect(result.items).toContain('lockpick');
+  });
+});
+```
+
+```
+$ npx vitest run src/services/inventory/player-inventory.test.ts
+
+ FAIL  src/services/inventory/player-inventory.test.ts
+   Cannot find module './player-inventory'
+
+Test Files  1 failed (1)
+Tests       0 failed | 0 passed | 1 skipped
+Duration    312ms
+```
+
+RED. Test exists. Implementation does not. That is the correct order.
+
+**Step 2 - minimal implementation:**
+
+```typescript
+// src/services/inventory/player-inventory.ts
+import { db } from '@/lib/firebase';
+
+export async function addItemToInventory(sessionId: string, item: string) {
+  const ref = db.collection('sessions').doc(sessionId);
+  const snap = await ref.get();
+  const current = snap.exists() ? (snap.data()?.items ?? []) : [];
+  const updated = [...current, item];
+  await ref.set({ items: updated }, { merge: true });
+  return { sessionId, items: updated };
+}
+
+export async function getInventory(sessionId: string) {
+  const snap = await db.collection('sessions').doc(sessionId).get();
+  return snap.exists() ? snap.data()?.items ?? [] : [];
+}
+```
+
+```
+$ npx vitest run src/services/inventory/player-inventory.test.ts
+
+ PASS  src/services/inventory/player-inventory.test.ts
+   player inventory
+     ✓ adds an item and returns updated inventory (23ms)
+
+Test Files  1 passed (1)
+Tests       1 passed (1)
+Duration    287ms
+```
+
+GREEN.
+
+**Step 3 - review-code security lens flags something:**
+
+```
+[Security Lens] BLOCKING: addItemToInventory accepts arbitrary item strings
+with no validation against a known-item allowlist. A malicious client could
+inject item: "<script>alert(1)</script>" or item: "admin_key" into any
+session. Add an ITEMS_ALLOWLIST constant and validate before writing.
+
+Severity: Blocking - do not merge without fixing.
+```
+
+The implementer adds the allowlist and a test for the rejection case before proceeding.
+
+**Step 4 - qa-verify requires proof:**
+
+```
+$ npx vitest run --reporter=verbose
+
+ PASS  src/services/inventory/player-inventory.test.ts (3 tests)
+ PASS  src/components/InventoryPanel.test.tsx (7 tests)
+ PASS  src/app/api/inventory/route.test.ts (4 tests)
+
+Test Files  3 passed (3)
+Tests       14 passed (14)
+Duration    1.84s
+Exit code: 0
+```
+
+```
+qa-verify: 14 tests passed, exit 0. Coverage: inventory module 94%.
+Completion claim is substantiated. Proceeding to deploy-ship.
+```
+
+---
+
+## How it works
+
+```mermaid
+flowchart LR
+    PM["PM\npm-refine\n---\nspec + QA plan"] --> Design["Design / Plan\ndev-brainstorm\ndev-plan\n---\nADRs + phases"]
+    Design --> Build["Build\ndev-implement\ndev-tdd\n---\nTDD enforced"]
+    Build --> Review["Review\nreview-code\nreview-design\n---\n3-lens analysis"]
+    Review --> Ship["Ship\nqa-verify\ndeploy-ship\n---\nevidence-based"]
+```
+
+Each node is a role with dedicated skills and a concrete output artifact. The PM hands off to the Architect. The Architect hands off to the Dev. The Dev hands off to the Reviewer. The Reviewer hands off to QA and Ship. When different people handle different phases, a Jira ticket carries the context between sessions automatically.
+
+---
+
+## The skills
+
+| Role | Skill | What It Does | What You Get | Try Saying... |
+|------|-------|-------------|--------------|---------------|
+| **PM** | `pm-refine` | Generates specs, refines stories, estimates points | `enggenie/spec_*.md` with requirements, edge cases, QA plan | "Write a spec for player inventory" |
+| **Architect** | `dev-brainstorm` | Brainstorms approaches, writes architecture decision records | `enggenie/adr_*.md` with options, decision, consequences | "What's the best way to handle timer sync?" |
+| **Architect** | `dev-plan` | Creates phased implementation plans | `enggenie/plan_*.md` with tasks, dependencies, readiness checks | "Create a plan from this spec" |
+| **Dev** | `dev-implement` | Executes plans with TDD subagents | Code, tests, per-task commits with spec traceability | "Execute Phase 1 of the plan" |
+| **Dev** | `dev-tdd` | Enforces RED-GREEN-REFACTOR on every change | Failing test, then implementation, then refactor | "Add a validateSessionCode function" |
+| **Dev** | `dev-debug` | 4-phase systematic root cause investigation | Root cause + targeted fix + regression test | "This Firebase listener is firing twice" |
+| **Reviewer** | `review-code` | 3-lens parallel review: security, engineering, test | Ranked findings: Blocking / Advisory / Observation | "Review my changes before I push" |
+| **Reviewer** | `review-design` | Checks UI against design system, states, a11y | Compliance report with specific gaps | "Does this match the Figma?" |
+| **QA** | `qa-verify` | Requires evidence before any completion claim | Test run output with exit code and counts | "Are we done? Prove it." |
+| **QA** | `qa-test` | Playwright automation + manual browser testing | Test scripts + annotated screenshots | "Test the heist session join flow" |
+| **Dev** | `dev-commit` | Analyzes diffs, proposes conventional commit messages | Conventional commit ready to stage | "Commit this" |
+| **Deploy** | `deploy-ship` | PR creation, Jira handoff updates, branch completion | Open PR with spec context and dev notes | "Create a PR for this branch" |
+| **Memory** | `memory-recall` | Cross-session context with 10x token savings | Summary of prior decisions and patterns | "What pattern did we use for auth tokens?" |
+| **Gateway** | `enggenie` | Routes to the right skill when intent is ambiguous | Correct skill activates for your context | "Help me work on PROJ-1234" |
+
+---
+
+## Why teams adopt it
+
+### For Engineering Managers
+
+Code review quality is inconsistent by nature - it depends on who is reviewing that week, whether they caught the auth issue, whether they noticed the missing test coverage. With enggenie, every PR gets the same three lenses regardless of team composition. Security, engineering principles, and test coverage are checked on every diff. Review quality stops being a function of who happened to have bandwidth.
+
+### For Developers
+
+"I always say I'll write tests first. I almost never do when I'm under pressure." `dev-tdd` removes the option. It will not move forward until the test is red. That constraint turns out to be useful when you're under a deadline - the pressure to just write the code is real, and having a tool that won't let you is a surprisingly effective forcing function.
+
+### For PMs
+
+The spec is complete but what ships is subtly different - missing an edge case, handling one AC differently than intended. `pm-refine` forces edge cases and acceptance criteria to be explicit before dev starts. The Jira handoff writes your spec into the ticket directly, so the developer reads what you wrote - not a summary someone typed from memory two days later.
+
+---
+
+## Multi-lens code review (new in v3.0.0)
+
+Every code review runs three specialized lenses in parallel, then consolidates findings with deduplication and ranking.
+
+```mermaid
+graph LR
+    A["Your PR diff"] --> B["Security Lens\nauth, secrets,\ninput validation"]
+    A --> C["Engineering Lens\nSOLID, naming,\ncoupling, YAGNI"]
+    A --> D["Test Lens\ncoverage gaps,\nfailure paths"]
+    B --> E["Consolidation\ndedup + rank"]
+    C --> E
+    D --> E
+    E --> F["Ranked findings\nBlocking / Advisory / Observation"]
+```
+
+**Finding severity levels:**
+- **Blocking** - must fix before merge (security vulnerabilities, missing test coverage for critical paths, API contract violations)
+- **Advisory** - should fix in this PR or immediately after (naming, coupling issues, missing edge case tests)
+- **Observation** - worth knowing, no action required now
+
+**Round 2+ etiquette:** on subsequent review rounds, lenses only raise new or worsened findings. If a finding was raised in round 1 and the author chose not to act on it, lenses do not relitigate it. This keeps review cycles from becoming arguments.
+
+---
+
+## Quick start
 
 ```bash
+# Works with Claude Code, Cursor, GitHub Copilot CLI, Gemini CLI, OpenCode, and more
 npx skills add badrusiddique/enggenie-skill
 ```
 
-This auto-detects your installed AI coding tools and installs all 14 skills. The `skills` CLI is from [skillkit.sh](https://www.skillkit.sh/) (by Vercel).
+Expected output:
+```
+Detecting installed AI coding tools...
+  ✓ Claude Code detected
+  ✓ Cursor detected
 
-**Claude Code only (native plugin system):**
+Installing enggenie-skill (14 skills)...
+  ✓ pm-refine
+  ✓ dev-brainstorm
+  ✓ dev-plan
+  ✓ dev-implement
+  ✓ dev-tdd
+  ✓ dev-debug
+  ✓ review-code
+  ✓ review-design
+  ✓ qa-verify
+  ✓ qa-test
+  ✓ dev-commit
+  ✓ deploy-ship
+  ✓ memory-recall
+  ✓ enggenie (gateway)
 
+Installed to: ~/.claude/skills/enggenie/  (Claude Code)
+              ~/.cursor/skills/enggenie/   (Cursor)
+
+Done. Skills activate automatically based on your intent.
+```
+
+**Claude Code native (no Node.js required):**
 ```
 /plugin marketplace add badrusiddique/enggenie-skill
 /plugin install enggenie@badrusiddique-enggenie-skill
 /reload-plugins
 ```
 
-For platform-specific setup, see [Getting Started guides](#getting-started) below.
+For platform-specific guides, see:
+- [Claude Code](docs/getting-started/claude-code.md)
+- [Cursor](docs/getting-started/cursor.md)
+- [GitHub Copilot CLI](docs/getting-started/copilot-cli.md)
+- [Google Gemini CLI](docs/getting-started/gemini-cli.md)
+- [OpenCode.ai](docs/getting-started/opencode.md)
 
-## What's Inside
+---
 
-| Role | Skill | What It Does | Try Saying... |
-|------|-------|-------------|---------------|
-| **PM** | `enggenie:pm-refine` | Generates specs, refines stories, estimates points | "Write a spec for user notifications" |
-| **Architect** | `enggenie:dev-brainstorm` | Brainstorms approaches, writes architecture decision records | "What's the best caching strategy?" |
-| **Architect** | `enggenie:dev-plan` | Creates phased implementation plans | "Create a plan from this spec" |
-| **Dev** | `enggenie:dev-implement` | Executes plans with TDD subagents | "Execute the plan" |
-| **Dev** | `enggenie:dev-tdd` | Enforces RED-GREEN-REFACTOR on every code change | "Add a validate email function" |
-| **Dev** | `enggenie:dev-debug` | 4-phase systematic root cause investigation | "This test is failing, help me fix it" |
-| **Reviewer** | `enggenie:review-code` | Dispatches code reviewer, handles PR feedback | "Review my changes before I push" |
-| **Reviewer** | `enggenie:review-design` | Checks UI against design system, states, a11y | "Check the dashboard against our design" |
-| **QA** | `enggenie:qa-verify` | Requires evidence before any completion claim | "Are the tests passing?" |
-| **QA** | `enggenie:qa-test` | Playwright automation + manual browser testing | "Test the login flow as a QA engineer" |
-| **Dev** | `enggenie:dev-commit` | Analyzes diffs, proposes conventional commit messages | "Create a commit message" |
-| **Deploy** | `enggenie:deploy-ship` | PR creation, Jira handoff updates, branch completion | "Create a PR for this work" |
-| **Memory** | `enggenie:memory-recall` | Cross-session context with 10x token savings | "What did we work on last session?" |
-| **Gateway** | `enggenie` | Routes to the right skill when intent is ambiguous | "Help me with this feature" |
+## What makes enggenie different
 
-## How It Works
+| | Generic AI prompting | enggenie |
+|--|---------------------|----------|
+| Code review | One response, one perspective | 3 parallel lenses: security, engineering, test |
+| Testing | Writes tests if you ask | Refuses to write code without a failing test first |
+| Completion claims | "Tests should pass" | Requires actual exit codes and test counts as proof |
+| Context between sessions | Starts fresh every time | Jira handoff bridges PM to Dev to QA |
+| Debugging | Guesses until it works | 4-phase investigation: observe, pattern, hypothesis, fix |
+| Estimation | "This should take a few days" | T-shirt sizing with explicit complexity reasoning |
+| Platform | One tool | Claude Code, Cursor, Copilot CLI, Gemini CLI, OpenCode |
 
-Skills activate automatically. You don't invoke them manually.
+---
 
-```
-You say: "I want to build a user dashboard"
-enggenie:dev-brainstorm activates -> brainstorms approaches
+## Cross-session handoffs via Jira (optional - requires Atlassian MCP)
 
-You say: "Create a plan for the dashboard"
-enggenie:dev-plan activates -> generates phased implementation plan
-
-You say: "Execute the plan"
-enggenie:dev-implement activates -> TDD with subagent review per task
-
-You say: "Are tests passing?"
-enggenie:qa-verify activates -> runs tests, shows evidence
-
-You say: "Create a PR"
-enggenie:deploy-ship activates -> commits, pushes, creates PR
-```
-
-Each skill knows what comes next. The PM hands off to the Architect. The Architect hands off to the Dev. The Dev hands off to QA. QA hands off to Deploy. It's a complete pipeline.
-
-That flow assumes one person driving the whole pipeline. When multiple people are involved across sessions, enggenie uses Jira as the handoff mechanism.
-
-### Cross-Session Handoffs via Jira (optional - requires Atlassian MCP)
-
-When different people handle different phases (PM specs it, Dev builds it, QA tests it), the Jira ticket becomes the context bridge:
+When different people handle different phases, the Jira ticket becomes the context bridge between roles:
 
 ```
-PM runs enggenie:pm-refine
+PM runs pm-refine
   → Writes "For Dev" and "For QA" sections to the Jira ticket
 
 Dev picks up the ticket
@@ -113,218 +297,45 @@ Dev picks up the ticket
 QA picks up the ticket
   → Reads PM's "For QA" + Dev's "Dev Handoff"
   → Writes "QA Results" comment (pass/fail, bugs found, coverage)
-
-Dev picks up bugs
-  → Reads QA's bug reproduction steps, fixes, writes "Bug Fix" comment
 ```
 
-Any skill can be picked up cold - just reference the Jira ticket and enggenie reads the full chain of context from previous roles. When Jira MCP is not available, handoff context saves to spec files instead and skills output the text for manual pasting.
+Any skill can be picked up cold - just reference the Jira ticket and enggenie reads the full chain of context from previous roles. When Jira MCP is not available, handoff context saves to spec files instead.
 
-For the full handoff protocol details, see [How It Works](docs/guides/how-it-works.md).
+---
 
-## Real-World Scenarios
-
-When do you use which skill? Here's how enggenie maps to your daily SDLC activities:
+## Real-world scenarios
 
 | Scenario | What You Say | Skill That Activates |
 |----------|-------------|---------------------|
-| **Refinement & Specs** | | |
-| PM drops a vague feature request | "I want to build email notifications for signups" | `enggenie:pm-refine` |
-| Existing Jira ticket needs tightening | "Refine PROJ-1234, the AC is weak" | `enggenie:pm-refine` |
-| Need story point estimate | "How big is this ticket? Break down the estimate" | `enggenie:pm-refine` |
-| Tech research before committing | "Spike: should we use Redis or DynamoDB for sessions?" | `enggenie:pm-refine` |
-| **Brainstorming & Architecture** | | |
-| New feature design discussion | "We need real-time notifications, what are our options?" | `enggenie:dev-brainstorm` |
-| Choosing between approaches | "Monolith vs microservice for billing - tradeoffs?" | `enggenie:dev-brainstorm` |
-| Database schema design | "Design the schema for multi-tenant invoicing" | `enggenie:dev-brainstorm` |
-| API contract design | "What should the REST API look like for this feature?" | `enggenie:dev-brainstorm` |
-| **Planning & Task Breakdown** | | |
-| Sprint planning breakdown | "Create an implementation plan from this spec" | `enggenie:dev-plan` |
-| Phased delivery plan | "Break this into independently deployable phases" | `enggenie:dev-plan` |
-| Execution roadmap | "Plan the work for this feature across 3 services" | `enggenie:dev-plan` |
-| **Pair Programming (TDD)** | | |
-| Writing new code from scratch | "Add a validateEmail function" | `enggenie:dev-tdd` |
-| Adding a new endpoint | "Add a POST /invoices endpoint" | `enggenie:dev-tdd` |
-| Building a React component | "Build a DataTable component with sorting" | `enggenie:dev-tdd` |
-| Any feature work | "Implement the search filter from the spec" | `enggenie:dev-tdd` |
-| **Execution (Plan-Driven)** | | |
-| Executing an dev-plan | "Execute Phase 1 of the implementation plan" | `enggenie:dev-implement` |
-| Multi-file coordinated changes | "Implement Task 2.3 from the plan" | `enggenie:dev-implement` |
-| Following a spec step by step | "Start building from the spec, phase by phase" | `enggenie:dev-implement` |
-| **Debugging** | | |
-| Test failure investigation | "This test is failing, help me fix it" | `enggenie:dev-debug` |
-| CI is broken | "CI passed locally but fails in pipeline" | `enggenie:dev-debug` |
-| Production bug triage | "Users are seeing 500 errors on the dashboard" | `enggenie:dev-debug` |
-| "It worked yesterday" | "This was passing before the merge, now it's broken" | `enggenie:dev-debug` |
-| Flaky test | "This test passes sometimes and fails sometimes" | `enggenie:dev-debug` |
-| **Git Commits** | | |
-| Committing staged changes | "Commit this" | `enggenie:dev-commit` |
-| Crafting a good commit message | "Help me write a commit message for these changes" | `enggenie:dev-commit` |
-| **Code Review** | | |
-| Reviewing a PR | "Review PR #42" | `enggenie:review-code` |
-| Reviewing local changes | "Review my changes before I push" | `enggenie:review-code` |
-| Addressing PR feedback | "I got 12 comments on my PR, help me address them" | `enggenie:review-code` |
-| **UI/Design Review** | | |
-| Checking implementation vs Figma | "Does this match the design?" | `enggenie:review-design` |
-| Accessibility audit | "Check if this component is accessible" | `enggenie:review-design` |
-| Responsive layout check | "Does this work on mobile, tablet, desktop?" | `enggenie:review-design` |
-| **Dev Testing (Verification)** | | |
-| Pre-PR sanity check | "Are we done? Prove it" | `enggenie:qa-verify` |
-| Full verification | "Run all tests and show me proof" | `enggenie:qa-verify` |
-| **QA / Manual Testing** | | |
-| Playwright automation | "Write Playwright tests for the login flow" | `enggenie:qa-test` |
-| Manual browser testing | "Walk through the checkout flow and screenshot each step" | `enggenie:qa-test` |
-| Edge case testing | "What happens with empty inputs, double clicks, slow network?" | `enggenie:qa-test` |
-| **Deployment & PRs** | | |
-| Creating a PR | "Open a PR for this branch" | `enggenie:deploy-ship` |
-| Release with changelog | "Ship this - tag, changelog, PR, the works" | `enggenie:deploy-ship` |
-| **Cross-Session Memory** | | |
-| Recalling past decisions | "What pattern did we use last time for caching?" | `enggenie:memory-recall` |
-| Finding prior art | "Have we built a notification system before?" | `enggenie:memory-recall` |
-| **Jira-Powered Handoffs** | | |
-| Pick up a ticket cold | "Pick up PROJ-1234" | `enggenie` (gateway auto-detects phase) |
-| PM hands off to Dev via Jira | "Write the handoff context to the ticket" | `enggenie:pm-refine` |
-| Dev hands off to QA via Jira | "Create a PR and update the ticket for QA" | `enggenie:deploy-ship` |
-| QA writes results back to Jira | "Write QA results to the ticket" | `enggenie:qa-test` |
-| **Don't Know Where to Start** | | |
-| General entry point | "I need to work on the billing feature" | `enggenie` (gateway) |
+| PM drops a vague feature request | "Write a spec for heist session timer" | `pm-refine` |
+| Choosing between approaches | "Server-side vs client-side timer - tradeoffs?" | `dev-brainstorm` |
+| Sprint planning breakdown | "Create an implementation plan from this spec" | `dev-plan` |
+| Writing new code from scratch | "Add a validateSessionCode function" | `dev-tdd` |
+| Executing a plan | "Execute Phase 1 of the implementation plan" | `dev-implement` |
+| Test failure investigation | "This Firebase listener is firing twice" | `dev-debug` |
+| Pre-PR review | "Review my changes before I push" | `review-code` |
+| Checking implementation vs Figma | "Does this match the design?" | `review-design` |
+| Pre-PR sanity check | "Are we done? Prove it." | `qa-verify` |
+| Playwright automation | "Test the session join flow" | `qa-test` |
+| Committing staged changes | "Commit this" | `dev-commit` |
+| Creating a PR | "Create a PR for this branch" | `deploy-ship` |
+| Recalling past decisions | "What pattern did we use for auth tokens?" | `memory-recall` |
+| Don't know where to start | "I need to work on PROJ-1234" | `enggenie` (gateway) |
 
-For detailed examples with terminal output, see [All Skills Usage Examples](docs/skills/usage-examples.md).
+---
 
-## What Makes enggenie Different
+## Documentation
 
-### Test-Driven Development (TDD) - Enforced, Not Optional
-TDD means writing a test first, then writing the code to make it pass, then cleaning up. enggenie:dev-tdd ensures your AI follows this cycle (called RED-GREEN-REFACTOR) every time. No exceptions. If it catches itself writing code first, it deletes it and starts over.
+- New to enggenie? Start at [docs/getting-started/](docs/getting-started/)
+- Adopting as a team? See [docs/guides/adopting.md](docs/guides/adopting.md)
+- Customizing for your team? See [docs/guides/team-setup.md](docs/guides/team-setup.md)
+- Building your own skills? See [docs/guides/writing-custom-skills.md](docs/guides/writing-custom-skills.md)
+- Worked examples? See [docs/examples/](docs/examples/)
+- How sessions hand off? See [docs/guides/how-it-works.md](docs/guides/how-it-works.md)
 
-### Evidence Before Claims
-enggenie:qa-verify prevents your AI from saying "tests pass" without actually running them. Every claim requires proof: command output, exit codes, failure counts.
+---
 
-### Systematic Debugging - No Guessing
-enggenie:dev-debug follows a 4-phase investigation: Investigate, Find Pattern, Test Hypothesis, Fix. After 3 failed fix attempts, it escalates as an architecture problem instead of thrashing.
-
-### Full Spec-to-Ship Pipeline
-Other tools help with coding. enggenie helps with the ENTIRE workflow:
-1. **PM** writes the spec with estimation
-2. **Architect** designs the approach and plans implementation
-3. **Dev** builds it with TDD and subagent review
-4. **Reviewer** checks code quality and design compliance
-5. **QA** tests from the user's perspective
-6. **Deploy** commits, creates PRs, updates Jira
-
-When different people handle different phases, the Jira ticket carries context between roles automatically (see [Cross-Session Handoffs](#cross-session-handoffs-via-jira-optional--requires-atlassian-mcp) above).
-
-### Phased Deployment
-Multi-service features are broken into independently deployable phases. Each phase has a readiness checklist. No big-bang releases.
-
-## Getting Started
-
-Pick your platform:
-
-- **[Claude Code](docs/getting-started/claude-code.md)** - Full setup guide with examples
-- **[Cursor](docs/getting-started/cursor.md)** - Full setup guide
-- **[GitHub Copilot CLI](docs/getting-started/copilot-cli.md)** - Full setup guide
-- **[Google Gemini CLI](docs/getting-started/gemini-cli.md)** - Full setup guide
-- **[OpenCode.ai](docs/getting-started/opencode.md)** - Full setup guide
-
-### Quick Start
-
-```bash
-# 1. Install (works with any AI coding tool)
-npx skills add badrusiddique/enggenie-skill
-
-# 2. Open any project
-cd your-project
-
-# 3. Start working - skills activate automatically
-# Try: "Add a function that validates email addresses"
-# enggenie:dev-tdd will enforce RED-GREEN-REFACTOR
-
-# Try: "This test is failing, help me fix it"
-# enggenie:dev-debug will enforce systematic investigation
-```
-
-## Examples
-
-See real-world walkthroughs of each skill in action:
-
-- [Full Feature Walkthrough](docs/examples/full-feature-walkthrough.md) - Idea to spec to plan to code to test to ship
-- [Debugging Session](docs/examples/debug-session.md) - Systematic root cause investigation
-- [Code Review Session](docs/examples/code-review-session.md) - Requesting and receiving reviews
-- [QA Testing Session](docs/examples/qa-testing-session.md) - Playwright + manual browser testing
-- [All Skills Usage Examples](docs/skills/usage-examples.md) - Quick examples for every skill
-
-## For Teams
-
-enggenie adapts to your team's conventions:
-
-- **Jira integration** - Handoff context flows through tickets automatically (requires Atlassian MCP)
-- **Spec templates** - Use your team's format instead of the default
-- **Commit format** - Conventional commits, emoji prefixes, Jira ticket references
-- **Estimation method** - Fibonacci, T-shirt sizing, or linear
-- **Architecture context** - Describe your system in CLAUDE.md
-
-See [Team Setup Guide](docs/guides/team-setup.md).
-
-**Want your team to use enggenie?** Share this one-liner:
-```bash
-npx skills add badrusiddique/enggenie-skill
-```
-It works with whatever AI coding tool they use. No configuration needed.
-
-## Architecture
-
-```mermaid
-flowchart LR
-    PM["pm-refine\n(Spec)"] --> AD["dev-brainstorm\n(Design)"]
-    AD --> AP["dev-plan\n(Plan)"]
-    AP --> DI["dev-implement\n(Build)"]
-    AP --> DT["dev-tdd\n(TDD)"]
-    DI --> DC["dev-commit\n(Commit)"]
-    DT --> DC
-    DC --> RC["review-code\n(Review)"]
-    DC --> RD["review-design\n(UI Review)"]
-    RC --> QV["qa-verify\n(Verify)"]
-    RD --> QV
-    QV --> QT["qa-test\n(QA Test)"]
-    QT --> DS["deploy-ship\n(Ship)"]
-
-    DB["dev-debug"] -.->|interrupts any stage| DI
-    MR["memory-recall"] -.->|available everywhere| PM
-
-    JIRA["Jira Ticket\n(Context Bridge)"]
-    PM -.->|For Dev + For QA| JIRA
-    AP -.->|Plan Context| JIRA
-    DS -.->|Dev Handoff| JIRA
-    QT -.->|QA Results| JIRA
-    DB -.->|Bug Fix| JIRA
-    JIRA -.->|reads context| AP
-    JIRA -.->|reads context| DI
-    JIRA -.->|reads context| QT
-    JIRA -.->|reads context| DB
-    JIRA -.->|auto-routes| GW["enggenie\n(Gateway)"]
-
-    style PM fill:#4CAF50,color:#fff
-    style AD fill:#2196F3,color:#fff
-    style AP fill:#2196F3,color:#fff
-    style DI fill:#FF9800,color:#fff
-    style DT fill:#FF9800,color:#fff
-    style DC fill:#FF9800,color:#fff
-    style RC fill:#9C27B0,color:#fff
-    style RD fill:#9C27B0,color:#fff
-    style QV fill:#F44336,color:#fff
-    style QT fill:#F44336,color:#fff
-    style DS fill:#607D8B,color:#fff
-    style DB fill:#795548,color:#fff
-    style MR fill:#009688,color:#fff
-    style JIRA fill:#FFD600,color:#000
-    style GW fill:#455A64,color:#fff
-```
-
-> Green = PM | Blue = Architect | Orange = Dev | Purple = Reviewer | Red = QA | Gray = Deploy | Brown = Debug | Teal = Memory | Yellow = Jira
-
-## Plugin Discovery
-
-enggenie is listed on multiple plugin directories across platforms:
+## Plugin discovery
 
 | Directory | Platforms | URL |
 |-----------|----------|-----|
@@ -334,7 +345,7 @@ enggenie is listed on multiple plugin directories across platforms:
 | Cursor Marketplace | Cursor | [cursor.com/marketplace](https://cursor.com/marketplace) |
 | SkillsMP | All | [skillsmp.com](https://skillsmp.com) |
 
-See the [full plugin discovery guide](docs/guides/plugin-discovery.md) for all directories and submission details.
+---
 
 ## Contributing
 

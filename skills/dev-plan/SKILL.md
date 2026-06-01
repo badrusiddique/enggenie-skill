@@ -42,11 +42,11 @@ Before starting the plan, verify scope is manageable:
 
 **If the user references a Jira ticket (e.g., "Pick up PROJ-1234", "Plan PROJ-1234"):**
 
-Read the Jira ticket first using MCP tools. The ticket contains the handoff context written by the PM — spec file link, key decisions, edge cases, and constraints. Extract:
+Read the Jira ticket first using MCP tools. The ticket contains the handoff context written by the PM - spec file link, key decisions, edge cases, and constraints. Extract:
 - Spec file path from the "For Dev" section
 - Key decisions from the "Key Decisions" section
 - Edge cases and constraints
-- Then READ the linked spec file. Do not summarize from the Jira description alone — the spec file has the full detail.
+- Then READ the linked spec file. Do not summarize from the Jira description alone - the spec file has the full detail.
 
 If Jira MCP is not available, ask the user: "I can't read PROJ-1234 directly. Can you share the spec file path or paste the ticket description?"
 
@@ -238,7 +238,7 @@ This is a recommendation. Ask the user: "This skill works best with opus for tho
 
 ## Plans Directory
 
-Save plans to the `enggenie/` directory at the project root with the `plan_` prefix. This keeps all skill artifacts in one place — specs, designs, ADRs, and plans are co-located per feature.
+Save plans to the `enggenie/` directory at the project root with the `plan_` prefix. This keeps all skill artifacts in one place - specs, designs, ADRs, and plans are co-located per feature.
 
 ```
 enggenie/
@@ -268,10 +268,10 @@ If a Jira ticket is associated with this work, add a comment to the ticket with:
 - Plan file: [path in repo]
 - Phases: [count] phases, [count] tasks total
 - Key design decisions:
-  - [Decision 1 — e.g., "Client-side timer with useEffect, synced to Firestore expiry field"]
-  - [Decision 2 — e.g., "Warning state at 30min threshold, red visual treatment"]
+  - [Decision 1 - e.g., "Client-side timer with useEffect, synced to Firestore expiry field"]
+  - [Decision 2 - e.g., "Warning state at 30min threshold, red visual treatment"]
 - Constraints discovered during planning:
-  - [Constraint 1 — e.g., "Firestore listener already exists in heists/[id]/page.tsx, reuse it"]
+  - [Constraint 1 - e.g., "Firestore listener already exists in heists/[id]/page.tsx, reuse it"]
 ```
 
 This ensures the next person in the chain (Dev implementing, QA testing, or another Dev picking up mid-sprint) can read the ticket and understand what was planned and why.

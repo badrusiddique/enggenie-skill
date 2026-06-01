@@ -29,8 +29,8 @@ qa-verify is developer-facing - unit tests, integration tests, type checks, lint
 When the user references a Jira ticket (e.g., "Test PROJ-1234", "QA PROJ-1234"):
 
 1. Read the Jira ticket using MCP tools
-2. Find the "For QA" section in the ticket description — it contains the spec path, key edge cases, and Playwright scenarios written by the PM
-3. Find the "Dev Handoff" comment — it contains the PR link, what was built, known limitations, and focus areas written by the Dev
+2. Find the "For QA" section in the ticket description - it contains the spec path, key edge cases, and Playwright scenarios written by the PM
+3. Find the "Dev Handoff" comment - it contains the PR link, what was built, known limitations, and focus areas written by the Dev
 4. Open the linked spec file. Extract the acceptance criteria, QA test plan table, and Playwright automation scenarios
 5. Open the PR to understand what code changed
 
@@ -46,11 +46,11 @@ If Jira MCP is not available, ask: "I can't read PROJ-1234 directly. Can you sha
 
 Before writing any tests, check for context in this order:
 
-1. **Jira ticket** (if referenced) — read the "For QA" section and "Dev Handoff" comment for spec path, focus areas, and known limitations
-2. **Spec file** (if `pm-refine` produced one) — extract acceptance criteria, QA test plan table, and Playwright scenarios
-3. **User description** — if neither Jira nor spec exists, ask the user for the expected behavior
+1. **Jira ticket** (if referenced) - read the "For QA" section and "Dev Handoff" comment for spec path, focus areas, and known limitations
+2. **Spec file** (if `pm-refine` produced one) - extract acceptance criteria, QA test plan table, and Playwright scenarios
+3. **User description** - if neither Jira nor spec exists, ask the user for the expected behavior
 
-Map each acceptance criterion to one or more test scenarios. Pay special attention to the "Focus areas" from the Dev Handoff — these are the areas the Dev flagged as needing QA attention.
+Map each acceptance criterion to one or more test scenarios. Pay special attention to the "Focus areas" from the Dev Handoff - these are the areas the Dev flagged as needing QA attention.
 
 ### Writing Tests for User Journeys
 
@@ -227,14 +227,14 @@ If a Jira ticket is associated with this work, add a comment with the QA results
 
 ```markdown
 ## QA Results
-- Status: [PASS / FAIL — X of Y scenarios passed]
+- Status: [PASS / FAIL - X of Y scenarios passed]
 - Test matrix: [summary or link to full report]
 - Bugs found:
   - [Bug 1: description, severity, reproduction steps]
   - [Bug 2: description, severity, reproduction steps]
-  - Or "None — all scenarios passed"
+  - Or "None - all scenarios passed"
 - Automation coverage: [X Playwright tests added at path/to/tests/]
-- Areas not tested: [anything skipped with reason — or "Full coverage per spec"]
+- Areas not tested: [anything skipped with reason - or "Full coverage per spec"]
 ```
 
 This closes the loop. The PM who wrote the spec can see what passed and what didn't. The Dev who built it can see exactly what failed and reproduce it. No Slack threads needed.

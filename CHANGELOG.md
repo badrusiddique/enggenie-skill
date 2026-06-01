@@ -6,6 +6,25 @@ Format: [Semantic Versioning](https://semver.org/). Each version lists what was 
 
 ---
 
+## [3.0.0] - 2026-06-01
+
+### Added
+- **Multi-lens code review (review-code)** - review-code now dispatches 3 parallel focused subagents on every PR, each reporting only within its domain: security lens (auth paths, secrets, input validation, injection vectors, token storage), engineering lens (SOLID violations, naming, coupling, YAGNI, god classes, error hiding), test lens (coverage gaps, failure-path tests, mocking anti-patterns). A consolidation agent deduplicates overlapping findings and ranks them as Blocking / Advisory / Observation. No change to how review-code is invoked - the 3-lens dispatch happens internally.
+- **Review etiquette rule** - on round 2+ of the same PR, each lens surfaces only new findings or findings that got measurably worse. No relitigating decisions the author already reviewed. The author's choice to defer a finding stands unless the code changed.
+- **docs/guides/adopting.md** - 5-stage adoption ramp for teams enabling enggenie incrementally: Observe, Spec and Plan, TDD Implementation, Full Pipeline, Optional Integrations. Each stage names specific skills, what not to do yet, and what success looks like.
+- **docs/examples/adr-timer-approach.md** - worked ADR example: choosing between server-side countdown and client-side timestamp for a heist session timer. Follows the dev-brainstorm output format.
+- **docs/examples/adr-storage-strategy.md** - worked ADR example: choosing between localStorage and Firestore for player state storage. Shows hybrid approach with full TypeScript hook implementations.
+
+### Changed
+- **README rebuilt as a product landing page** - hero section with before/after framing, real terminal output from the heist app, Mermaid pipeline diagram, 3-lens review flow diagram, role-specific value props (EM / Dev / PM), comparison table (generic AI vs enggenie), and updated skills table with "What You Get" column.
+- **review-code subagent template list updated** - documents all 4 agent files and their dispatch order
+- **review-code exit condition updated** - "blocking and important" replaced with "Blocking and Advisory" to match consolidated severity tier names
+
+### Upgrading from v2.7.0
+No changes to how any skill is invoked. review-code users get multi-lens review automatically. All other skills unchanged from v2.7.0.
+
+---
+
 ## [2.7.0] - 2026-06-01
 
 ### Changed

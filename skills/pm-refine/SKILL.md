@@ -183,9 +183,9 @@ After creating or updating the Jira ticket, ensure the ticket description includ
 [Link to spec file in repo, e.g., enggenie/spec_heist-timer.md]
 
 ## Key Decisions
-- [Decision 1 from clarifying questions — e.g., "Timer logic: client-side useEffect, not server-side"]
-- [Decision 2 — e.g., "Warning threshold: 30 minutes (turns red)"]
-- [Decision 3 — e.g., "Expired state: show 'Expired' badge, disable all actions"]
+- [Decision 1 from clarifying questions - e.g., "Timer logic: client-side useEffect, not server-side"]
+- [Decision 2 - e.g., "Warning threshold: 30 minutes (turns red)"]
+- [Decision 3 - e.g., "Expired state: show 'Expired' badge, disable all actions"]
 
 ## Edge Cases
 - [Edge case 1 and its expected behavior]
@@ -194,7 +194,7 @@ After creating or updating the Jira ticket, ensure the ticket description includ
 ## For Dev
 - Spec file: [path in repo]
 - Start with: "Pick up PROJ-1234" or "Plan and build PROJ-1234 based on [spec path]"
-- Key constraints: [anything Dev must know — performance targets, API contracts, backward compatibility]
+- Key constraints: [anything Dev must know - performance targets, API contracts, backward compatibility]
 
 ## For QA
 - Test against: [spec path]
@@ -203,7 +203,7 @@ After creating or updating the Jira ticket, ensure the ticket description includ
 - Playwright scenarios: [list from spec or "see spec section X"]
 ```
 
-**Why this matters:** A Dev picking up this ticket two weeks later — with no context from the PM conversation — reads the ticket and has everything needed to start. A QA engineer picking it up after the PR reads the ticket and knows exactly what to verify. No Slack messages needed. No "hey, what did we decide about X?"
+**Why this matters:** A Dev picking up this ticket two weeks later - with no context from the PM conversation - reads the ticket and has everything needed to start. A QA engineer picking it up after the PR reads the ticket and knows exactly what to verify. No Slack messages needed. No "hey, what did we decide about X?"
 
 If Jira MCP is not available, include these sections in the spec .md file under a "## Handoff Context" heading at the end.
 
@@ -342,7 +342,7 @@ When the spec is complete and passes the Spec Reviewer:
 
 1. **Design review checkpoint** -- If a design artifact (Figma, UX prototype) was provided, invoke enggenie:review-design before finalizing the spec. The review-design skill checks that the spec accurately reflects the design intent and catches any design constraints that were lost in translation. Do not skip this if a design exists.
 2. Save the spec to `enggenie/spec_[slug].md` (e.g., `enggenie/spec_heist-timer.md`). If the team has a configured spec directory in CLAUDE.md, use that instead.
-3. Write the handoff context to the Jira ticket (Step 7) — this ensures whoever picks up the ticket next has full context
+3. Write the handoff context to the Jira ticket (Step 7) - this ensures whoever picks up the ticket next has full context
 4. Present the full spec to the user for review
 5. Wait for explicit approval -- do not proceed without it
 

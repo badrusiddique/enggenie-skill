@@ -378,9 +378,9 @@ This template defines the investigator subagent's instructions:
 When the user references a Jira ticket with QA findings (e.g., "Fix bugs from PROJ-1234", "QA found issues on PROJ-1234"):
 
 1. Read the Jira ticket using MCP tools
-2. Find the "QA Results" comment — it contains bug descriptions, severity, and reproduction steps
-3. Find the "Dev Handoff" comment — it contains the PR link and what was built
-4. Use the reproduction steps from QA as your Phase 1 starting point — QA already documented how to trigger the bug
+2. Find the "QA Results" comment - it contains bug descriptions, severity, and reproduction steps
+3. Find the "Dev Handoff" comment - it contains the PR link and what was built
+4. Use the reproduction steps from QA as your Phase 1 starting point - QA already documented how to trigger the bug
 
 This skips the "gather evidence" portion of Phase 1 and lets you jump to reproduction verification. Verify QA's reproduction steps work, then proceed to Phase 2.
 

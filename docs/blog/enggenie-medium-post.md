@@ -194,7 +194,7 @@ Here's how enggenie:dev-debug handles it:
 │ cause investigation.                                 │
 ╰─────────────────────────────────────────────────────╯
 
-PHASE 1 — INVESTIGATE
+PHASE 1 - INVESTIGATE
 
   Error: TypeError: Cannot read property 'name' of undefined
     at getProfile (user.controller.ts:47)
@@ -213,7 +213,7 @@ PHASE 1 — INVESTIGATE
 It found the suspicious commit in 30 seconds. Now it compares:
 
 ```
-PHASE 2 — FIND THE PATTERN
+PHASE 2 - FIND THE PATTERN
 
   team.service.ts (UPDATED):
     return response.data.team;    // unwraps new format ✓
@@ -229,14 +229,14 @@ PHASE 2 — FIND THE PATTERN
 Then the one-line hypothesis test:
 
 ```
-PHASE 3 — TEST HYPOTHESIS
+PHASE 3 - TEST HYPOTHESIS
 
   Hypothesis: user.service.ts needs to unwrap response.data.team
 
   Change: teamData.data → teamData.data.team
   Result: test PASSES ✓
 
-PHASE 4 — FIX
+PHASE 4 - FIX
 
   Regression test written (RED → GREEN)
   Fix applied.

@@ -31,9 +31,9 @@ This skill requires one of:
 
 When the user references a Jira ticket, read the ticket first using MCP tools. The ticket contains handoff context from PM and/or Architect:
 
-1. Read the ticket description — look for "For Dev" section with spec path and constraints
-2. Read the "Implementation Plan" comment (if dev-plan added one) — get the plan file path
-3. Open the linked spec and plan files. Do not work from the Jira description alone — it is a summary, not the full context.
+1. Read the ticket description - look for "For Dev" section with spec path and constraints
+2. Read the "Implementation Plan" comment (if dev-plan added one) - get the plan file path
+3. Open the linked spec and plan files. Do not work from the Jira description alone - it is a summary, not the full context.
 4. If anything is unclear or missing, ask the user for clarification before starting. Do not guess.
 
 If Jira MCP is not available, ask: "I can't read PROJ-1234 directly. Can you share the plan file path or paste the relevant details?"

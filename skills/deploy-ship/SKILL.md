@@ -103,19 +103,19 @@ If Jira MCP tools are available:
 ## Dev Handoff
 - PR: [GitHub PR link]
 - What was built: [2-3 bullet summary of what shipped vs what was planned]
-- Spec deviations: [anything that changed from the original spec, or "None — built as specified"]
-- Known limitations: [anything not covered, deferred, or working differently than spec — or "None"]
+- Spec deviations: [anything that changed from the original spec, or "None - built as specified"]
+- Known limitations: [anything not covered, deferred, or working differently than spec - or "None"]
 - Test coverage:
   - Unit tests: [count] tests added/modified
   - Integration tests: [count if applicable]
   - Manual testing done: [brief summary of what Dev verified]
 - For QA:
   - Test against: [spec file path]
-  - Focus areas: [top 3 areas that need QA attention — e.g., "timer behavior at exactly 0, expired heist state, page refresh during countdown"]
-  - Environment notes: [anything QA needs to know — env vars, feature flags, test data setup]
+  - Focus areas: [top 3 areas that need QA attention - e.g., "timer behavior at exactly 0, expired heist state, page refresh during countdown"]
+  - Environment notes: [anything QA needs to know - env vars, feature flags, test data setup]
 ```
 
-This comment is the handoff to QA. A QA engineer picking up this ticket — with no knowledge of what the Dev did — reads this comment and knows exactly what to test, where to focus, and what the Dev already verified.
+This comment is the handoff to QA. A QA engineer picking up this ticket - with no knowledge of what the Dev did - reads this comment and knows exactly what to test, where to focus, and what the Dev already verified.
 
 If Jira MCP tools are NOT available:
 - Skip gracefully. Output the handoff context so the user can paste it into Jira manually.
@@ -264,11 +264,11 @@ If no Jira ticket is referenced in the current conversation when creating a PR, 
 > "Is there a Jira ticket for this work? I can read it to write a better PR summary and update the ticket status."
 
 If the user provides one:
-1. Read the ticket using MCP tools — get the spec summary for the PR description
+1. Read the ticket using MCP tools - get the spec summary for the PR description
 2. Use the acceptance criteria to write a more specific test plan section in the PR
 3. Transition the ticket status and add the Dev Handoff comment (Section 3)
 
-If Jira MCP is not available, just use the ticket ID for the PR Jira section. This is a soft fallback — if the user says no, proceed with the PR using git context alone.
+If Jira MCP is not available, just use the ticket ID for the PR Jira section. This is a soft fallback - if the user says no, proceed with the PR using git context alone.
 
 ---
 
