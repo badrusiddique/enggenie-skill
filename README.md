@@ -152,7 +152,7 @@ flowchart LR
     Review --> Ship["Ship\nqa-verify\ndeploy-ship\n---\nevidence-based"]
 ```
 
-Each node is a role with dedicated skills and a concrete output artifact. The PM hands off to the Architect. The Architect hands off to the Dev. The Dev hands off to the Reviewer. The Reviewer hands off to QA and Ship. When different people handle different phases, a Jira ticket carries the context between sessions automatically.
+Each node is a role with dedicated skills and a concrete output artifact. The PM hands off to Dev for design and planning. Dev builds and hands off to the Reviewer. The Reviewer hands off to QA and Ship. When different people handle different phases, a Jira ticket carries the context between sessions automatically.
 
 ---
 
@@ -161,8 +161,8 @@ Each node is a role with dedicated skills and a concrete output artifact. The PM
 | Role | Skill | What It Does | What You Get | Try Saying... |
 |------|-------|-------------|--------------|---------------|
 | **PM** | `pm-refine` | Generates specs, refines stories, estimates points | `enggenie/spec_*.md` with requirements, edge cases, QA plan | "Write a spec for player inventory" |
-| **Architect** | `dev-brainstorm` | Brainstorms approaches, writes architecture decision records | `enggenie/adr_*.md` with options, decision, consequences | "What's the best way to handle timer sync?" |
-| **Architect** | `dev-plan` | Creates phased implementation plans | `enggenie/plan_*.md` with tasks, dependencies, readiness checks | "Create a plan from this spec" |
+| **Dev** | `dev-brainstorm` | Brainstorms approaches, writes architecture decision records | `enggenie/adr_*.md` with options, decision, consequences | "What's the best way to handle timer sync?" |
+| **Dev** | `dev-plan` | Creates phased implementation plans | `enggenie/plan_*.md` with tasks, dependencies, readiness checks | "Create a plan from this spec" |
 | **Dev** | `dev-implement` | Executes plans with TDD subagents | Code, tests, per-task commits with spec traceability | "Execute Phase 1 of the plan" |
 | **Dev** | `dev-tdd` | Enforces RED-GREEN-REFACTOR on every change | Failing test, then implementation, then refactor | "Add a validateSessionCode function" |
 | **Dev** | `dev-debug` | 4-phase systematic root cause investigation | Root cause + targeted fix + regression test | "This Firebase listener is firing twice" |

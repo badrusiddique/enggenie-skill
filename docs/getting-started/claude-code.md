@@ -48,8 +48,7 @@ What enggenie skills do I have?
 
 **What you should see:** A list of 14 skills grouped by role:
 - PM: `enggenie:pm-refine`
-- Architect: `enggenie:dev-brainstorm`, `enggenie:dev-plan`
-- Dev: `enggenie:dev-implement`, `enggenie:dev-tdd`, `enggenie:dev-debug`, `enggenie:dev-commit`
+- Dev: `enggenie:dev-brainstorm`, `enggenie:dev-plan`, `enggenie:dev-implement`, `enggenie:dev-tdd`, `enggenie:dev-debug`, `enggenie:dev-commit`
 - Reviewer: `enggenie:review-code`, `enggenie:review-design`
 - QA: `enggenie:qa-verify`, `enggenie:qa-test`
 - Deploy: `enggenie:deploy-ship`
@@ -116,7 +115,7 @@ It will NEVER guess. It investigates systematically.
 | Create an implementation plan | "Create a plan for the dashboard" | `enggenie:dev-plan` |
 | Write a full spec | "Write a spec for the search feature" | `enggenie:pm-refine` |
 | Execute a plan | "Execute the plan" | `enggenie:dev-implement` |
-| Review code before PR | "Review my changes before I push" | `enggenie:review-code` |
+| Review code before PR | "Review my changes before I push" | `enggenie:review-code` (3-lens: security + engineering + test in parallel) |
 | Ship your code | "Commit and create a PR" | `enggenie:deploy-ship` |
 | Test like QA | "Test the login flow as a QA engineer" | `enggenie:qa-test` |
 
@@ -147,6 +146,8 @@ See [Team Setup Guide](../guides/team-setup.md) for all configuration options.
 
 ## What's Next?
 
+- [Adopting enggenie](../guides/adopting.md) - 5-stage ramp for teams enabling enggenie incrementally (start here if you're rolling this out to a team)
 - [All Skills Usage Examples](../skills/usage-examples.md) - Quick examples for every skill
 - [Full Feature Walkthrough](../examples/full-feature-walkthrough.md) - Idea to spec to plan to code to ship
 - [How It Works](../guides/how-it-works.md) - Architecture and skill interconnection
+- [ADR Examples](../examples/) - Worked architecture decision records from dev-brainstorm sessions
