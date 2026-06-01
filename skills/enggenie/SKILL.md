@@ -11,7 +11,7 @@ If you were dispatched as a subagent to execute a specific task, skip this skill
 
 ## Overview
 
-enggenie is a role-based SDLC skill suite. Each skill is a domain expert - PM, Architect, Dev, Reviewer, QA, Deploy. This gateway skill routes you to the right one.
+enggenie is a role-based SDLC skill suite. Each skill is a domain expert - PM, Dev, Reviewer, QA, Deploy. This gateway skill routes you to the right one.
 
 **If a specific enggenie skill already matched your task, you should be there instead of here.** This gateway fires only when intent is ambiguous.
 
@@ -30,8 +30,8 @@ Match the user's intent to the right skill:
 | User says something like... | Skill | Role |
 |-----------------------------|-------|------|
 | "I want to build X", "Write a spec", "Refine this story", "Estimate this" | enggenie:pm-refine | PM |
-| "Let's brainstorm", "What's the best approach?", "Architecture review" | enggenie:architect-design | Architect |
-| "Create a plan", "Break this into tasks", "How should we implement this?" | enggenie:architect-plan | Architect |
+| "Let's brainstorm", "What's the best approach?", "Architecture review" | enggenie:dev-brainstorm | Dev |
+| "Create a plan", "Break this into tasks", "How should we implement this?" | enggenie:dev-plan | Dev |
 | "Execute the plan", "Build this", "Start implementing" | enggenie:dev-implement | Dev |
 | "Add a function", "Write this code", "Implement X" (no plan context) | enggenie:dev-tdd | Dev |
 | "This is broken", "Test failing", "Bug", "Not working" | enggenie:dev-debug | Dev |
@@ -52,7 +52,7 @@ When the user references a Jira ticket without specifying what to do:
 
 1. Read the ticket using Jira MCP tools
 2. Check the ticket's comments and status to determine what phase it's in:
-   - **No Dev comments, no PR** → Dev is picking up fresh work → route to enggenie:architect-plan or enggenie:dev-implement
+   - **No Dev comments, no PR** → Dev is picking up fresh work → route to enggenie:dev-plan or enggenie:dev-implement
    - **Has PR, no QA results** → QA is picking up for testing → route to enggenie:qa-test
    - **Has QA Results with bugs** → Dev is fixing QA bugs → route to enggenie:dev-debug
 3. Ask the user to confirm: "PROJ-1234 looks like it's [in phase X]. Should I [suggested action]?"
@@ -64,8 +64,8 @@ If Jira MCP is not available, ask: "What would you like to do with PROJ-1234? Pl
 If the user's request doesn't clearly match any skill:
 
 1. Ask: "What are you trying to accomplish?" with options:
-   - Plan a feature (→ enggenie:pm-refine or enggenie:architect-design)
-   - Build something (→ enggenie:architect-plan or enggenie:dev-implement)
+   - Plan a feature (→ enggenie:pm-refine or enggenie:dev-brainstorm)
+   - Build something (→ enggenie:dev-plan or enggenie:dev-implement)
    - Fix something (→ enggenie:dev-debug)
    - Review something (→ enggenie:review-code)
    - Test something (→ enggenie:qa-test)
@@ -87,11 +87,11 @@ The suite stays out of your way when you don't need it.
 
 When multiple skills could apply, use this order:
 
-1. **Process skills first** (architect-design, dev-debug) - these determine HOW to approach the task
+1. **Process skills first** (dev-brainstorm, dev-debug) - these determine HOW to approach the task
 2. **Implementation skills second** (dev-tdd, dev-implement) - these guide execution
 3. **Verification skills third** (qa-verify, review-code) - these check the work
 
-"Let's build X" → architect-design first, then dev-implement.
+"Let's build X" → dev-brainstorm first, then dev-implement.
 "Fix this bug" → dev-debug first, then dev-tdd for the fix.
 
 ## Rigid vs Flexible Skills
@@ -102,7 +102,7 @@ When multiple skills could apply, use this order:
 - enggenie:dev-debug - 4-phase investigation is non-negotiable
 
 **Flexible** (adapt principles to context):
-- enggenie:architect-design - Modes and depth scale to project size
+- enggenie:dev-brainstorm - Modes and depth scale to project size
 - enggenie:pm-refine - Spec detail scales to feature complexity
 - enggenie:deploy-ship - Commit format adapts to team conventions
 
@@ -138,8 +138,8 @@ Skills use Claude Code tool names by default. For other platforms, read the tool
 | Role | Skill | Purpose |
 |------|-------|---------|
 | PM | enggenie:pm-refine | Spec generation, story refinement, estimation |
-| Architect | enggenie:architect-design | Brainstorming, ADRs, technical decisions |
-| Architect | enggenie:architect-plan | Phased implementation plans |
+| Dev | enggenie:dev-brainstorm | Brainstorming, ADRs, technical decisions |
+| Dev | enggenie:dev-plan | Phased implementation plans |
 | Dev | enggenie:dev-implement | Subagent-driven TDD execution |
 | Dev | enggenie:dev-tdd | TDD discipline (RED-GREEN-REFACTOR) |
 | Dev | enggenie:dev-debug | Systematic root cause investigation |
@@ -159,7 +159,7 @@ Each skill suggests an optimal model. The gateway does not override these - each
 
 | Model | Skills | Why |
 |-------|--------|-----|
-| **opus** (with extended thinking) | architect-design | Deep architectural reasoning |
-| **opus** | pm-refine, architect-plan | Thorough specs and plans |
+| **opus** (with extended thinking) | dev-brainstorm | Deep architectural reasoning |
+| **opus** | pm-refine, dev-plan | Thorough specs and plans |
 | **sonnet** | dev-implement (orchestrator), dev-tdd, dev-debug, review-code, review-design, qa-test | Balanced speed and capability |
 | **haiku** | qa-verify, deploy-ship, dev-commit, memory-recall | Lightweight tasks, fast execution |

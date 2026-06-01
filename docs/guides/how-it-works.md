@@ -15,8 +15,8 @@ Good descriptions are specific about triggers. They use the exact phrases a user
 When intent is ambiguous, the `enggenie` gateway skill activates. It routes the user to the correct specialist:
 
 - "I want to build X" -- routes to pm-refine
-- "Let's brainstorm" -- routes to architect-design
-- "Create a plan" -- routes to architect-plan
+- "Let's brainstorm" -- routes to dev-brainstorm
+- "Create a plan" -- routes to dev-plan
 - "Execute the plan" -- routes to dev-implement
 - "This is broken" -- routes to dev-debug
 - "Review my code" -- routes to review-code
@@ -33,8 +33,8 @@ The gateway defines what is explicitly outside the suite: quick questions, simpl
 
 ```mermaid
 flowchart LR
-    PM["pm-refine\n(Spec)"] --> AD["architect-design\n(Design)"]
-    AD --> AP["architect-plan\n(Plan)"]
+    PM["pm-refine\n(Spec)"] --> AD["dev-brainstorm\n(Design)"]
+    AD --> AP["dev-plan\n(Plan)"]
     AP --> DI["dev-implement\n(Build)"]
     AP --> DT["dev-tdd\n(TDD)"]
     DI --> DC["dev-commit\n(Commit)"]
@@ -82,8 +82,8 @@ flowchart LR
 
 Skills consume each other's outputs through explicit handoffs:
 
-- architect-plan reads the spec file produced by pm-refine
-- dev-implement reads the plan file produced by architect-plan
+- dev-plan reads the spec file produced by pm-refine
+- dev-implement reads the plan file produced by dev-plan
 - qa-test maps scenarios to acceptance criteria from the spec
 - deploy-ship uses evidence from qa-verify in the PR description
 
@@ -100,7 +100,7 @@ Each role reads from and writes to the Jira ticket using structured comment sect
 | Role | Reads | Writes |
 |------|-------|--------|
 | **PM** (pm-refine) | - | "For Dev" and "For QA" sections in ticket description |
-| **Architect** (architect-plan) | PM's handoff context, spec link | "Implementation Plan" comment with plan file link and design decisions |
+| **Architect** (dev-plan) | PM's handoff context, spec link | "Implementation Plan" comment with plan file link and design decisions |
 | **Dev** (dev-implement) | PM's "For Dev", Architect's plan link | - |
 | **Deploy** (deploy-ship) | - | "Dev Handoff" comment (PR link, what was built, spec deviations, QA focus areas) |
 | **QA** (qa-test) | PM's "For QA", Dev's "Dev Handoff" | "QA Results" comment (pass/fail, bugs, coverage) |
@@ -110,7 +110,7 @@ Each role reads from and writes to the Jira ticket using structured comment sect
 
 Any skill can be picked up by someone with zero prior context. Reference a Jira ticket and the skill reads the full chain of handoff comments from previous roles. The gateway (`enggenie`) auto-detects the ticket's phase:
 
-- No PR exists → routes to architect-plan or dev-implement
+- No PR exists → routes to dev-plan or dev-implement
 - Has a PR → routes to qa-test or review-code
 - Has bugs in QA Results → routes to dev-debug
 
@@ -128,10 +128,10 @@ All skill-generated files save to a single `enggenie/` directory at the project 
 ```
 enggenie/
   spec_user-notifications.md       # pm-refine
-  design_notification-system.md    # architect-design (brainstorm)
-  adr_001-websocket-vs-sse.md      # architect-design (ADR)
-  decision_auth-provider.md        # architect-design (decision)
-  plan_user-notifications.md       # architect-plan
+  design_notification-system.md    # dev-brainstorm (brainstorm)
+  adr_001-websocket-vs-sse.md      # dev-brainstorm (ADR)
+  decision_auth-provider.md        # dev-brainstorm (decision)
+  plan_user-notifications.md       # dev-plan
 ```
 
 This keeps all feature artifacts co-located and discoverable. If a project has an existing convention configured in CLAUDE.md, skills follow that instead.
@@ -164,7 +164,7 @@ Each subagent type has a dedicated prompt template defining its instructions, co
 | Skill | Templates |
 |-------|-----------|
 | pm-refine | refinement-agent, qa-planner-agent, spec-reviewer-agent |
-| architect-plan | explorer-agent, doc-discovery-agent, plan-reviewer-agent |
+| dev-plan | explorer-agent, doc-discovery-agent, plan-reviewer-agent |
 | dev-implement | implementer-agent, spec-reviewer-agent, quality-reviewer-agent |
 | dev-debug | investigator-agent |
 | review-code | code-reviewer-agent |
@@ -185,7 +185,7 @@ Subagent model is chosen by task complexity, not by default:
 
 The rule: if you are unsure whether a task is simple or complex, it is complex. Use sonnet.
 
-pm-refine uses sonnet for its refinement, QA planner, and spec reviewer subagents. It uses haiku only for the optional memory search. architect-plan uses sonnet for exploration and plan review, haiku for doc discovery. dev-implement uses haiku for simple implementer tasks, sonnet for complex ones, and opus for the final cross-task review.
+pm-refine uses sonnet for its refinement, QA planner, and spec reviewer subagents. It uses haiku only for the optional memory search. dev-plan uses sonnet for exploration and plan review, haiku for doc discovery. dev-implement uses haiku for simple implementer tasks, sonnet for complex ones, and opus for the final cross-task review.
 
 ## Memory Integration
 
@@ -208,7 +208,7 @@ ELSE:
   No error message, no mention of missing feature
 ```
 
-Four skills actively search memory: architect-design ("have we designed something similar?"), architect-plan ("what patterns did we use last time?"), pm-refine ("have we built something similar?"), and dev-debug ("have we seen this bug pattern before?").
+Four skills actively search memory: dev-brainstorm ("have we designed something similar?"), dev-plan ("what patterns did we use last time?"), pm-refine ("have we built something similar?"), and dev-debug ("have we seen this bug pattern before?").
 
 When claude-mem is not installed, these skills produce the same outputs -- they just lack historical context.
 

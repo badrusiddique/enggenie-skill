@@ -77,13 +77,13 @@ Spec saved to `specs/welcome-email-spec.md`.
 **User:** Approved. Let's plan the implementation.
 
 **Assistant:**
-> Spec approved. Next: invoke enggenie:architect-plan to create the implementation plan.
+> Spec approved. Next: invoke enggenie:dev-plan to create the implementation plan.
 
 ---
 
-## 3. enggenie:architect-plan -- Planning
+## 3. enggenie:dev-plan -- Planning
 
-> I'm using enggenie:architect-plan to create an implementation plan.
+> I'm using enggenie:dev-plan to create an implementation plan.
 
 The assistant reads `specs/welcome-email-spec.md`, then dispatches:
 - **Explorer subagent** (sonnet) -- finds existing patterns in `src/queues/invoice-queue.ts`, `src/services/email/transactional.ts`
@@ -362,7 +362,7 @@ Branch is ready. Choose a completion path:
 |------|-------|---------------|
 | Request | -- | User described the feature |
 | Spec | pm-refine | 3 clarifying questions, spec with 5 AC, 10 QA scenarios, estimation |
-| Plan | architect-plan | 2-phase plan, 5 tasks, file map, deployment gates |
+| Plan | dev-plan | 2-phase plan, 5 tasks, file map, deployment gates |
 | Code | dev-implement | Worktree setup, TDD per task, spec + quality review gates |
 | Verify | qa-verify | 156 tests pass, build clean, 5/5 AC verified |
 | Ship | deploy-ship | Conventional commit, PR created, Jira note |

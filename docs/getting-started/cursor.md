@@ -79,7 +79,7 @@ Read ~/.cursor/skills/enggenie/skills/dev-tdd/SKILL.md and follow it.
 | What you want to do | Say this |
 |---------------------|---------|
 | Debug a test failure | "This test fails. Read the dev-debug skill and follow it." |
-| Plan a feature | "I want to build X. Read the architect-design skill and follow it." |
+| Plan a feature | "I want to build X. Read the dev-brainstorm skill and follow it." |
 | Review code | "Review my changes. Read the review-code skill and follow it." |
 
 **Tip:** After a few uses, Cursor learns to check for applicable skills automatically via your rules file.

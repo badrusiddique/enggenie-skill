@@ -1,6 +1,6 @@
 ---
 name: pm-refine
-description: Use when refining user stories, writing feature specifications, estimating story points, creating subtasks, planning spikes, or generating QA test plans - covers the product management side of development before implementation begins
+description: Use when refining user stories, writing feature specifications, sizing work (T-shirt), creating subtasks, planning spikes, or generating QA test plans - covers the product management side of development before implementation begins
 ---
 
 # enggenie:pm-refine
@@ -66,6 +66,13 @@ Extract from the user's request:
 - Branch name suggestion (e.g., `feature/<slug>`)
 - Figma link (if the user provided one)
 - Project board / Jira project key (if the user specified one)
+
+**Design artifact check:** Before asking clarifying questions, surface the design status:
+- If a Figma link or UX prototype was provided: confirm it is the approved design (not a draft)
+- If no design exists: explicitly note "No design artifact provided -- spec will describe expected behavior and UI patterns to follow; UX review recommended before implementation"
+- If design is in progress: note it and flag the spec as provisional pending design sign-off
+
+Design happens upstream of pm-refine. This skill consumes design output -- it does not produce it. A spec without a design is valid but carries higher implementation risk. Call that out, do not silently proceed.
 
 If any critical piece is ambiguous, ask. Do not guess at scope.
 
@@ -204,34 +211,41 @@ If Jira MCP is not available, include these sections in the spec .md file under 
 
 ## Estimation Method
 
-All estimates follow this process. The method is transparent -- show every step of the math.
+All estimates use T-shirt sizing based on relative complexity -- not hours. Hours are a proxy for complexity, and a bad one. Two stories that take the same hours can have wildly different complexity based on unknowns, breadth, and risk.
 
-1. **Raw estimate per area** -- Break the work into areas (backend, frontend, database, infrastructure, testing). Estimate each area in hours or relative complexity.
+**Sizes:**
 
-2. **Add 20% buffer** -- Multiply the raw estimate by 1.2. This accounts for integration overhead, context switching, and minor unknowns.
+| Size | What it means |
+|------|--------------|
+| XS | Trivial. Single file, well-understood change, no design decisions. A dev could do it in one focused session with no surprises. |
+| S | Small. Clear implementation path, limited surface area, maybe one or two files. Low unknowns. |
+| M | Moderate. Multiple files or components, some coordination across layers, a few unknowns that need investigation. |
+| L | Large. Significant scope -- multiple services, complex logic, or meaningful unknowns that could expand the work. Worth decomposing if possible. |
+| XL | Too big. If you reach XL, the story must be decomposed. No XL stories ship. |
 
-3. **Round UP to nearest Fibonacci number** -- The buffered estimate maps to the Fibonacci scale: 1, 2, 3, 5, 8. Always round up, never down.
+**How to estimate:**
 
-**Note:** In this method, raw hour estimates map directly to the Fibonacci scale - the Fibonacci number IS the estimate, not a separate "points" concept. 3.6 hours rounds up to 5 on the Fibonacci scale.
-
-4. **Estimate the story AS A WHOLE** -- Use the largest sub-area as the anchor. Do not sum sub-estimates - summing Fibonacci numbers produces non-Fibonacci totals.
-
-5. **Cap at 8** -- Any estimate above 8 points means the story is too large. Decompose it into smaller stories. No exceptions.
-
-6. **Show the work** -- Every estimate includes the transparent calculation:
+1. **Identify the areas** -- what touches backend, frontend, database, infrastructure, testing separately.
+2. **Rate each area** using the size table above.
+3. **Rate the story as a whole** -- consider scope breadth, unknowns, and coordination cost across areas. Do not average or sum -- the whole is different from the parts.
+4. **Show the reasoning** -- call out what drives the size up or down.
 
 ```
-Backend API:     3h raw -> +20% -> 3.6h -> round up -> 5 points
-Frontend UI:     2h raw -> +20% -> 2.4h -> round up -> 3 points
-Database migration: 1h raw -> +20% -> 1.2h -> round up -> 2 points
-Testing:         2h raw -> +20% -> 2.4h -> round up -> 3 points
-Largest sub-area: 5 points (Backend API) -> story estimate: 5 points
+Backend API:        S (clear REST pattern, existing auth middleware reused)
+Frontend UI:        M (new component needed, state management changes)
+Database:           XS (one column, backward-compatible migration)
+Testing:            S (unit + integration, existing fixtures reusable)
+
+Dominant factors:   Frontend complexity + cross-layer coordination
+Story estimate:     M
 ```
+
+5. **If M or larger** -- check whether the story can be decomposed into independently shippable pieces. Smaller stories ship faster, are easier to review, and carry less integration risk.
 
 The estimation method is configurable per team. Check the project's CLAUDE.md for overrides:
-- **Fibonacci** (default): 1, 2, 3, 5, 8
-- **T-shirt**: XS, S, M, L, XL (mapped to 1, 2, 3, 5, 8 internally)
-- **Linear**: 1-10 scale without Fibonacci rounding
+- **T-shirt** (default): XS, S, M, L, XL
+- **Fibonacci**: 1, 2, 3, 5, 8
+- **Linear**: 1-10 scale
 
 ---
 
@@ -304,7 +318,7 @@ Teams customize this skill through their repo configuration:
 
 **Architecture Context** -- Defined in the project's CLAUDE.md. Describes the service topology, shared libraries, and integration patterns. The skill reads this context when generating the Architecture Context section of the spec.
 
-**Estimation Method** -- Configured in CLAUDE.md. Options: Fibonacci (default), T-shirt, linear. The skill uses the configured method for all estimates in that project.
+**Estimation Method** -- Configured in CLAUDE.md. Options: T-shirt (default), Fibonacci, linear. The skill uses the configured method for all estimates in that project.
 
 **Jira Project Key** -- Configured in CLAUDE.md. The skill uses this key when creating tickets. If not configured, the skill asks during Step 1.
 
@@ -326,14 +340,15 @@ Common entry points:
 
 When the spec is complete and passes the Spec Reviewer:
 
-1. Save the spec to `enggenie/spec_[slug].md` (e.g., `enggenie/spec_heist-timer.md`). If the team has a configured spec directory in CLAUDE.md, use that instead.
-2. Write the handoff context to the Jira ticket (Step 7) — this ensures whoever picks up the ticket next has full context
-3. Present the full spec to the user for review
-4. Wait for explicit approval -- do not proceed without it
+1. **Design review checkpoint** -- If a design artifact (Figma, UX prototype) was provided, invoke enggenie:review-design before finalizing the spec. The review-design skill checks that the spec accurately reflects the design intent and catches any design constraints that were lost in translation. Do not skip this if a design exists.
+2. Save the spec to `enggenie/spec_[slug].md` (e.g., `enggenie/spec_heist-timer.md`). If the team has a configured spec directory in CLAUDE.md, use that instead.
+3. Write the handoff context to the Jira ticket (Step 7) — this ensures whoever picks up the ticket next has full context
+4. Present the full spec to the user for review
+5. Wait for explicit approval -- do not proceed without it
 
 After the user approves, offer the next step:
 
-> Spec approved. Jira ticket PROJ-1234 updated with handoff context for Dev and QA. Next: invoke enggenie:architect-design (if design decisions need discussion) or enggenie:architect-plan (if the design is clear and you are ready to plan implementation).
+> Spec approved. Jira ticket PROJ-1234 updated with handoff context for Dev and QA. Next: invoke enggenie:dev-brainstorm (if design decisions need discussion) or enggenie:dev-plan (if the design is clear and you are ready to plan implementation).
 
 Do not auto-invoke the next skill. The user decides the next step.
 
@@ -341,8 +356,8 @@ Do not auto-invoke the next skill. The user decides the next step.
 
 ## What This Skill Is Not
 
-- This is not implementation planning. Phased task breakdowns with code-level detail happen in enggenie:architect-plan.
-- This is not design discussion. Architecture tradeoffs and pattern selection happen in enggenie:architect-design.
+- This is not implementation planning. Phased task breakdowns with code-level detail happen in enggenie:dev-plan.
+- This is not design discussion. Architecture tradeoffs and pattern selection happen in enggenie:dev-brainstorm.
 - This is not coding. No code is written by this skill. Code happens in enggenie:dev-implement.
 - This is not QA execution. Test execution and verification happen in enggenie:qa-verify.
 

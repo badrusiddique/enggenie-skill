@@ -48,7 +48,7 @@ What enggenie skills do I have?
 
 **What you should see:** A list of 14 skills grouped by role:
 - PM: `enggenie:pm-refine`
-- Architect: `enggenie:architect-design`, `enggenie:architect-plan`
+- Architect: `enggenie:dev-brainstorm`, `enggenie:dev-plan`
 - Dev: `enggenie:dev-implement`, `enggenie:dev-tdd`, `enggenie:dev-debug`, `enggenie:dev-commit`
 - Reviewer: `enggenie:review-code`, `enggenie:review-design`
 - QA: `enggenie:qa-verify`, `enggenie:qa-test`
@@ -112,8 +112,8 @@ It will NEVER guess. It investigates systematically.
 
 | What you want to do | Say this | Skill that fires |
 |---------------------|---------|-----------------|
-| Plan a new feature | "I want to build a user dashboard" | `enggenie:architect-design` |
-| Create an implementation plan | "Create a plan for the dashboard" | `enggenie:architect-plan` |
+| Plan a new feature | "I want to build a user dashboard" | `enggenie:dev-brainstorm` |
+| Create an implementation plan | "Create a plan for the dashboard" | `enggenie:dev-plan` |
 | Write a full spec | "Write a spec for the search feature" | `enggenie:pm-refine` |
 | Execute a plan | "Execute the plan" | `enggenie:dev-implement` |
 | Review code before PR | "Review my changes before I push" | `enggenie:review-code` |

@@ -1,9 +1,9 @@
 ---
-name: architect-design
+name: dev-brainstorm
 description: Use when brainstorming new features, making architectural decisions, evaluating technical tradeoffs, or documenting decisions as ADRs - before any implementation planning or coding begins
 ---
 
-# enggenie:architect-design
+# enggenie:dev-brainstorm
 
 Think before you build. This skill handles the messy, creative, consequential work that happens before anyone writes a plan or touches code. It operates in three modes depending on what the user needs: exploring an idea, designing a system, or settling a technical debate.
 
@@ -15,7 +15,7 @@ No code gets written here. No plans get made here. This is where decisions happe
 
 When this skill is invoked, announce:
 
-> I'm using enggenie:architect-design for [brainstorming/architecture review/technical discussion].
+> I'm using enggenie:dev-brainstorm for [brainstorming/architecture review/technical discussion].
 
 Pick the label that matches the mode. If you are unsure which mode, ask.
 
@@ -25,7 +25,7 @@ Pick the label that matches the mode. If you are unsure which mode, ask.
 
 Design first. Always. Short designs are fine -- three sentences for a simple feature, a full ADR for a system redesign. The length matches the complexity. But the user says "go" before anyone builds.
 
-Do not generate implementation code, pseudocode, or skeleton files during this skill. If the user asks for code, redirect: "Let's nail the design first, then enggenie:architect-plan will break it into buildable steps."
+Do not generate implementation code, pseudocode, or skeleton files during this skill. If the user asks for code, redirect: "Let's nail the design first, then enggenie:dev-plan will break it into buildable steps."
 
 ---
 
@@ -64,7 +64,7 @@ Use when the user has a feature idea, a vague requirement, or a "what if we..." 
 
 ---
 
-## Mode 2: Architecture -- System Design
+## Mode 2: Devure -- System Design
 
 Use when the user needs to design or redesign a system, define service boundaries, plan a migration, or make a structural decision that affects multiple components.
 
@@ -142,7 +142,7 @@ Use when the user is weighing two or more technical options and needs to reach a
 - Component relationships and service boundaries
 - Data flow between systems
 - UI layout proposals and wireframes
-- Architecture comparisons (side-by-side)
+- Devure comparisons (side-by-side)
 - Sequence diagrams for multi-step interactions
 
 **Use text (terminal) for:**
@@ -197,7 +197,7 @@ Searches past decisions and designs in the same domain. "Have we designed someth
 When subagents (Explorer, Memory) complete their work, explicitly capture their key findings back to the main conversation before proceeding:
 
 - Existing patterns and conventions discovered
-- Architecture constraints and boundaries found
+- Devure constraints and boundaries found
 - Prior decisions recalled from memory
 - File paths and components relevant to the design
 
@@ -208,7 +208,7 @@ Do not assume the orchestrating agent retains subagent context automatically. Ex
 ## Recommended Model
 
 **Primary:** opus (with extended thinking)
-**Why:** Architectural decisions require deep reasoning about tradeoffs, system boundaries, and long-term consequences. Extended thinking allows the model to explore multiple approaches before committing to a recommendation.
+**Why:** Devural decisions require deep reasoning about tradeoffs, system boundaries, and long-term consequences. Extended thinking allows the model to explore multiple approaches before committing to a recommendation.
 
 This is a recommendation. Ask the user: "This skill works best with opus and extended thinking for deep architectural reasoning. Confirm or override?" Do not proceed until the user responds.
 
@@ -228,7 +228,7 @@ When the design is approved by the user:
 2. Summarize the key decisions in 2-3 sentences
 3. Offer the next step:
 
-> Design approved. Ready to create an implementation plan with enggenie:architect-plan?
+> Design approved. Ready to create an implementation plan with enggenie:dev-plan?
 
 Do not auto-invoke. The user decides when to move forward.
 
@@ -236,7 +236,7 @@ Do not auto-invoke. The user decides when to move forward.
 
 ## What This Skill Is Not
 
-- This is not planning. Plans come from enggenie:architect-plan after design is approved.
+- This is not planning. Plans come from enggenie:dev-plan after design is approved.
 - This is not implementation. Code comes from enggenie:dev-implement after a plan exists.
 - This is not requirements gathering. If the user needs to refine requirements with stakeholders, use enggenie:pm-refine first.
 

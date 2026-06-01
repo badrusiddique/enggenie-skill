@@ -302,8 +302,8 @@ Those four demos cover about half of what enggenie does. Here's the full roster:
 | Role | Skill | What It Does |
 |------|-------|-------------|
 | **PM** | `pm-refine` | Specs, story refinement, estimation |
-| **Architect** | `architect-design` | Brainstorming, ADRs, technical decisions |
-| **Architect** | `architect-plan` | Phased implementation plans |
+| **Architect** | `dev-brainstorm` | Brainstorming, ADRs, technical decisions |
+| **Architect** | `dev-plan` | Phased implementation plans |
 | **Dev** | `dev-implement` | Executes plans with TDD subagents |
 | **Dev** | `dev-tdd` | RED-GREEN-REFACTOR on every change |
 | **Dev** | `dev-debug` | 4-phase systematic debugging |

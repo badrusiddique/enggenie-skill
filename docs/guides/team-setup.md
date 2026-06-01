@@ -72,7 +72,7 @@ Scale: 1-10. Raw estimate + 20% buffer, no Fibonacci rounding. Stories above 8 a
 
 ## Architecture Context
 
-Describe your system topology in `CLAUDE.md` so skills understand your architecture without re-discovering it each session. This context is used by pm-refine (Architecture Context section of specs), architect-design (system mapping), and architect-plan (codebase discovery).
+Describe your system topology in `CLAUDE.md` so skills understand your architecture without re-discovering it each session. This context is used by pm-refine (Architecture Context section of specs), dev-brainstorm (system mapping), and dev-plan (codebase discovery).
 
 ```markdown
 ## Architecture Context
@@ -143,7 +143,7 @@ fibonacci
 | Spec template | pm-refine |
 | Commit conventions | deploy-ship |
 | Estimation method | pm-refine |
-| Architecture context | pm-refine, architect-design, architect-plan |
+| Architecture context | pm-refine, dev-brainstorm, dev-plan |
 | Jira project key | pm-refine, deploy-ship |
 
 ## Custom Skills

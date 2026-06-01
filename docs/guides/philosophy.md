@@ -11,7 +11,7 @@ Each skill maps to a role in the software development lifecycle:
 | Role | Skills | Domain |
 |------|--------|--------|
 | PM | pm-refine | Specs, stories, estimation |
-| Architect | architect-design, architect-plan | Design decisions, phased plans |
+| Architect | dev-brainstorm, dev-plan | Design decisions, phased plans |
 | Dev | dev-implement, dev-tdd, dev-debug | Execution, TDD discipline, debugging |
 | Reviewer | review-code, review-design | Code quality, UI/UX compliance |
 | QA | qa-verify, qa-test | Verification, Playwright and manual testing |
@@ -54,8 +54,8 @@ The suite is not 14 isolated tools. It is a pipeline:
 
 ```
 pm-refine produces a spec
-  architect-design produces an approved design
-    architect-plan produces a phased implementation plan
+  dev-brainstorm produces an approved design
+    dev-plan produces a phased implementation plan
       dev-implement executes the plan task by task
         review-code and review-design validate quality
           qa-verify and qa-test confirm correctness

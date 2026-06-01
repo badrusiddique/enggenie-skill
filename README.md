@@ -59,8 +59,8 @@ For platform-specific setup, see [Getting Started guides](#getting-started) belo
 | Role | Skill | What It Does | Try Saying... |
 |------|-------|-------------|---------------|
 | **PM** | `enggenie:pm-refine` | Generates specs, refines stories, estimates points | "Write a spec for user notifications" |
-| **Architect** | `enggenie:architect-design` | Brainstorms approaches, writes architecture decision records | "What's the best caching strategy?" |
-| **Architect** | `enggenie:architect-plan` | Creates phased implementation plans | "Create a plan from this spec" |
+| **Architect** | `enggenie:dev-brainstorm` | Brainstorms approaches, writes architecture decision records | "What's the best caching strategy?" |
+| **Architect** | `enggenie:dev-plan` | Creates phased implementation plans | "Create a plan from this spec" |
 | **Dev** | `enggenie:dev-implement` | Executes plans with TDD subagents | "Execute the plan" |
 | **Dev** | `enggenie:dev-tdd` | Enforces RED-GREEN-REFACTOR on every code change | "Add a validate email function" |
 | **Dev** | `enggenie:dev-debug` | 4-phase systematic root cause investigation | "This test is failing, help me fix it" |
@@ -79,10 +79,10 @@ Skills activate automatically. You don't invoke them manually.
 
 ```
 You say: "I want to build a user dashboard"
-enggenie:architect-design activates -> brainstorms approaches
+enggenie:dev-brainstorm activates -> brainstorms approaches
 
 You say: "Create a plan for the dashboard"
-enggenie:architect-plan activates -> generates phased implementation plan
+enggenie:dev-plan activates -> generates phased implementation plan
 
 You say: "Execute the plan"
 enggenie:dev-implement activates -> TDD with subagent review per task
@@ -134,21 +134,21 @@ When do you use which skill? Here's how enggenie maps to your daily SDLC activit
 | Need story point estimate | "How big is this ticket? Break down the estimate" | `enggenie:pm-refine` |
 | Tech research before committing | "Spike: should we use Redis or DynamoDB for sessions?" | `enggenie:pm-refine` |
 | **Brainstorming & Architecture** | | |
-| New feature design discussion | "We need real-time notifications, what are our options?" | `enggenie:architect-design` |
-| Choosing between approaches | "Monolith vs microservice for billing - tradeoffs?" | `enggenie:architect-design` |
-| Database schema design | "Design the schema for multi-tenant invoicing" | `enggenie:architect-design` |
-| API contract design | "What should the REST API look like for this feature?" | `enggenie:architect-design` |
+| New feature design discussion | "We need real-time notifications, what are our options?" | `enggenie:dev-brainstorm` |
+| Choosing between approaches | "Monolith vs microservice for billing - tradeoffs?" | `enggenie:dev-brainstorm` |
+| Database schema design | "Design the schema for multi-tenant invoicing" | `enggenie:dev-brainstorm` |
+| API contract design | "What should the REST API look like for this feature?" | `enggenie:dev-brainstorm` |
 | **Planning & Task Breakdown** | | |
-| Sprint planning breakdown | "Create an implementation plan from this spec" | `enggenie:architect-plan` |
-| Phased delivery plan | "Break this into independently deployable phases" | `enggenie:architect-plan` |
-| Execution roadmap | "Plan the work for this feature across 3 services" | `enggenie:architect-plan` |
+| Sprint planning breakdown | "Create an implementation plan from this spec" | `enggenie:dev-plan` |
+| Phased delivery plan | "Break this into independently deployable phases" | `enggenie:dev-plan` |
+| Execution roadmap | "Plan the work for this feature across 3 services" | `enggenie:dev-plan` |
 | **Pair Programming (TDD)** | | |
 | Writing new code from scratch | "Add a validateEmail function" | `enggenie:dev-tdd` |
 | Adding a new endpoint | "Add a POST /invoices endpoint" | `enggenie:dev-tdd` |
 | Building a React component | "Build a DataTable component with sorting" | `enggenie:dev-tdd` |
 | Any feature work | "Implement the search filter from the spec" | `enggenie:dev-tdd` |
 | **Execution (Plan-Driven)** | | |
-| Executing an architect-plan | "Execute Phase 1 of the implementation plan" | `enggenie:dev-implement` |
+| Executing an dev-plan | "Execute Phase 1 of the implementation plan" | `enggenie:dev-implement` |
 | Multi-file coordinated changes | "Implement Task 2.3 from the plan" | `enggenie:dev-implement` |
 | Following a spec step by step | "Start building from the spec, phase by phase" | `enggenie:dev-implement` |
 | **Debugging** | | |
@@ -275,8 +275,8 @@ It works with whatever AI coding tool they use. No configuration needed.
 
 ```mermaid
 flowchart LR
-    PM["pm-refine\n(Spec)"] --> AD["architect-design\n(Design)"]
-    AD --> AP["architect-plan\n(Plan)"]
+    PM["pm-refine\n(Spec)"] --> AD["dev-brainstorm\n(Design)"]
+    AD --> AP["dev-plan\n(Plan)"]
     AP --> DI["dev-implement\n(Build)"]
     AP --> DT["dev-tdd\n(TDD)"]
     DI --> DC["dev-commit\n(Commit)"]

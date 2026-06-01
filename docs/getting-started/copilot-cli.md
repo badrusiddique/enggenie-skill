@@ -42,7 +42,7 @@ Ask Copilot:
 List all the enggenie skills in ~/.copilot/skills/enggenie/skills/
 ```
 
-**What you should see:** 14 skill directories (enggenie, pm-refine, architect-design, architect-plan, dev-implement, dev-tdd, dev-debug, dev-commit, review-code, review-design, qa-verify, qa-test, deploy-ship, memory-recall).
+**What you should see:** 14 skill directories (enggenie, pm-refine, dev-brainstorm, dev-plan, dev-implement, dev-tdd, dev-debug, dev-commit, review-code, review-design, qa-verify, qa-test, deploy-ship, memory-recall).
 
 ## Step 3: Tool Name Differences
 
@@ -69,8 +69,8 @@ Read the skill at ~/.copilot/skills/enggenie/skills/dev-tdd/SKILL.md and follow 
 | What you want to do | Say this |
 |---------------------|---------|
 | Debug a test failure | "This test fails. Use the dev-debug skill." |
-| Plan a feature | "I want to build X. Use the architect-design skill." |
-| Create an implementation plan | "Create a plan. Use the architect-plan skill." |
+| Plan a feature | "I want to build X. Use the dev-brainstorm skill." |
+| Create an implementation plan | "Create a plan. Use the dev-plan skill." |
 | Review code | "Review my changes. Use the review-code skill." |
 | Ship code | "Commit and create a PR. Use the deploy-ship skill." |
 

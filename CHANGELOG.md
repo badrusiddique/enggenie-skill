@@ -6,6 +6,16 @@ Format: [Semantic Versioning](https://semver.org/). Each version lists what was 
 
 ---
 
+## [2.7.0] - 2026-06-01
+
+### Changed
+- **Renamed architect-design → dev-brainstorm** — removed "architect" role framing; brainstorming and design thinking are activities any dev does, not a separate role
+- **Renamed architect-plan → dev-plan** — same rationale; implementation planning is a dev activity
+- **Estimation method changed to T-shirt sizing (default)** — replaced hour-anchored Fibonacci method in pm-refine with relative complexity T-shirt sizes (XS/S/M/L/XL); Fibonacci and linear remain available as team overrides via CLAUDE.md
+- **UX/design artifact handling in pm-refine** — design artifact status is now surfaced explicitly at Step 1 (not silently skipped); specs proceeding without a design are flagged as provisional; enggenie:review-design is now invoked as an exit checkpoint when a design artifact exists
+
+---
+
 ## [2.6.0] - 2026-04-06
 
 ### Added

@@ -39,7 +39,7 @@ What you see:
 ```
 Spec saved to docs/specs/user-notifications.md
 Estimated: 5 story points (Backend: 3h + Frontend: 2h + Testing: 1h = 3.6h raw, anchored at 5 on Fibonacci scale)
-Next: invoke enggenie:architect-plan to create an implementation plan?
+Next: invoke enggenie:dev-plan to create an implementation plan?
 ```
 
 **Example 2: Estimate an existing story**
@@ -73,7 +73,7 @@ Estimate breakdown:
 
 ## Architect Role
 
-### enggenie:architect-design - Brainstorm and Make Technical Decisions
+### enggenie:dev-brainstorm - Brainstorm and Make Technical Decisions
 
 **Example 1: Brainstorm a technical approach**
 
@@ -128,7 +128,7 @@ Saved to docs/adrs/007-rest-over-graphql.md
 - You can reference previous ADRs: "Review ADR-003 before deciding"
 - The skill always ties recommendations back to your specific codebase, not generic advice
 
-### enggenie:architect-plan - Create Implementation Plans
+### enggenie:dev-plan - Create Implementation Plans
 
 **Example: Plan a multi-service feature**
 
@@ -618,8 +618,8 @@ Ready to continue with Task 2.3?
 | What you want to do | What to say | Skill that fires |
 |---------------------|-------------|-----------------|
 | Write a feature spec | "I want to build X" | pm-refine |
-| Brainstorm approaches | "What's the best way to do X?" | architect-design |
-| Create an implementation plan | "Plan how to build X" | architect-plan |
+| Brainstorm approaches | "What's the best way to do X?" | dev-brainstorm |
+| Create an implementation plan | "Plan how to build X" | dev-plan |
 | Build a feature with TDD | "Execute the plan" | dev-implement |
 | Add a function | "Add a function that does X" | dev-tdd |
 | Fix a bug | "This test is failing" | dev-debug |
@@ -638,8 +638,8 @@ These skills work best when chained together. Here are the most common end-to-en
 
 ### New Feature (Full Lifecycle)
 1. **pm-refine** - "I want to build a notification system" (generates spec)
-2. **architect-design** - "Brainstorm the technical approach" (picks architecture)
-3. **architect-plan** - "Create an implementation plan" (breaks into tasks)
+2. **dev-brainstorm** - "Brainstorm the technical approach" (picks architecture)
+3. **dev-plan** - "Create an implementation plan" (breaks into tasks)
 4. **dev-implement** - "Execute the plan" (builds it with TDD)
 5. **review-code** - "Review my changes" (catches issues)
 6. **qa-test** - "Test the notification flow" (QA from user perspective)

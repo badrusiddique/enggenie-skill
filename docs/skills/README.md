@@ -12,8 +12,8 @@ All 14 skills organized by role. Each skill is a domain expert that activates ba
 
 | Skill | Purpose | Example Triggers | Key Feature |
 |-------|---------|------------------|-------------|
-| `enggenie:architect-design` | Brainstorming, ADRs, technical decisions | "Let's brainstorm the caching approach", "Should we use Kafka or SQS?" | Three modes (brainstorm, architecture, discussion) with decisions grounded in codebase evidence |
-| `enggenie:architect-plan` | Phased implementation plans with deployment gates | "Create a plan from this spec", "Break this into tasks" | Deployment-sequenced phases, no placeholders, every step contains real code |
+| `enggenie:dev-brainstorm` | Brainstorming, ADRs, technical decisions | "Let's brainstorm the caching approach", "Should we use Kafka or SQS?" | Three modes (brainstorm, architecture, discussion) with decisions grounded in codebase evidence |
+| `enggenie:dev-plan` | Phased implementation plans with deployment gates | "Create a plan from this spec", "Break this into tasks" | Deployment-sequenced phases, no placeholders, every step contains real code |
 
 ## Dev
 
@@ -61,7 +61,7 @@ All 14 skills organized by role. Each skill is a domain expert that activates ba
 Skills consume each other's outputs in a defined pipeline:
 
 ```
-pm-refine (spec) --> architect-design (approved design) --> architect-plan (phased plan)
+pm-refine (spec) --> dev-brainstorm (approved design) --> dev-plan (phased plan)
     --> dev-implement (code) --> review-code + review-design (reviewed code)
     --> qa-verify + qa-test (verified code) --> deploy-ship (shipped)
 ```
@@ -76,8 +76,8 @@ pm-refine (spec) --> architect-design (approved design) --> architect-plan (phas
 | Skill | Subagents | Models |
 |-------|-----------|--------|
 | pm-refine | refinement, qa-planner, spec-reviewer, memory | sonnet, sonnet, sonnet, haiku |
-| architect-design | explorer, memory | sonnet, haiku |
-| architect-plan | explorer, doc-discovery, plan-reviewer | sonnet, haiku, sonnet |
+| dev-brainstorm | explorer, memory | sonnet, haiku |
+| dev-plan | explorer, doc-discovery, plan-reviewer | sonnet, haiku, sonnet |
 | dev-implement | implementer, spec-reviewer, quality-reviewer | haiku/sonnet, sonnet, sonnet |
 | dev-debug | investigator, memory | sonnet, haiku |
 | review-code | code-reviewer | sonnet |

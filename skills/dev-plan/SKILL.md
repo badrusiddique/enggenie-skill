@@ -1,9 +1,9 @@
 ---
-name: architect-plan
+name: dev-plan
 description: Use when creating implementation plans from specs or requirements - phased task breakdown with deployment readiness gates before any coding begins
 ---
 
-# enggenie:architect-plan
+# enggenie:dev-plan
 
 Create implementation plans that are phased, independently deployable, and contain complete code in every step. No placeholders. No hand-waving. Every phase can be deployed to production before the next phase begins. If a step says "write a test," the actual test code is right there. If a step says "add a route," the route definition is spelled out.
 
@@ -15,7 +15,7 @@ This is not a flat task list. This is a deployment-sequenced plan with gates bet
 
 When this skill is invoked, announce:
 
-> I'm using enggenie:architect-plan to create an implementation plan.
+> I'm using enggenie:dev-plan to create an implementation plan.
 
 ---
 
@@ -23,7 +23,7 @@ When this skill is invoked, announce:
 
 Activate this skill when ANY of the following are true:
 
-- An approved design exists from enggenie:architect-design
+- An approved design exists from enggenie:dev-brainstorm
 - An approved spec exists from enggenie:pm-refine
 - The user directly requests an implementation plan, task breakdown, or phased plan
 
@@ -287,7 +287,7 @@ Do not auto-execute. The user decides when to start building.
 ## What This Skill Is Not
 
 - This is not a flat task list. Flat lists have no deployment boundaries and no dependency ordering. This skill produces phased, deployment-sequenced plans.
-- This is not a design document. Design decisions should already be made (by enggenie:architect-design) before this skill runs.
+- This is not a design document. Design decisions should already be made (by enggenie:dev-brainstorm) before this skill runs.
 - This is not a spec. Requirements should already be refined (by enggenie:pm-refine) before this skill runs.
 - This is not implementation. No code is written by this skill. Code happens in enggenie:dev-implement.
 

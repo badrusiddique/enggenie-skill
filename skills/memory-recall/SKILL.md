@@ -91,8 +91,8 @@ ELSE:
 ```
 
 Skills that use memory:
-- **enggenie:architect-design** - "Have we designed something similar?"
-- **enggenie:architect-plan** - "What patterns did we use last time?"
+- **enggenie:dev-brainstorm** - "Have we designed something similar?"
+- **enggenie:dev-plan** - "What patterns did we use last time?"
 - **enggenie:pm-refine** - "Have we built something similar?"
 - **enggenie:dev-debug** - "Have we seen this bug pattern before?"
 

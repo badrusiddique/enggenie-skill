@@ -22,8 +22,8 @@ Every prior skill suites capability is covered. Nothing is lost in switching.
 | Prior skill suites Skill | Genie Equivalent | What Changes |
 |---|---|---|
 | using-prior skill suites (gateway) | **enggenie** (gateway) | Same routing + instruction priority hierarchy |
-| brainstorming | **enggenie:architect-design** | 3 modes (brainstorm/architecture/discussion) + memory |
-| writing-plans | **enggenie:architect-plan** | Phased plans with deployment readiness gates + spec inheritance |
+| brainstorming | **enggenie:dev-brainstorm** | 3 modes (brainstorm/architecture/discussion) + memory |
+| writing-plans | **enggenie:dev-plan** | Phased plans with deployment readiness gates + spec inheritance |
 | executing-plans | **enggenie:dev-implement** | Subagent-driven only (executing-plans was the weaker option) |
 | subagent-driven-development | **enggenie:dev-implement** | Merged — one skill, not two |
 | test-driven-development | **enggenie:dev-tdd** | Standalone discipline skill (fires during any coding) |
@@ -96,7 +96,7 @@ Every prior skill suites capability is covered. Nothing is lost in switching.
 - `agents/qa-planner-agent.md`
 
 **Entry condition:** None — this is often the first skill in a workflow
-**Exit action:** Spec saved. Next step: invoke `enggenie:architect-design` (if design discussion needed) or `enggenie:architect-plan` (if design is clear)
+**Exit action:** Spec saved. Next step: invoke `enggenie:dev-brainstorm` (if design discussion needed) or `enggenie:dev-plan` (if design is clear)
 
 **Team extensibility:**
 - Teams provide their own template in `docs/engenggenie/templates/spec-template.md`
@@ -107,7 +107,7 @@ Every prior skill suites capability is covered. Nothing is lost in switching.
 
 ### Role: Architect
 
-#### enggenie:architect-design
+#### enggenie:dev-brainstorm
 **Purpose:** Brainstorming + architectural decisions + technical discussions
 
 **Triggers on:** Brainstorming, architecture review, technical discussion, design session, ADR, tradeoff analysis, system design
@@ -141,7 +141,7 @@ Every prior skill suites capability is covered. Nothing is lost in switching.
 - **Memory subagent** (haiku, if available) — "Have we designed something similar? What decisions did we make?"
 
 **Entry condition:** None — can be invoked directly
-**Exit action:** Design approved → invoke `enggenie:architect-plan`
+**Exit action:** Design approved → invoke `enggenie:dev-plan`
 
 **What makes it different from prior skill suites:brainstorming:**
 - Three modes instead of one rigid 9-step flow
@@ -153,7 +153,7 @@ Every prior skill suites capability is covered. Nothing is lost in switching.
 
 ---
 
-#### enggenie:architect-plan
+#### enggenie:dev-plan
 **Purpose:** Implementation planning from specs — phased, independently deployable
 
 **Triggers on:** Implementation plan, plan from spec, task breakdown, before writing code
@@ -211,7 +211,7 @@ Depends on: Phase 1 deployed
 - `agents/explorer-agent.md`
 - `agents/doc-discovery-agent.md`
 
-**Entry condition:** Approved design (from architect-design) OR approved spec (from pm-refine) OR direct user request
+**Entry condition:** Approved design (from dev-brainstorm) OR approved spec (from pm-refine) OR direct user request
 **Exit action:** Plan saved. Next step: invoke `enggenie:dev-implement`
 
 **What makes it different from prior skill suites:writing-plans:**
@@ -304,7 +304,7 @@ If you catch yourself writing code before a test: stop. Delete it. Write the tes
 - `agents/spec-reviewer-agent.md` — Check spec compliance, nothing missing, nothing extra
 - `agents/quality-reviewer-agent.md` — Code quality, bugs, test quality, YAGNI
 
-**Entry condition:** Approved plan (from architect-plan) OR direct user request
+**Entry condition:** Approved plan (from dev-plan) OR direct user request
 **Exit action:** All tasks complete, verified → invoke `enggenie:deploy-ship`
 
 ---
@@ -729,21 +729,21 @@ These patterns from prior skill suites are preserved and adapted with original v
 
 ```
 enggenie:pm-refine
-  EXIT → "Spec saved. Invoke enggenie:architect-design or enggenie:architect-plan"
+  EXIT → "Spec saved. Invoke enggenie:dev-brainstorm or enggenie:dev-plan"
   GATE → Other skills check: does a spec exist? If yes, consume it.
 
-enggenie:architect-design
-  EXIT → "Design approved. Invoke enggenie:architect-plan"
+enggenie:dev-brainstorm
+  EXIT → "Design approved. Invoke enggenie:dev-plan"
   GATE → Must have user approval before proceeding to plan
 
-enggenie:architect-plan
+enggenie:dev-plan
   ENTRY → Checks for spec (from pm-refine). If exists, inherits phases/AC.
   EXIT → "Plan saved. Invoke enggenie:dev-implement"
   GATE → Must have user approval before proceeding to implement
   REVIEW → Dispatch plan-reviewer subagent before presenting to user
 
 enggenie:dev-implement
-  ENTRY → Checks for plan (from architect-plan).
+  ENTRY → Checks for plan (from dev-plan).
   EXIT → "All tasks complete. Invoke enggenie:qa-verify"
   GATE → No code without failing test (enforced by enggenie:dev-tdd)
 
@@ -778,7 +778,7 @@ enggenie:memory-recall
   ENTRY → Anytime. Available to all other skills as a utility.
 ```
 
-**Enforcement style:** Each skill declares what MUST come next. If a user says "just build it" without a plan, `enggenie:dev-implement` says: "No plan found. Should I create one with enggenie:architect-plan first, or proceed without a plan?"
+**Enforcement style:** Each skill declares what MUST come next. If a user says "just build it" without a plan, `enggenie:dev-implement` says: "No plan found. Should I create one with enggenie:dev-plan first, or proceed without a plan?"
 
 This is SOFTER than prior skill suites (which blocks entirely) but PRESENT (not silent). The user can override, but they're informed.
 
@@ -792,10 +792,10 @@ Each skill has a CSO-optimized description (says WHEN to use, never HOW):
 enggenie:pm-refine: "Use when refining user stories, writing feature specifications,
   estimating story points, creating subtasks, planning spikes, or generating QA plans"
 
-enggenie:architect-design: "Use when brainstorming features, making architectural decisions,
+enggenie:dev-brainstorm: "Use when brainstorming features, making architectural decisions,
   evaluating technical tradeoffs, or documenting decisions as ADRs"
 
-enggenie:architect-plan: "Use when creating implementation plans from specs or requirements —
+enggenie:dev-plan: "Use when creating implementation plans from specs or requirements —
   phased task breakdown with deployment readiness gates"
 
 enggenie:dev-implement: "Use when executing an implementation plan task-by-task —
@@ -852,9 +852,9 @@ enggenie/
 │   │   │   └── spec-reviewer-agent.md     # Reviews spec completeness before saving
 │   │   └── references/
 │   │       └── default-spec-template.md   # Overridable by team
-│   ├── architect-design/
+│   ├── dev-brainstorm/
 │   │   └── SKILL.md
-│   ├── architect-plan/
+│   ├── dev-plan/
 │   │   ├── SKILL.md
 │   │   └── agents/
 │   │       ├── explorer-agent.md
@@ -952,11 +952,11 @@ enggenie/
 |-------|-------|-----------|--------|
 | 1 | **enggenie:dev-tdd** | Foundation discipline. Every other coding skill references it. | Medium |
 | 2 | **enggenie:dev-implement** | Core engine. Proves the subagent architecture. | High |
-| 3 | **enggenie:architect-plan** | Feeds dev-implement. Together they cover plan→execute. | Medium |
+| 3 | **enggenie:dev-plan** | Feeds dev-implement. Together they cover plan→execute. | Medium |
 | 4 | **enggenie:qa-verify** | Quick win. Lightweight. High daily impact. | Low |
 | 5 | **enggenie:dev-debug** | Every dev hits bugs. Daily use. | Medium |
 | 6 | **enggenie:pm-refine** | Biggest differentiator. No other suite has this. | High |
-| 7 | **enggenie:architect-design** | Brainstorming entry point. | Medium |
+| 7 | **enggenie:dev-brainstorm** | Brainstorming entry point. | Medium |
 | 8 | **enggenie:review-code** | Every PR cycle. Must match prior skill suites' depth. | Medium |
 | 9 | **enggenie:qa-test** | QA gap-filler. Playwright + manual with evidence. | Medium |
 | 10 | **enggenie:deploy-ship** | Last mile. Important but well-understood. | Low |
@@ -986,10 +986,10 @@ enggenie/
 7. Close loopholes, re-test
 
 **Integration tests:**
-- pm-refine → architect-plan → dev-implement → qa-verify → deploy-ship (happy path)
+- pm-refine → dev-plan → dev-implement → qa-verify → deploy-ship (happy path)
 - dev-implement → dev-debug → dev-implement (bug during implementation)
 - qa-test → pm-refine (QA found missing AC, refine story)
-- Full SDLC: pm-refine → architect-design → architect-plan → dev-implement → review-code → qa-verify → qa-test → deploy-ship
+- Full SDLC: pm-refine → dev-brainstorm → dev-plan → dev-implement → review-code → qa-verify → qa-test → deploy-ship
 
 **Switching test:** Give enggenie to a prior skill suites user. Can they do everything they did before? Do the new skills (pm-refine, qa-test, memory-recall) add value they notice?
 
@@ -1003,12 +1003,12 @@ enggenie/
 ## Publishing Plan
 
 ### Phase 1: Core (skills 1-5)
-Build dev-tdd, dev-implement, architect-plan, qa-verify, dev-debug. Test each with writing-skills methodology.
+Build dev-tdd, dev-implement, dev-plan, qa-verify, dev-debug. Test each with writing-skills methodology.
 - Repo: `github.com/badrusiddique/enggenie`
 - Local testing in `~/.claude/skills/enggenie/`
 
 ### Phase 2: Differentiators (skills 6-9)
-Add pm-refine, architect-design, review-code, qa-test. Integration test: full SDLC flow.
+Add pm-refine, dev-brainstorm, review-code, qa-test. Integration test: full SDLC flow.
 
 ### Phase 3: Polish (skills 10-13)
 Add deploy-ship, review-design, gateway, memory-recall. End-to-end test.
@@ -1221,8 +1221,8 @@ Now let's try something more powerful. Tell your assistant:
 
 | What you want to do | Say this | Skill that fires |
 |---------------------|---------|-----------------|
-| Plan a new feature | "I want to build a user dashboard" | enggenie:architect-design |
-| Create an implementation plan | "Create a plan for the dashboard" | enggenie:architect-plan |
+| Plan a new feature | "I want to build a user dashboard" | enggenie:dev-brainstorm |
+| Create an implementation plan | "Create a plan for the dashboard" | enggenie:dev-plan |
 | Debug a failing test | "This test is failing, help me fix it" | enggenie:dev-debug |
 | Review code before PR | "Review my changes before I push" | enggenie:review-code |
 | Write a spec with estimation | "Write a spec for the search feature" | enggenie:pm-refine |
@@ -1280,8 +1280,8 @@ claude plugin add --from github.com/badrusiddique/enggenie
 | Role | Skill | What It Does | Example Trigger |
 |------|-------|-------------|-----------------|
 | PM | enggenie:pm-refine | Spec generation, story refinement, estimation | "Write a spec for user search" |
-| Architect | enggenie:architect-design | Brainstorming, ADRs, technical decisions | "Let's brainstorm the caching approach" |
-| Architect | enggenie:architect-plan | Implementation plans with deployment phases | "Create a plan from this spec" |
+| Architect | enggenie:dev-brainstorm | Brainstorming, ADRs, technical decisions | "Let's brainstorm the caching approach" |
+| Architect | enggenie:dev-plan | Implementation plans with deployment phases | "Create a plan from this spec" |
 | Dev | enggenie:dev-implement | Subagent-driven TDD execution | "Execute the plan" |
 | Dev | enggenie:dev-tdd | TDD discipline (RED-GREEN-REFACTOR) | "Add a validate email function" |
 | Dev | enggenie:dev-debug | Systematic root cause investigation | "This test is failing" |
@@ -1350,9 +1350,9 @@ gh repo edit --add-topic claude-code,ai-skills,sdlc,tdd,agile,developer-tools,co
 
 **Step 3: Create Directory Structure**
 ```bash
-mkdir -p .claude-plugin .cursor-plugin skills/{enggenie,pm-refine,architect-design,architect-plan,dev-implement,dev-tdd,dev-debug,review-code,review-design,qa-verify,qa-test,deploy-ship,memory-recall} references templates docs/{getting-started,guides,skills,examples,changelog}
+mkdir -p .claude-plugin .cursor-plugin skills/{enggenie,pm-refine,dev-brainstorm,dev-plan,dev-implement,dev-tdd,dev-debug,review-code,review-design,qa-verify,qa-test,deploy-ship,memory-recall} references templates docs/{getting-started,guides,skills,examples,changelog}
 # Create agent subdirectories for skills that need them
-mkdir -p skills/pm-refine/{agents,references} skills/architect-plan/agents skills/dev-implement/agents skills/dev-tdd/references skills/dev-debug/{agents,references} skills/review-code/agents skills/review-design/agents skills/qa-test/{agents,scripts}
+mkdir -p skills/pm-refine/{agents,references} skills/dev-plan/agents skills/dev-implement/agents skills/dev-tdd/references skills/dev-debug/{agents,references} skills/review-code/agents skills/review-design/agents skills/qa-test/{agents,scripts}
 ```
 
 **Step 4: Write All Files**

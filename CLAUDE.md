@@ -13,7 +13,7 @@ This repo contains skills that shape AI agent behavior. Changes to skill content
 
 ## Skill Architecture
 
-- **14 skills** across 7 roles (PM, Architect, Dev, Reviewer, QA, Deploy, Memory)
+- **14 skills** across 6 roles (PM, Dev, Reviewer, QA, Deploy, Memory)
 - **15 agent prompt templates** in `agents/` subdirectories
 - **5 reference docs** in `references/` subdirectories
 - **4 platform adapters** in `references/`
@@ -76,8 +76,8 @@ Use subagents to run skills in parallel where independent. Reference the real-wo
 | Skill | Min Scenarios | Must Include |
 |-------|--------------|-------------|
 | pm-refine | 3 | Spec generation, estimation, Jira gate |
-| architect-design | 3 | Each mode (brainstorm, architecture, discussion) |
-| architect-plan | 3 | Phased plan, deployment gates, no-code rule |
+| dev-brainstorm | 3 | Each mode (brainstorm, architecture, discussion) |
+| dev-plan | 3 | Phased plan, deployment gates, no-code rule |
 | dev-tdd | 4 | RED-GREEN-REFACTOR cycle, Shortcut Tax trigger, Deep Rebuttal trigger, exception handling |
 | dev-implement | 4 | Worktree setup, subagent dispatch, parallel dispatch decision, two-stage review |
 | dev-debug | 4 | 4-phase flow, 3-Attempt Rule trigger, pattern indicators, one-variable-at-a-time |
