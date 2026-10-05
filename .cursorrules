@@ -1,0 +1,106 @@
+# enggenie - Cursor project rules (handoff from Claude Code session "ENGGENIE", Jun 2026)
+
+Supporting detail lives next to this file: STATUS.md, ITERATIONS.md, IMPLEMENTATION.md, NEXT_STEPS.md, DECISIONS.md, CODE_REFERENCE.md, OPEN_QUESTIONS.md, TRANSFER.md.
+Source of truth for code: /Users/badru.siddique/magento/learning/enggenie-skill (remote https://github.com/badrusiddique/enggenie-skill).
+Rules in this file: hyphens only, never em-dashes. Never write secret values. Do not assume - mark unknowns [UNCERTAIN].
+
+## 1. Project name and goal
+
+enggenie is a role-based SDLC skill suite (pure Markdown SKILL.md files plus subagent prompt templates, no runtime, no build, no npm dependency) for AI coding assistants: Claude Code, Cursor, GitHub Copilot CLI, Gemini CLI, OpenCode. It encodes the SDLC context a senior team carries implicitly: spec (pm-refine), design/plan (dev-brainstorm, dev-plan), TDD build (dev-implement, dev-tdd, dev-debug, dev-commit), review (review-code with 3 parallel lenses, review-design), QA (qa-verify, qa-test), ship (deploy-ship), memory (memory-recall, needs claude-mem), plus a gateway skill (enggenie). Author: Badru Siddique (Engineering Manager at Hudl; this is a personal open-source project, MIT). The session covered Jun 1 - Jun 22 2026: v2.7.0 and v3.0.0 releases, v3.1.0 / v3.1.1 changes (committed locally, NOT tagged, NOT pushed), a SessionStart hook (committed, NOT pushed), docs/marketing work (Medium follow-up post draft, LinkedIn draft, README overhaul, SEO repo metadata).
+
+## 2. Tech stack and versions
+
+- Content: Markdown with YAML frontmatter (name, description). No code runtime.
+- Plugin manifests: .claude-plugin/plugin.json (version 3.1.1, hooks registered), .claude-plugin/marketplace.json (STALE: 2.0.0, still says Architect), .cursor-plugin/plugin.json (STALE: 2.0.0, Architect), gemini-extension.json (STALE: 2.0.0, Architect).
+- Hook: bash script hooks/session-start + polyglot hooks/run-hook.cmd + hooks/hooks.json (Claude Code SessionStart, matcher "startup|clear|compact").
+- Tooling verified on this machine (Oct 6 2026 check): node v25.6.1, npm 11.9.0, git 2.46.0, gh 2.58.0 (logged in as badrusiddique), Python 3.14.6, Claude Code 2.1.286. mmdc is NOT installed (diagrams rendered via `npx @mermaid-js/mermaid-cli`).
+- Install commands users run: `npx skills add badrusiddique/enggenie-skill`; Claude Code native: `/plugin marketplace add badrusiddique/enggenie-skill`, `/plugin install enggenie@badrusiddique-enggenie-skill`, `/reload-plugins`.
+- Optional integrations: Atlassian MCP (Jira handoff), claude-mem plugin (memory-recall).
+- Git state: branch main, 4 commits ahead of origin/main, latest remote tag v3.0.0, local HEAD 4435dc7.
+
+## 3. Already built (file level) - see IMPLEMENTATION.md
+
+Released and pushed (tags v2.7.0, v3.0.0):
+- skills/dev-brainstorm/ and skills/dev-plan/ (renamed from architect-design / architect-plan; Architect role removed).
+- skills/pm-refine/SKILL.md: T-shirt sizing (XS/S/M/L/XL, default; Fibonacci/linear via project CLAUDE.md), Step 1 "Design artifact check" (spec flagged PROVISIONAL if no design), Exit Action invokes enggenie:review-design when a design artifact exists.
+- skills/review-code/SKILL.md + agents/security-lens-agent.md, engineering-lens-agent.md, test-lens-agent.md, code-reviewer-agent.md (consolidation): 3 parallel lenses, Blocking/Advisory/Observation, Review Etiquette for rounds 2+.
+- docs/guides/adopting.md (5-stage ramp), docs/examples/adr-timer-approach.md, docs/examples/adr-storage-strategy.md.
+- Em-dash cleanup across skills/, docs/ (hyphens), CHANGELOG entries 2.7.0 and 3.0.0.
+- Commit 4aaf247 (pushed): removed stale Architect from README and docs/getting-started/claude-code.md.
+Committed locally only (NOT pushed, NOT tagged):
+- a85e036 README overhaul (505 lines, scope, personas, philosophy, WHY column, adoption diagram).
+- 8f5de95 skills: review-code Step 0 (existing review agent detection, Complement vs Full mode), dev-commit Step 0 (project commit convention detection), qa-test platform detection + Mobile Mode (Detox / Maestro / manual checklist); docs/guides/team-customization.md.
+- 2a057d6 ARCHITECTURE.md, SECURITY.md, .github/ISSUE_TEMPLATE/{bug_report,feature_request}.md, .github/pull_request_template.md, docs/faq.md, docs/guides/jira-mcp.md, docs/guides/memory-recall.md, CHANGELOG 3.1.0 and 3.1.1 entries.
+- 4435dc7 SessionStart hook: hooks/hooks.json, hooks/run-hook.cmd, hooks/session-start, skills/using-enggenie/SKILL.md, plugin.json (version 3.1.1, "hooks": "./hooks/hooks.json").
+Remote GitHub metadata changed directly with gh (applied, public): repo description and topics (see DECISIONS.md D-18).
+
+## 4. Partially built (done vs missing)
+
+- v3.1.0 / v3.1.1 release: code and CHANGELOG done; MISSING git push, tags v3.1.0 / v3.1.1 (or a different scheme), gh release, hook entry in CHANGELOG (hook shipped in commit 4435dc7 but CHANGELOG 3.1.1 does not mention it), decision on skill count (14 documented, 15 dirs in skills/ now).
+- Team configuration layer (`## enggenie` section in a project CLAUDE.md: skip_skills, review_code.default_mode, dev_commit.conventions, qa_test.platform, qa_test.mobile_runner, adopted_skills): DOCUMENTED in docs/guides/team-customization.md, but the skills were never edited to read these keys (verified Oct 2026: grep for skip_skills / default_mode / adopted_skills / mobile_runner finds them only in docs/faq.md and docs/guides/team-customization.md, not in any skills/*/SKILL.md). Only Step 0 auto-detection is implemented.
+- Medium follow-up post docs/blog/enggenie-v3-medium-post.md (UNTRACKED): written and iterated 4 times; title on disk is still "I Gave My AI a Whole Team of Reviewers. ..." (Option 1 title "A Security Bug Survived Three Human Code Reviews. Three AI Lenses Caught It in Seconds." was proposed, never applied to the file). Still contains 3 [GIF:], 3 [SCREENSHOT:], 2 [IMAGE:] placeholders. Only 2 of 8 assets exist (docs/blog/assets/images/three-lens-flow.png, adr-flow.png); the 6 Carbon terminal PNGs were never produced (only the .txt sources exist). Not published to Medium.
+- SessionStart hook: written and committed; never verified in a fresh session or on Cursor/Copilot/Gemini [UNCERTAIN].
+- getting-started guides for cursor, copilot-cli, gemini-cli, opencode were not updated for multi-lens review / v3.x.
+- .agents/skills mirror: gitignored, not tracked by git, lacks dev-commit and using-enggenie; synced by cp only.
+
+## 5. Not started
+
+- Tags/releases for v3.1.0, v3.1.1 (and any v3.2.0 for the hook).
+- Updating stale manifests: .claude-plugin/marketplace.json, .cursor-plugin/plugin.json, gemini-extension.json (2.0.0, Architect).
+- Rendering 6 Carbon images, recording 3 GIFs, publishing Medium post, posting LinkedIn post.
+- Submitting to awesome-claude-code list (only suggested).
+- gstack-inspired deferred ideas: confidence-calibrated findings (v4.0), adversarial/second-model review, template-based docs, fix-first AUTO-FIX vs ASK (v3.2).
+- developer.ai-inspired deferred: 2-layer challenger/critic review pass (deliberately deferred), Definition of Ready gate, project-context.md template, qa-audit skill.
+- Replying to Medium thread (Mykola Kondratiuk) with the short rule-based answer: drafted only, posting status unknown.
+- Fixing remaining em-dashes in CHANGELOG.md, CLAUDE.md, plans/enggenie-design-plan.md and 3 carbon .txt files (the Jun 1 cleanup only covered skills/, .agents/skills, docs/*.md).
+
+## 6. Decisions already made - do not revisit (details in DECISIONS.md)
+
+- No "Architect" role. Brainstorm/plan are Dev activities: dev-brainstorm, dev-plan. 6 roles: PM, Dev, Reviewer, QA, Deploy, Memory.
+- Estimation default is T-shirt sizing by relative complexity, never hours; XL means decompose.
+- UX/design artifacts are INPUTS to pm-refine (design happens upstream); absent design => spec PROVISIONAL; review-design is an exit checkpoint when a design exists.
+- Any change that adds capability = major version (user rejected a 2.8.0 plan; v3.0.0 shipped with docs overhaul). Documentation must sell: before/after, real terminal output, diagrams.
+- Multi-lens review: 3 anonymous lenses (security, engineering, test) + consolidation agent keeping the name code-reviewer-agent.md; severity words exactly Blocking / Advisory / Observation.
+- Plagiarism rules re developer.ai: concepts only; no named personas (Alice, Bob, Jekyll, Hyde etc.), no "Prime Directive" phrase, no HTML comment tagging, no verbatim spec text. Same caution for gstack and for the user's own earlier Medium post (no verbatim reuse).
+- Project-first configuration: detect and defer to project conventions (commit rules, existing review agents, mobile vs web) and tell the user which source is used; never blend two convention systems.
+- Pre-release QA gate (6 categories, parallel subagents) before every commit/release (user standing requirement).
+- Commit style: small batches, human-like messages, no AI co-author tags (user memory feedback_commit_style). NOTE: the session-level attribution reminder said to add a Co-Authored-By line; the user's rule takes precedence.
+- Never push to main without the user's explicit "yes" (Claude Code auto-mode classifier denied unauthorized pushes twice).
+- Hyphens only (no em-dashes) in all content.
+
+## 7. The exact next step
+
+1. `cd /Users/badru.siddique/magento/learning/enggenie-skill && git status -sb && git log origin/main..HEAD --oneline` (expect 4 commits: a85e036, 8f5de95, 2a057d6, 4435dc7).
+2. Resolve the pre-push cautions in NEXT_STEPS.md step 2 (skill count 14 vs 15, stale manifests, CHANGELOG hook entry, Hudl/superpowers mentions, remaining em-dashes).
+3. Get the user's explicit approval, then `git push origin main`, then tag/release per the user's chosen scheme (CHANGELOG already lists 3.1.0 and 3.1.1; plugin.json says 3.1.1).
+Full ordered list with commands: NEXT_STEPS.md.
+
+## 8. Constraints and patterns to follow
+
+- Three locations per skill: skills/<name>/SKILL.md (canonical, tracked), .agents/skills/<name>/ (real dirs, gitignored mirror), .claude/skills/<name> (symlinks to ../../.agents/skills/<name>, gitignored). After editing skills/, `cp` into .agents/skills/ (skills-lock.json is also gitignored). The mirror is NOT currently in sync (dev-tdd, qa-test/scripts/with_server.py differ; dev-commit and using-enggenie missing) - see section 9.
+- Rename/refactor sweep pattern: sed -i '' across skills, docs, README, CLAUDE.md, plans; leave CHANGELOG history untouched and add a new entry.
+- Verification before any commit (CLAUDE.md in repo + user memory): functionality, persona walkthrough, skills-expert handoff chains, security, marketplace/platform docs, zero-mentions scan (superpowers / Hudl / personal paths). Also: no em-dashes, no architect-design / architect-plan refs, 4 agent files in review-code/agents, skills/ vs .agents/ diff clean.
+- Subagent templates use placeholder tokens like {GIT_DIFF}; lens agents must stay in their own domain; round 2+ lenses surface only new or worsened findings.
+- Skills announce themselves ("I'm using enggenie:<skill> ..."), include a model recommendation, wait for user approval on commits/specs, never auto-invoke the next skill.
+- Docs tone: relatable, concrete, real terminal output from the "heist" demo app (Next.js + TypeScript + Firebase/Firestore), no jargon-first openings.
+- Medium/LinkedIn writing: first person, casual, section-heading emojis, short sentences, [GIF:]/[SCREENSHOT:]/[IMAGE:] placeholders clearly marked; LinkedIn is short, hook-first, ends with a question.
+- Do NOT modify ~/.claude/CLAUDE.md or user config without explicit user approval (classifier blocked it once; user later approved and it was edited).
+- Read-only default on the repo until the user asks to commit/push.
+
+## 9. Known issues and blockers
+
+- 4 unpushed commits; no tags for 3.1.x; v3.0.0 is the latest remote tag.
+- Skill count drift: docs and CLAUDE.md say 14 skills; skills/ has 15 dirs (using-enggenie added). plugin/README/ARCHITECTURE counts not updated.
+- Stale manifests (2.0.0, "Architect") in .claude-plugin/marketplace.json, .cursor-plugin/plugin.json, gemini-extension.json; version/description drift between manifests (which one each platform reads was not verified).
+- Hudl / superpowers mentions exist despite the "zero mentions" rule: SECURITY.md (contact email at the hudl.com domain), docs/guides/team-customization.md (rn-hudl example + superpowers conflict section), docs/faq.md (superpowers), CLAUDE.md and CHANGELOG.md (superpowers), docs/verification/superpowers-vs-enggenie-comparison.md (untracked). The assistant rationalized that the rule applies to SKILL.md only; user memory (feedback_no_superpowers_refs) says enggenie must stand independently - needs the user's ruling.
+- Remaining em-dashes: CHANGELOG.md, CLAUDE.md, plans/enggenie-design-plan.md, docs/blog/assets/carbon/02,04,06 .txt.
+- Untracked: docs/blog/ (post + assets), docs/verification/, .DS_Store files.
+- README/docs state "v3.0.0" features while plugin is 3.1.1; blog post says v3.0.0.
+- Blog demo narrative (security bug "survived three human reviews") may be an illustrative example, not a real incident [UNCERTAIN]; Medium says two weeks, LinkedIn draft says three weeks - fix before publishing.
+- SessionStart hook injects EXTREMELY_IMPORTANT priority text meant to override other skill suites; unverified; whether it loads for `npx skills add` installs (vs plugin installs) is unknown [UNCERTAIN].
+- Stale word "Architect" still present in skills/review-code/SKILL.md:31, skills/dev-implement/SKILL.md:32, docs/qa/e2e-test-plan.md, docs/blog/enggenie-medium-post.md (the earlier greps only looked for architect-design / architect-plan).
+- .agents/skills mirror drift vs skills/: dev-tdd/SKILL.md (mirror lacks Deep Rebuttals), qa-test/scripts/with_server.py differs, pm-refine/references is an empty dir (untracked), dev-commit and using-enggenie not mirrored.
+- The repo CLAUDE.md 8-step Pre-Release Verification Gate (needs ~/magento/learning/claude-pocket-heist-app test branch) was not run as written; only the user's 6-category subagent gate was used, and not at all for v3.1.x commits.
+- .claude-plugin/marketplace.json name is "enggenie-marketplace" while install docs use `enggenie@badrusiddique-enggenie-skill` [UNCERTAIN].
+- The plan file ~/.claude/plans/one-of-my-collegues-magical-blum.md does NOT exist on disk any more (BLOCKED / NOT VERIFIED); its final content (v3.1.0 plan) was recovered from the raw transcript.
+- claude-mem search tool failed in-session ("fetch is not defined"); memory-recall relies on that plugin.
